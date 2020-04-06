@@ -14,7 +14,7 @@ public:
     const QList<QImage> &getImages();
     void setExiffs();
 
-    QStringList imagePaths;
+    QStringList image_paths;
     QList<QImage> images;
     QStringList exiffs;
 };

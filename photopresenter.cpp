@@ -23,14 +23,14 @@ void PhotoPresenter::process(QStringList &photo_paths)
 
 bool PhotoPresenter::isGoodSize(QStringList &photo_paths)
 {
-    bool isGood = false;
+    bool is_good = false;
     if (!photo_paths.isEmpty()){
         if (photo_paths.size() == 17)
             photo_paths.removeAt(0);
         if (photo_paths.size() == 16)
-            isGood = true;
+            is_good = true;
     }
-    return isGood;
+    return is_good;
 }
 
 const QList<QImage> &PhotoPresenter::getImages()

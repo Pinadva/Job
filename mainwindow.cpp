@@ -7,6 +7,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->presenter = new PhotoPresenter();
+
+    this->label_w = ui->label->width(); // ширина label для отображения плиток
+    this->bars_cnt = 4;  // количество отображаемых плиток
+    this->bar_w = label_w / bars_cnt; // ширина одной плитки
+
+    on_pushButton_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -28,20 +34,41 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::paint()
 {
     auto images = this->presenter->getImages();
-    int label_w = ui->label->width();
-    int bars_cnt = 4;  // количество отображаемых плиток
-    int bar_w = label_w / bars_cnt; // ширина одной плитки
 
     QPixmap pm(ui->label->width(), ui->label->width());
     QPainter painter(&pm);
 
     for (int i = 0; i < images.size(); ++i) {
-        painter.drawPixmap(bar_w * (i % bars_cnt),
-                           bar_w * (i / bars_cnt),
-                           bar_w,
-                           bar_w,
-                           QPixmap::fromImage(images[i]).scaled(label_w, label_w));
+        painter.drawPixmap(this->bar_w * (i % this->bars_cnt),
+                           this->bar_w * (i / this->bars_cnt),
+                           drawExiff(images[i]));
     }
     painter.end();
     ui->label->setPixmap(pm);
 }
+
+QPixmap MainWindow::drawExiff(QImage &image)
+{
+    // bar_w = 222 (ширина плитки)
+    QPixmap pm_text(bar_w, bar_w / 3); // пиксмап для отображения текста
+    QPainter painter_text(&pm_text);
+
+    painter_text.setBackground(Qt::black); // задаю цвет фона (не работает)
+
+// painter_text.setBrush(Qt::black); // задаю цвет фона (не работает)
+    painter_text.setPen(Qt::white); // задаю цвет текста (все норм)
+    painter_text.setFont(QFont("Arial", 6));
+    painter_text.drawText(rect(), Qt::AlignLeft, "Some\nbody\nonce\ntold me");
+    painter_text.end();
+
+    QPixmap pm_image = QPixmap::fromImage(image.scaled(this->bar_w, this->bar_w));
+    QPainter painter_image(&pm_image);
+
+    qDebug() << pm_text.width()<< pm_text.height();
+    painter_image.drawPixmap(0,0, pm_text);
+    painter_image.end();
+
+    return pm_image;
+}
+
+

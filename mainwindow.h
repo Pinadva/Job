@@ -9,6 +9,8 @@
 #include <QDragEnterEvent>
 #include <QPainter>
 #include <QPixmap>
+#include <QTextItem>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,10 +28,15 @@ public:
 private slots:
     void on_pushButton_clicked();
     void paint();
+    QPixmap drawExiff(QImage &);
 
 private:
     Ui::MainWindow *ui;
 
     PhotoPresenter *presenter;
+    int label_w; // ширина label для отображения плиток
+    int bars_cnt; // количество отображаемых плиток
+    int bar_w; // ширина одной плитки
+
 };
 #endif // MAINWINDOW_H
