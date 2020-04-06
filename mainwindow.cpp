@@ -49,23 +49,14 @@ void MainWindow::paint()
 
 QPixmap MainWindow::drawExiff(QImage &image)
 {
-    // bar_w = 222 (ширина плитки)
-    QPixmap pm_text(bar_w, bar_w / 3); // пиксмап для отображения текста
-    QPainter painter_text(&pm_text);
-
-    painter_text.setBackground(Qt::black); // задаю цвет фона (не работает)
-
-// painter_text.setBrush(Qt::black); // задаю цвет фона (не работает)
-    painter_text.setPen(Qt::white); // задаю цвет текста (все норм)
-    painter_text.setFont(QFont("Arial", 6));
-    painter_text.drawText(rect(), Qt::AlignLeft, "Some\nbody\nonce\ntold me");
-    painter_text.end();
-
     QPixmap pm_image = QPixmap::fromImage(image.scaled(this->bar_w, this->bar_w));
     QPainter painter_image(&pm_image);
 
-    qDebug() << pm_text.width()<< pm_text.height();
-    painter_image.drawPixmap(0,0, pm_text);
+    painter_image.setBackgroundMode(Qt::OpaqueMode);
+    painter_image.setBackground(Qt::black);
+    painter_image.setPen(Qt::white);
+    painter_image.setFont(QFont("Arial", 9));
+    painter_image.drawText(rect(), Qt::AlignLeft, "Some\nbody\nonce\ntold me");
     painter_image.end();
 
     return pm_image;
