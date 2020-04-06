@@ -56,7 +56,7 @@ QPixmap MainWindow::drawExiff(QImage &image)
     painter_image.setBackground(Qt::black);
     painter_image.setPen(Qt::white);
     painter_image.setFont(QFont("Arial", 9));
-    painter_image.drawText(rect(), Qt::AlignLeft, "Some\nbody\nonce\ntold me");
+    painter_image.drawText(rect(), Qt::AlignLeft, "Some body\nonce\ntold me");
     painter_image.end();
 
     return pm_image;
