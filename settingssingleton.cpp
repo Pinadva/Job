@@ -5,7 +5,7 @@ SettingsSingleton::SettingsSingleton()
     this->settings = new QSettings("settings.txt", QSettings::IniFormat);
 }
 
-SettingsSingleton &SettingsSingleton::instance()
+SettingsSingleton &SettingsSingleton::getInstance()
 {
     static SettingsSingleton self;
     return self;

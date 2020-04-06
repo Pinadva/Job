@@ -6,8 +6,9 @@
 class SettingsSingleton
 {
 public:
-    static SettingsSingleton &instance();
+    static SettingsSingleton &getInstance();
     void setPath(QString &);
+    QString getPath();
 private:
     SettingsSingleton();
     ~SettingsSingleton()              = default;
