@@ -11,9 +11,9 @@ SettingsSingleton &SettingsSingleton::getInstance()
     return self;
 }
 
-void SettingsSingleton::setPath(QString &pathToLastFile)
+void SettingsSingleton::setPath(QString &path_to_last_file)
 {
-    this->settings->setValue("path", pathToLastFile);
+    this->settings->setValue("path", path_to_last_file);
 }
 
 QString SettingsSingleton::getPath()

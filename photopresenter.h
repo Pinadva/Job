@@ -12,6 +12,7 @@ public:
 
     void process(QStringList &);
     bool isGoodSize(QStringList &);
+    const QList<QImage> &getImages();
 
     PhotoModel *model;
 };

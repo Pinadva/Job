@@ -11,6 +11,7 @@ public:
     void setPaths(QStringList &);
     const QStringList &getPaths();
     void setImages();
+    const QList<QImage> &getImages();
     void setExiffs();
 
     QStringList imagePaths;
