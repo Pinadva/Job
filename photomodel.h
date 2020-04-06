@@ -3,6 +3,9 @@
 #include <QStringList>
 #include <QImage>
 #include <QDebug>
+#include <exiv2/exiv2.hpp>
+
+using namespace std;
 
 class PhotoModel
 {
