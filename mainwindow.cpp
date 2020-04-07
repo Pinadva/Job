@@ -11,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->label_w = ui->label->width(); // ширина label для отображения плиток
     this->bars_cnt = 4;  // количество отображаемых плиток
     this->bar_w = label_w / bars_cnt; // ширина одной плитки
-
-    on_pushButton_clicked();
+    connect(presenter, SIGNAL(statusChanged(QString)), this, SLOT(updateStatusBar(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -26,9 +25,10 @@ void MainWindow::on_pushButton_clicked()
 {
     QStringList filenames = QFileDialog::getOpenFileNames(this,
                                                           "Выберите фотографии",
-                                                          SettingsSingleton::getInstance().getPath());
-    this->presenter->process(filenames);
-    paint();
+                                                          SettingsSingleton::getInstance().getPath(),
+                                                          "*.jpg; *.jpeg");
+    if (this->presenter->process(filenames))
+        paint();
 }
 
 void MainWindow::paint()
@@ -60,6 +60,12 @@ QPixmap MainWindow::drawExiff(QImage &image)
     painter_image.end();
 
     return pm_image;
+}
+
+void MainWindow::updateStatusBar(QString status_message = "")
+{
+    qDebug() << status_message;
+    ui->statusbar->showMessage(status_message, 10000);
 }
 
 

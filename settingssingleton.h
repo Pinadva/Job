@@ -2,6 +2,8 @@
 #define SETTINGSSINGLETON_H
 
 #include <QSettings>
+#include <QDir>
+#include <QDebug>
 
 class SettingsSingleton
 {

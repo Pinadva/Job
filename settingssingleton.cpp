@@ -13,7 +13,11 @@ SettingsSingleton &SettingsSingleton::getInstance()
 
 void SettingsSingleton::setPath(QString &path_to_last_file)
 {
-    this->settings->setValue("path", path_to_last_file);
+    qDebug() << "path_to_last_file" << path_to_last_file;
+    QDir last_dir(path_to_last_file);
+    last_dir.cdUp();
+    qDebug() << "last dir" << last_dir.path();
+    this->settings->setValue("path", last_dir.path());
 }
 
 QString SettingsSingleton::getPath()

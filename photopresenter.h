@@ -4,17 +4,23 @@
 #include "photomodel.h"
 #include "settingssingleton.h"
 
-class PhotoPresenter
+#include <QObject>
+
+class PhotoPresenter : public QObject
 {
+    Q_OBJECT
+
 public:
     PhotoPresenter();
     ~PhotoPresenter();
 
-    void process(QStringList &);
+    bool process(QStringList &);
     bool isGoodSize(QStringList &);
     const QList<QImage> &getImages();
 
     PhotoModel *model;
+signals:
+    void statusChanged(QString);
 };
 
 #endif // PHOTOPRESENTER_H
