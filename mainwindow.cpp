@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->bars_cnt = 4;  // количество отображаемых плиток
     this->bar_w = label_w / bars_cnt; // ширина одной плитки
     connect(presenter, SIGNAL(statusChanged(QString)), this, SLOT(updateStatusBar(QString)));
+    connect(presenter, SIGNAL(readyPaint()), this, SLOT(paint()));
 }
 
 MainWindow::~MainWindow()
@@ -27,8 +28,7 @@ void MainWindow::on_pushButton_clicked()
                                                           "Выберите фотографии",
                                                           SettingsSingleton::getInstance().getPath(),
                                                           "*.jpg; *.jpeg");
-    if (this->presenter->process(filenames))
-        paint();
+    this->presenter->process(filenames);
 }
 
 void MainWindow::paint()

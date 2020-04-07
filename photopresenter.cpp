@@ -10,7 +10,7 @@ PhotoPresenter::~PhotoPresenter()
     delete this->model;
 }
 
-bool PhotoPresenter::process(QStringList &photo_paths)
+void PhotoPresenter::process(QStringList &photo_paths)
 {
 
     if (this->isGoodCount(photo_paths)){
@@ -19,11 +19,10 @@ bool PhotoPresenter::process(QStringList &photo_paths)
         model->setPhotos();
         if (this->isSameSize(this->model->getPhotos()))
         //model->setExiffs();
-            return true;
+            emit readyPaint();
         else
             this->model->clear();
     }
-    return false;
 }
 
 bool PhotoPresenter::isGoodCount(QStringList &photo_paths)

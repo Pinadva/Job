@@ -14,7 +14,7 @@ public:
     PhotoPresenter();
     ~PhotoPresenter();
 
-    bool process(QStringList &);
+    void process(QStringList &);
     bool isGoodCount(QStringList &);
     bool isSameSize(const QHash<int, QPixmap> &);
     const QHash<int, QPixmap> &getImages();
@@ -22,6 +22,7 @@ public:
     PhotoModel *model;
 signals:
     void statusChanged(QString);
+    void readyPaint();
 };
 
 #endif // PHOTOPRESENTER_H

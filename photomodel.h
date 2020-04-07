@@ -22,6 +22,7 @@ public:
     const QHash<int, QPixmap> &getPhotos();
     void setExiffs();
     void setPhotoSize(QSize &);
+    void clear();
 
     QStringList photo_paths;
     QHash<int, QPixmap> photos;
