@@ -26,7 +26,8 @@ void MainWindow::on_pushButton_clicked()
 {
     QStringList filenames = QFileDialog::getOpenFileNames(this,
                                                           "Выберите фотографии",
-                                                          SettingsSingleton::getInstance().getPath());
+                                                          SettingsSingleton::getInstance().getPath(),
+                                                          "*.jpg; *.jpeg");
     this->presenter->process(filenames);
     paint();
 }
