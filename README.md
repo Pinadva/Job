@@ -14,6 +14,7 @@
   * for (auto item : photos)
     * у фотографии item.value() взять сегмент под номером item.key() и запомнить как QPixmap segment;
     * считать у элемента item.value() exif поля {Make, Model, LensInfo, FocalLength, Megapixels, FullImageSize, ModifyDate, ExposureProgram, FocalLength, ISOAutoMin, ISOAutoMax} с помощью libexiv2
+    * если какого то поля exif не существует - спросить значение у пользователя
     * с помощью QPainter::drawText наносим на segment текст полей начиная с левого верхнего угла с отступом 20, 20; одно поле в одной строчке; между строчками 30 пикселей (т.е. вторая строчка в координатах 20, 50); шрифт Arial 14
     * получившийся segment рисуем на result в сегмент под номером item.key()
   * Сохранить result в файл result.jpg в папку folderPath
