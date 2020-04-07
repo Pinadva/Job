@@ -13,18 +13,20 @@ PhotoPresenter::~PhotoPresenter()
 bool PhotoPresenter::process(QStringList &photo_paths)
 {
 
-    if (this->isGoodSize(photo_paths)){
+    if (this->isGoodCount(photo_paths)){
         SettingsSingleton::getInstance().setPath(photo_paths.last());
         model->setPaths(photo_paths);
-        model->setImages();
-        model->setExiffs();
-        return true;
+        model->setPhotos();
+        if (this->isSameSize(this->model->getPhotos()))
+        //model->setExiffs();
+            return true;
+        else
+            this->model->clear();
     }
-    else
-        return false;
+    return false;
 }
 
-bool PhotoPresenter::isGoodSize(QStringList &photo_paths)
+bool PhotoPresenter::isGoodCount(QStringList &photo_paths)
 {
     bool is_good = false;
     if (!photo_paths.isEmpty()){
@@ -39,7 +41,21 @@ bool PhotoPresenter::isGoodSize(QStringList &photo_paths)
     return is_good;
 }
 
-const QList<QImage> &PhotoPresenter::getImages()
+const QHash<int, QPixmap> &PhotoPresenter::getImages()
 {
-    return this->model->getImages();
+    return this->model->getPhotos();
+}
+
+bool PhotoPresenter::isSameSize(const QHash<int, QPixmap> &photos)
+{
+    auto size = photos[0].size();
+    for (auto iter = photos.begin(); iter != photos.end(); ++iter){
+        qDebug() << iter->size();
+        if (size != iter->size()){
+            emit statusChanged("Размер фотографий должен быть одинаковым.");
+            return false;
+        }
+    }
+    this->model->setPhotoSize(size);
+    return true;
 }

@@ -1,10 +1,14 @@
 #ifndef PHOTOMODEL_H
 #define PHOTOMODEL_H
+
+#include <QSize>
 #include <QStringList>
 #include <QImage>
 #include <QDebug>
 #include <exiv2/exiv2.hpp>
+#include <QHash>
 #include <iostream>
+#include <QPixmap>
 
 using namespace std;
 
@@ -14,13 +18,16 @@ public:
     PhotoModel();
     void setPaths(QStringList &);
     const QStringList &getPaths();
-    void setImages();
-    const QList<QImage> &getImages();
+    void setPhotos();
+    const QHash<int, QPixmap> &getPhotos();
     void setExiffs();
+    void setPhotoSize(QSize &);
 
-    QStringList image_paths;
-    QList<QImage> images;
+    QStringList photo_paths;
+    QHash<int, QPixmap> photos;
     QStringList exiffs;
+    QSize photo_size;
+
 };
 
 #endif // PHOTOMODEL_H

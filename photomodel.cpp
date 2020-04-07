@@ -7,34 +7,34 @@ PhotoModel::PhotoModel()
 
 void PhotoModel::setPaths(QStringList &image_paths)
 {
-    this->image_paths = image_paths;
+    this->photo_paths = image_paths;
 
     // debug
-    for (auto i: this->image_paths)
+    for (auto i: this->photo_paths)
         qDebug() << i;
     //enddebug
 }
 
 const QStringList &PhotoModel::getPaths()
 {
-    return this->image_paths;
+    return this->photo_paths;
 }
 
-void PhotoModel::setImages()
+void PhotoModel::setPhotos()
 {
-    for (QString path: this->image_paths){
-        this->images << QImage(path);
+    for (int i = 0; i < this->photo_paths.size(); ++i){
+        this->photos.insert(i, QPixmap(photo_paths[i]));
     }
 }
 
-const QList<QImage> &PhotoModel::getImages()
+const QHash<int, QPixmap> &PhotoModel::getPhotos()
 {
-    return this->images;
+    return this->photos;
 }
 
 void PhotoModel::setExiffs()
 {
-    for (auto path: image_paths){
+    for (auto path: photo_paths){
         cout << "=================" << endl;
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(path.toStdString());
         assert(image.get() != 0);
@@ -74,6 +74,20 @@ void PhotoModel::setExiffs()
 //                             << "\n";
 //               }
     }
+}
+
+void PhotoModel::setPhotoSize(QSize &size)
+{
+    this->photo_size = size;
+}
+
+void PhotoModel::clear()
+{
+    this->photo_paths.clear();
+    this->photos.clear();
+    this->exiffs.clear();
+    this->photo_size = QSize();
+
 }
 
 

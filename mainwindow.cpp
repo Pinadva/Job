@@ -47,9 +47,9 @@ void MainWindow::paint()
     ui->label->setPixmap(pm);
 }
 
-QPixmap MainWindow::drawExiff(QImage &image)
+QPixmap MainWindow::drawExiff(QPixmap &photo)
 {
-    QPixmap pm_image = QPixmap::fromImage(image.scaled(this->bar_w, this->bar_w));
+    QPixmap pm_image = photo.scaled(this->bar_w, this->bar_w);
     QPainter painter_image(&pm_image);
 
     painter_image.setBackgroundMode(Qt::OpaqueMode);

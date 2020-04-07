@@ -15,8 +15,9 @@ public:
     ~PhotoPresenter();
 
     bool process(QStringList &);
-    bool isGoodSize(QStringList &);
-    const QList<QImage> &getImages();
+    bool isGoodCount(QStringList &);
+    bool isSameSize(const QHash<int, QPixmap> &);
+    const QHash<int, QPixmap> &getImages();
 
     PhotoModel *model;
 signals:
