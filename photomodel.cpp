@@ -35,7 +35,7 @@ const QList<QImage> &PhotoModel::getImages()
 void PhotoModel::setExiffs()
 {
     for (auto path: image_paths){
-        qDebug() << "=================";
+        cout << "=================" << endl;
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(path.toStdString());
         assert(image.get() != 0);
         image->readMetadata();
@@ -45,10 +45,23 @@ void PhotoModel::setExiffs()
                 qDebug() << ": No Exif data found in the file";
                 continue;
             }
-            Exiv2::ExifData::const_iterator end = exifData.end();
-               for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
-                   const char* tn = i->typeName();
-                   qDebug() << QString::fromStdString(i->toString());
+            //Exiv2::ExifData::const_iterator end = exifData.end();
+            try {
+                cout << exifData["asdfasdf"] << endl;
+                cout << exifData["Exif.Image.FNumber"] << endl;
+                cout << exifData["Exif.Photo.ISOSpeedRatings"] << endl;
+                cout << exifData["Exif.Photo.Flash"] << endl;
+            }  catch (Exiv2::Error& e) {
+               std::cout << "Caught Exiv2 exception '" << e.what() << "'\n";
+            }
+
+//            cout << exifData["Exif.Image.FNumber"] << endl;
+//            cout << exifData["Image.FNumber"].toString();
+//            cout << exifData["FNumber"].toString();
+
+//               for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
+//                   const char* tn = i->typeName();
+//                   //qDebug() << QString::fromStdString(i->toString());
 //                   std::cout << std::setw(44) << std::setfill(' ') << std::left
 //                             << i->key() << " "
 //                             << "0x" << std::setw(4) << std::setfill('0') << std::right
@@ -58,9 +71,8 @@ void PhotoModel::setExiffs()
 //                             << std::dec << std::setw(3)
 //                             << std::setfill(' ') << std::right
 //                             << i->count() << "  "
-//                             << std::dec << i->value()
 //                             << "\n";
-               }
+//               }
     }
 }
 

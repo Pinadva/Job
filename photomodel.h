@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QDebug>
 #include <exiv2/exiv2.hpp>
+#include <iostream>
 
 using namespace std;
 
