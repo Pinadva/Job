@@ -10,7 +10,7 @@ PhotoPresenter::~PhotoPresenter()
     delete this->model;
 }
 
-void PhotoPresenter::process(QStringList &photo_paths)
+bool PhotoPresenter::process(QStringList &photo_paths)
 {
 
     if (this->isGoodSize(photo_paths)){
@@ -18,7 +18,10 @@ void PhotoPresenter::process(QStringList &photo_paths)
         model->setPaths(photo_paths);
         model->setImages();
         model->setExiffs();
+        return true;
     }
+    else
+        return false;
 }
 
 bool PhotoPresenter::isGoodSize(QStringList &photo_paths)
@@ -29,6 +32,9 @@ bool PhotoPresenter::isGoodSize(QStringList &photo_paths)
             photo_paths.removeAt(0);
         if (photo_paths.size() == 16)
             is_good = true;
+        else {
+            emit statusChanged("Выбрано неверное количество файлов. Необходимо 16 или 17 файлов.");
+        }
     }
     return is_good;
 }
