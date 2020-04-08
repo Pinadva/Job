@@ -56,10 +56,10 @@ QPixmap MainWindow::drawExiff(const PhotoSegment &segment)
     painter_image.setBackground(Qt::black);
     painter_image.setPen(Qt::white);
     painter_image.setFont(QFont("Arial", 9));
-//    auto segments = this->presenter->getSegments();
-//    QString text = segments.begin().value().exifs.begin().key() + segments.begin().value().exifs.begin().value();
+    // вынести создание текста в отдельную функцию
     QString text = "";
-    for (auto i = segment.exifs.begin(); i != segment.exifs.end(); ++i){
+    text += segment.file_name + "\n";
+    for (auto i = segment.segment.begin(); i != segment.segment.end(); ++i){
         text += i.key() + " " + i.value() + "\n";
     }
     painter_image.drawText(rect(), Qt::AlignLeft, text);

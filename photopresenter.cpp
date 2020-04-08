@@ -17,8 +17,7 @@ void PhotoPresenter::process(QStringList &photo_paths)
         SettingsSingleton::getInstance().setPath(photo_paths.last());
         this->model->setPaths(photo_paths);
         this->model->setPhotos();
-        if (this->isSameSize(this->model->getPhotos())){
-            this->model->setSegments();
+        if (this->isValid(this->model->getPhotos())){
             emit readyPaint();
         }
         else
@@ -41,26 +40,35 @@ bool PhotoPresenter::isGoodCount(QStringList &photo_paths)
     return is_good;
 }
 
-const QHash<int, QPixmap> &PhotoPresenter::getPhotos()
+bool PhotoPresenter::isValid(const QHash<int, PhotoSegment> &photos)
+{
+    bool same_size = true;
+    bool same_exif = true;
+
+    auto size = photos[0].photo->size();
+    auto exif = photos[0].common;
+    for (auto iter = photos.begin(); iter != photos.end(); ++iter){
+        if (size != iter->photo->size()){
+            emit statusChanged("Размер фотографий должен быть одинаковым.");
+            same_size = false;
+            return same_size;
+        }
+        if (exif != iter->common){
+            emit statusChanged("Общие EXIF данные должны быть одинаковыми.");
+            same_exif = false;
+            return same_exif;
+        }
+    }
+    return true;
+}
+
+const QHash<int, PhotoSegment> &PhotoPresenter::getPhotos()
 {
     return this->model->getPhotos();
 }
 
 const QHash<int, PhotoSegment> &PhotoPresenter::getSegments()
 {
-    return this->model->getSegments();
+    return this->model->getPhotos();
 }
 
-bool PhotoPresenter::isSameSize(const QHash<int, QPixmap> &photos)
-{
-    auto size = photos[0].size();
-    for (auto iter = photos.begin(); iter != photos.end(); ++iter){
-        qDebug() << iter->size();
-        if (size != iter->size()){
-            emit statusChanged("Размер фотографий должен быть одинаковым.");
-            return false;
-        }
-    }
-    this->model->setPhotoSize(size);
-    return true;
-}

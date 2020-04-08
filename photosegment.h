@@ -6,7 +6,9 @@
 #include <QString>
 #include <QHash>
 
-struct PhotoSegment{
+struct PhotoSegment {
     QPixmap *photo = nullptr;
-    QHash<QString, QString> exifs;
+    QString file_name = "";
+    QHash<QString, QString> segment;
+    QHash<QString, QString> common;
 };

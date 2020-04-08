@@ -16,8 +16,8 @@ public:
 
     void process(QStringList &);
     bool isGoodCount(QStringList &);
-    bool isSameSize(const QHash<int, QPixmap> &);
-    const QHash<int, QPixmap> &getPhotos();
+    bool isValid(const QHash<int, PhotoSegment> &);
+    const QHash<int, PhotoSegment> &getPhotos();
     const QHash<int, PhotoSegment> &getSegments();
 
     PhotoModel *model;

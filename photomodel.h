@@ -25,18 +25,13 @@ public:
     void setPaths(QStringList &);
     const QStringList &getPaths();
     void setPhotos();
-    const QHash<int, QPixmap> &getPhotos();
-    const QHash<int, PhotoSegment> &getSegments();
-    void setSegments();
-    void setPhotoSize(QSize &);
+    const QHash<int, PhotoSegment> &getPhotos();
+    void setExif(QHash<QString, QString> &source_keys, QHash<QString, QString> &dist_keys, Exiv2::ExifData &);
     void clear();
 
     QStringList photo_paths;
-    QHash<int, QPixmap> photos;
-    QHash<int, PhotoSegment> segments; // <i, exif данные>
+    QHash<int, PhotoSegment> photos; // <i, exif данные>
     ExifKeys keys;
-    QSize photo_size;
-
 
 };
 
