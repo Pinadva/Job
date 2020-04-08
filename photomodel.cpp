@@ -33,14 +33,10 @@ void PhotoModel::setPhotos()
 {
     for (int i = 0; i < photo_paths.size(); ++i){
         auto path = this->photo_paths[i];
-        cout << "================================================" << endl;
+        qDebug() << "================================================";
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(path.toStdString());
         assert(image.get() != 0);
         image->readMetadata();
-
-        PhotoSegment photo_segment;
-        photo_segment.photo = new QPixmap(path);
-        photo_segment.file_name = path;
 
         Exiv2::ExifData &exifData = image->exifData();
         if (exifData.empty()) {
@@ -48,6 +44,10 @@ void PhotoModel::setPhotos()
             // emit дай все exif
             continue;
             }
+
+        PhotoSegment photo_segment;
+        photo_segment.photo = new QPixmap(path);
+        photo_segment.file_name = QFileInfo(path).fileName();
 
         setExif(this->keys.segment, photo_segment.segment, exifData);
         setExif(this->keys.common, photo_segment.common, exifData);
@@ -68,9 +68,6 @@ void PhotoModel::setExif(QHash<QString, QString> &src_keys, QHash<QString, QStri
         if (data.findKey(key) != data.end()){
             auto tag = data[i.value().toStdString()].value().toString();
             dst_keys.insert(i.key(), QString::fromStdString(tag));
-
-            cout << setw(44) << setfill(' ')<< left << i.key().toStdString() <<
-            data[i.value().toStdString()].value() << endl;
         }
         else {
         // emit дай any exif

@@ -1,7 +1,7 @@
 #ifndef PHOTOMODEL_H
 #define PHOTOMODEL_H
 
-#include <QSize>
+#include <QFileInfo>
 #include <QStringList>
 #include <QImage>
 #include <QDebug>
