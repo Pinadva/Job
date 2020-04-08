@@ -10,10 +10,16 @@
 #include <iostream>
 #include <QPixmap>
 
+#include <photosegment.h>
+#include <exifkeys.h>
+
 using namespace std;
 
 class PhotoModel
 {
+private:
+    void setExifKeys();
+
 public:
     PhotoModel();
     void setPaths(QStringList &);
@@ -26,8 +32,10 @@ public:
 
     QStringList photo_paths;
     QHash<int, QPixmap> photos;
-    QStringList exiffs;
+    QHash<int, PhotoSegment> segment_exif; // <i, exif данные>
+    ExifKeys keys;
     QSize photo_size;
+
 
 };
 

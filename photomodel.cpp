@@ -1,6 +1,12 @@
 #include "photomodel.h"
 
+
 PhotoModel::PhotoModel()
+{
+
+}
+
+void PhotoModel::setExifKeys()
 {
 
 }
@@ -34,46 +40,44 @@ const QHash<int, QPixmap> &PhotoModel::getPhotos()
 
 void PhotoModel::setExiffs()
 {
-    for (auto path: photo_paths){
-        cout << "=================" << endl;
+    for (auto iter = this->photos.begin(); iter != this->photos.end(); ++iter){
+        auto path = this->photo_paths[iter.key()];
+        cout << "================================================" << endl;
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(path.toStdString());
         assert(image.get() != 0);
         image->readMetadata();
 
+        PhotoSegment photo_segment;
+        photo_segment.photo = &iter.value();
+
         Exiv2::ExifData &exifData = image->exifData();
-            if (exifData.empty()) {
-                qDebug() << ": No Exif data found in the file";
-                continue;
-            }
-            //Exiv2::ExifData::const_iterator end = exifData.end();
-            try {
-                cout << exifData["asdfasdf"] << endl;
-                cout << exifData["Exif.Image.FNumber"] << endl;
-                cout << exifData["Exif.Photo.ISOSpeedRatings"] << endl;
-                cout << exifData["Exif.Photo.Flash"] << endl;
-            }  catch (Exiv2::Error& e) {
-               std::cout << "Caught Exiv2 exception '" << e.what() << "'\n";
+        if (exifData.empty()) {
+            qDebug() << ": No Exif data found in the file";
+            continue;
+            // emit дай все exif
             }
 
-//            cout << exifData["Exif.Image.FNumber"] << endl;
-//            cout << exifData["Image.FNumber"].toString();
-//            cout << exifData["FNumber"].toString();
+        for (auto i = keys.segment.begin(); i != keys.segment.end(); ++i){
+            Exiv2::ExifKey key = Exiv2::ExifKey(i.value().toStdString());
+            if (exifData.findKey(key) != exifData.end()){
 
-//               for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
-//                   const char* tn = i->typeName();
-//                   //qDebug() << QString::fromStdString(i->toString());
-//                   std::cout << std::setw(44) << std::setfill(' ') << std::left
-//                             << i->key() << " "
-//                             << "0x" << std::setw(4) << std::setfill('0') << std::right
-//                             << std::hex << i->tag() << " "
-//                             << std::setw(9) << std::setfill(' ') << std::left
-//                             << (tn ? tn : "Unknown") << " "
-//                             << std::dec << std::setw(3)
-//                             << std::setfill(' ') << std::right
-//                             << i->count() << "  "
-//                             << "\n";
-//               }
+                auto tag = exifData[i.value().toStdString()].value().toString();
+                photo_segment.exifs.insert(i.key(), QString::fromStdString(tag));
+
+                cout << setw(44) << setfill(' ')<< left << i.key().toStdString() <<
+                exifData[i.value().toStdString()].value() << endl;
+            }
+            else{
+            // emit дай exif
+            }
+
+         }
+        this->segment_exif.insert(segment_exif.size(), photo_segment);
+        qDebug() << "*****************";
+        qDebug() << photo_segment.exifs;
+        qDebug() << "*****************";
     }
+
 }
 
 void PhotoModel::setPhotoSize(QSize &size)
@@ -85,7 +89,7 @@ void PhotoModel::clear()
 {
     this->photo_paths.clear();
     this->photos.clear();
-    this->exiffs.clear();
+    //this->exiffs.clear();
     this->photo_size = QSize();
 
 }

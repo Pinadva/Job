@@ -17,9 +17,10 @@ void PhotoPresenter::process(QStringList &photo_paths)
         SettingsSingleton::getInstance().setPath(photo_paths.last());
         model->setPaths(photo_paths);
         model->setPhotos();
-        if (this->isSameSize(this->model->getPhotos()))
-        //model->setExiffs();
+        if (this->isSameSize(this->model->getPhotos())){
+        model->setExiffs();
             emit readyPaint();
+        }
         else
             this->model->clear();
     }
