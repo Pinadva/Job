@@ -47,7 +47,7 @@ void PhotoModel::setPhotos()
 
         PhotoSegment photo_segment;
         photo_segment.photo = new QPixmap(path);
-        photo_segment.file_name = QFileInfo(path).fileName();
+        photo_segment.segment.insert("FileName", QFileInfo(path).fileName());
 
         setExif(this->keys.segment, photo_segment.segment, exifData);
         setExif(this->keys.common, photo_segment.common, exifData);

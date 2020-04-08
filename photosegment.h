@@ -8,7 +8,6 @@
 
 struct PhotoSegment {
     QPixmap *photo = nullptr;
-    QString file_name = "";
     QHash<QString, QString> segment;
     QHash<QString, QString> common;
 };

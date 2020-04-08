@@ -33,18 +33,12 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::paint()
 {
-    auto photo_segments = this->presenter->getSegments();
 
-    QPixmap result(ui->label->width(), ui->label->width());
+
+    QPixmap result(ui->label->width() + 200, ui->label->width());
     QPainter painter(&result);
 
-    for (int i = 0; i < photo_segments.size(); ++i) {
-        painter.drawPixmap(this->bar_w * (i % this->bars_cnt),
-                           this->bar_w * (i / this->bars_cnt),
-                           drawExiff(photo_segments[i]));
-    }
-    painter.end();
-    ui->label->setPixmap(result);
+
 }
 
 QPixmap MainWindow::drawExiff(const PhotoSegment &segment)
@@ -57,16 +51,51 @@ QPixmap MainWindow::drawExiff(const PhotoSegment &segment)
     painter_image.setPen(Qt::white);
     painter_image.setFont(QFont("Arial", 9));
     // вынести создание текста в отдельную функцию
-    QString text = "";
-    text += segment.file_name + "\n";
-    for (auto i = segment.segment.begin(); i != segment.segment.end(); ++i){
-        text += i.key() + " " + i.value() + "\n";
-    }
+    QString text = createText(segment.segment);
     painter_image.drawText(rect(), Qt::AlignLeft, text);
     painter_image.end();
 
     return photo;
 }
+
+QPixmap MainWindow::drawPhotos()
+{
+    auto photo_segments = this->presenter->getSegments();
+    QPixmap photos(ui->label->width(), ui->label->width());
+    QPainter painter(&photos);
+    for (int i = 0; i < photo_segments.size(); ++i) {
+        painter.drawPixmap(this->bar_w * (i % this->bars_cnt),
+                           this->bar_w * (i / this->bars_cnt),
+                           drawExiff(photo_segments[i]));
+    }
+    painter.end();
+    return photos;
+}
+
+QPixmap MainWindow::drawCommonExif()
+{
+    auto segment = this->presenter->getSegments()[1];
+    QPixmap exif(200, ui->label->width()*4);
+    QPainter painter(&exif);
+    QString text = createText(segment.common);
+    painter.setBackgroundMode(Qt::OpaqueMode);
+    painter.setBackground(Qt::black);
+    painter.setPen(Qt::white);
+    painter.setFont(QFont("Arial", 9));
+    painter.drawText(rect(), Qt::AlignLeft, text);
+    painter.end();
+    return exif;
+}
+
+QString MainWindow::createText(const QHash<QString, QString> &exif_data)
+{
+    QString text = "";
+    for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
+        text += i.key() + " " + i.value() + "\n";
+    }
+    return text;
+}
+
 
 void MainWindow::updateStatusBar(QString status_message = "")
 {

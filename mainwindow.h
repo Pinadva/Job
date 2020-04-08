@@ -31,6 +31,9 @@ private slots:
     void on_pushButton_clicked();
     void paint();
     QPixmap drawExiff(const PhotoSegment &);
+    QPixmap drawPhotos();
+    QPixmap drawCommonExif();
+    QString createText(const QHash<QString, QString> &);
 
 private:
     Ui::MainWindow *ui;
