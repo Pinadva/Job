@@ -38,8 +38,15 @@ const QHash<int, QPixmap> &PhotoModel::getPhotos()
     return this->photos;
 }
 
-void PhotoModel::setExiffs()
+
+const QHash<int, PhotoSegment> &PhotoModel::getSegments()
 {
+    return this->segments;
+}
+
+void PhotoModel::setSegments()
+{
+    // разделить на подфункции, когда будет сделан вывод
     for (auto iter = this->photos.begin(); iter != this->photos.end(); ++iter){
         auto path = this->photo_paths[iter.key()];
         cout << "================================================" << endl;
@@ -72,7 +79,7 @@ void PhotoModel::setExiffs()
             }
 
          }
-        this->segment_exif.insert(segment_exif.size(), photo_segment);
+        this->segments.insert(segments.size(), photo_segment);
         qDebug() << "*****************";
         qDebug() << photo_segment.exifs;
         qDebug() << "*****************";

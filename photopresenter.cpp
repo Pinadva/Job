@@ -15,10 +15,10 @@ void PhotoPresenter::process(QStringList &photo_paths)
 
     if (this->isGoodCount(photo_paths)){
         SettingsSingleton::getInstance().setPath(photo_paths.last());
-        model->setPaths(photo_paths);
-        model->setPhotos();
+        this->model->setPaths(photo_paths);
+        this->model->setPhotos();
         if (this->isSameSize(this->model->getPhotos())){
-        model->setExiffs();
+            this->model->setSegments();
             emit readyPaint();
         }
         else
@@ -41,9 +41,14 @@ bool PhotoPresenter::isGoodCount(QStringList &photo_paths)
     return is_good;
 }
 
-const QHash<int, QPixmap> &PhotoPresenter::getImages()
+const QHash<int, QPixmap> &PhotoPresenter::getPhotos()
 {
     return this->model->getPhotos();
+}
+
+const QHash<int, PhotoSegment> &PhotoPresenter::getSegments()
+{
+    return this->model->getSegments();
 }
 
 bool PhotoPresenter::isSameSize(const QHash<int, QPixmap> &photos)

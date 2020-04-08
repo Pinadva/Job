@@ -9,8 +9,8 @@ class ExifKeys
 public:
     ExifKeys();
 
-    QHash<QString, QString> segment;
-    QHash<QString, QString> common;
+    QHash<QString, QString> segment; // <short name, full name> example: <"Make", "Exif.Image.Make">
+    QHash<QString, QString> common; // <short name, full name> example: <"Make", "Exif.Image.Make">
 private:
     void setSegment();
     void setCommon();

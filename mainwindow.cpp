@@ -33,33 +33,39 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::paint()
 {
-    auto images = this->presenter->getImages();
+    auto photo_segments = this->presenter->getSegments();
 
-    QPixmap pm(ui->label->width(), ui->label->width());
-    QPainter painter(&pm);
+    QPixmap result(ui->label->width(), ui->label->width());
+    QPainter painter(&result);
 
-    for (int i = 0; i < images.size(); ++i) {
+    for (int i = 0; i < photo_segments.size(); ++i) {
         painter.drawPixmap(this->bar_w * (i % this->bars_cnt),
                            this->bar_w * (i / this->bars_cnt),
-                           drawExiff(images[i]));
+                           drawExiff(photo_segments[i]));
     }
     painter.end();
-    ui->label->setPixmap(pm);
+    ui->label->setPixmap(result);
 }
 
-QPixmap MainWindow::drawExiff(QPixmap &photo)
+QPixmap MainWindow::drawExiff(const PhotoSegment &segment)
 {
-    QPixmap pm_image = photo.scaled(this->bar_w, this->bar_w);
-    QPainter painter_image(&pm_image);
+    QPixmap photo = segment.photo->scaled(this->bar_w, this->bar_w);
+    QPainter painter_image(&photo);
 
     painter_image.setBackgroundMode(Qt::OpaqueMode);
     painter_image.setBackground(Qt::black);
     painter_image.setPen(Qt::white);
     painter_image.setFont(QFont("Arial", 9));
-    painter_image.drawText(rect(), Qt::AlignLeft, "Some body\nonce\ntold me");
+//    auto segments = this->presenter->getSegments();
+//    QString text = segments.begin().value().exifs.begin().key() + segments.begin().value().exifs.begin().value();
+    QString text = "";
+    for (auto i = segment.exifs.begin(); i != segment.exifs.end(); ++i){
+        text += i.key() + " " + i.value() + "\n";
+    }
+    painter_image.drawText(rect(), Qt::AlignLeft, text);
     painter_image.end();
 
-    return pm_image;
+    return photo;
 }
 
 void MainWindow::updateStatusBar(QString status_message = "")

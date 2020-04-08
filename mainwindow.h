@@ -30,7 +30,7 @@ public slots:
 private slots:
     void on_pushButton_clicked();
     void paint();
-    QPixmap drawExiff(QPixmap &);
+    QPixmap drawExiff(const PhotoSegment &);
 
 private:
     Ui::MainWindow *ui;
