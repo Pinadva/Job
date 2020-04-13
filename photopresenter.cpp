@@ -21,8 +21,10 @@ void PhotoPresenter::process(QStringList &photo_paths)
             qDebug() << "paint";
             emit readyPaint();
         }
-        else
+        else{
+            qDebug() << "invalid";
             this->model->clear();
+        }
     }
 }
 
@@ -43,12 +45,26 @@ bool PhotoPresenter::isGoodCount(QStringList &photo_paths)
 
 bool PhotoPresenter::isValid(const QHash<int, PhotoSegment> &photos)
 {
+    if (!this->isDateTimeExists(photos))
+        return false;
+
     if (!this->isGoodSize(photos))
         return false;
 
     if (!this->isSameExifs(photos))
         return false;
 
+    return true;
+}
+
+bool PhotoPresenter::isDateTimeExists(const QHash<int, PhotoSegment> &photos)
+{
+    auto common = photos[0].common;
+    qDebug() << common.keys();
+    if (common.find("DateTime") == common.end()){
+        emit statusChanged("В exif данных отсутствует поле даты и времени", -1);
+        return false;
+    }
     return true;
 }
 

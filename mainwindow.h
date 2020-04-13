@@ -29,6 +29,7 @@ public slots:
 
 private slots:
     void on_pushButton_clicked();
+
     void paint();
     void saveResult(QPixmap &);
     QPixmap drawSegmentExif(const PhotoSegment &);

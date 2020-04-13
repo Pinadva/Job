@@ -17,8 +17,9 @@ public:
     void process(QStringList &);
     bool isGoodCount(QStringList &);
     bool isValid(const QHash<int, PhotoSegment> &);
+    bool isDateTimeExists(const QHash<int, PhotoSegment> &);
     bool isGoodSize(const QHash<int, PhotoSegment> &);
-    bool isSameExifs(const QHash<int, PhotoSegment> &photos);
+    bool isSameExifs(const QHash<int, PhotoSegment> &);
     const QHash<int, PhotoSegment> &getPhotos();
     const QHash<int, PhotoSegment> &getSegments();
 

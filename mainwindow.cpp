@@ -89,6 +89,9 @@ QPixmap MainWindow::drawCommonExif()
     auto segment = this->presenter->getSegments()[0];
     QPixmap common(200, ui->label->height());
     QPainter painter(&common);
+    painter.setBackgroundMode(Qt::OpaqueMode);
+    painter.setBackground(Qt::white);
+    painter.setPen(Qt::black);
     QString text = createText(segment.common);
     this->setPainterFont(painter);
     painter.drawText(rect(), Qt::AlignLeft, text);
