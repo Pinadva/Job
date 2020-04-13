@@ -37,7 +37,7 @@ private slots:
     QPixmap drawSegmentExif(const PhotoSegment &);
     QPixmap drawPhotos();
     QPixmap drawCommonExif();
-    QString createText(const QHash<QString, QString> &);
+    void drawText(const QHash<QString, QString> &, QPainter &);
     void setPainterFont(QPainter &);
 
 private:

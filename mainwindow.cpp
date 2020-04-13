@@ -77,8 +77,7 @@ QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment)
     QPixmap photo = segment.photo->scaled(this->bar_w, this->bar_w);
     QPainter painter(&photo);
     this->setPainterFont(painter);
-    QString text = createText(segment.segment);
-    painter.drawText(rect(), Qt::AlignLeft, text);
+    drawText(segment.segment, painter);
 
     painter.end();
     return photo;
@@ -91,21 +90,21 @@ QPixmap MainWindow::drawCommonExif()
     QPixmap common(200, ui->label->height());
     common.fill(Qt::white);
     QPainter painter(&common);
-    QString text = createText(segment.common);
-    painter.drawText(rect(), Qt::AlignLeft, text);
+    drawText(segment.common, painter);
 
     painter.end();
     return common;
 }
 
-QString MainWindow::createText(const QHash<QString, QString> &exif_data)
+void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter)
 {
     QString text = "";
-    for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
-        text += i.key() + " " + i.value() + "\n";
-    }
 
-    return text;
+    for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
+             text += i.key() + " " + i.value() + "\n";
+    }
+    painter.drawText(rect(), Qt::AlignLeft, text);
+
 }
 
 void MainWindow::setPainterFont(QPainter &painter)

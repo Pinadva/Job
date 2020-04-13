@@ -19,6 +19,7 @@ void PhotoPresenter::process(QStringList &photo_paths)
         this->model->setPhotos();
         if (this->isValid(this->model->getPhotos())){
             qDebug() << "paint";
+            emit statusChanged("Успешно.", 1);
             emit readyPaint();
         }
         else{
