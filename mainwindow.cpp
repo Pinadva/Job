@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->presenter = new PhotoPresenter();
+    this->model = new PhotoModel();
 
     this->label_w = ui->label->height(); // ширина label для отображения плиток
     this->bars_cnt = 4;  // количество отображаемых плиток
@@ -18,9 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete this->presenter;
+    delete this->model;
     delete ui;
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -36,9 +37,10 @@ void MainWindow::paint()
 
     qDebug() << "strart paint";
     QPixmap result(ui->label->width(), ui->label->height());
+    result.fill(Qt::white);
     QPainter painter(&result);
     painter.drawPixmap(0, 0, drawPhotos());
-    painter.drawPixmap(ui->label->height(), 0, drawCommonExif());
+    painter.drawPixmap(ui->label->height() + 10, 0, drawCommonExif());
 
     painter.end();
     this->saveResult(result);
@@ -72,7 +74,6 @@ QPixmap MainWindow::drawPhotos()
 
 QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment)
 {
-    qDebug() << "draw segment exif";
     QPixmap photo = segment.photo->scaled(this->bar_w, this->bar_w);
     QPainter painter(&photo);
     this->setPainterFont(painter);
@@ -88,12 +89,9 @@ QPixmap MainWindow::drawCommonExif()
     qDebug() << "draw common exif";
     auto segment = this->presenter->getSegments()[0];
     QPixmap common(200, ui->label->height());
+    common.fill(Qt::white);
     QPainter painter(&common);
-    painter.setBackgroundMode(Qt::OpaqueMode);
-    painter.setBackground(Qt::white);
-    painter.setPen(Qt::black);
     QString text = createText(segment.common);
-    this->setPainterFont(painter);
     painter.drawText(rect(), Qt::AlignLeft, text);
 
     painter.end();

@@ -3,6 +3,7 @@
 PhotoPresenter::PhotoPresenter()
 {
     this->model = new PhotoModel();
+
 }
 
 PhotoPresenter::~PhotoPresenter()
@@ -12,7 +13,6 @@ PhotoPresenter::~PhotoPresenter()
 
 void PhotoPresenter::process(QStringList &photo_paths)
 {
-
     if (this->isGoodCount(photo_paths)){
         SettingsSingleton::getInstance().setPath(photo_paths.last());
         this->model->setPaths(photo_paths);

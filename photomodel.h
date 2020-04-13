@@ -32,6 +32,8 @@ public:
     QStringList photo_paths;
     QHash<int, PhotoSegment> photos; // <i, exif данные>
     ExifKeys keys;
+signals:
+    void statusChanged(QString, int);
 
 };
 

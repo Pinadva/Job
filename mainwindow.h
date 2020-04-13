@@ -3,6 +3,7 @@
 
 #include "settingssingleton.h"
 #include "photopresenter.h"
+#include "photomodel.h"
 
 #include <QMainWindow>
 #include <QFileDialog>
@@ -10,7 +11,8 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QTextItem>
-
+#include <QMimeData>
+#include <Qt>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,6 +44,7 @@ private:
     Ui::MainWindow *ui;
 
     PhotoPresenter *presenter;
+    const PhotoModel *model;
     int label_w; // ширина label для отображения плиток
     int bars_cnt; // количество отображаемых плиток
     int bar_w; // ширина одной плитки

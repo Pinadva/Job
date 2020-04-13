@@ -42,7 +42,7 @@ void PhotoModel::setPhotos()
         if (exifData.empty()) {
             qDebug() << ": No Exif data found in the file";
             // emit дай все exif
-            continue;
+            return;
             }
 
         PhotoSegment photo_segment;
