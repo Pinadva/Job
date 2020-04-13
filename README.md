@@ -18,9 +18,9 @@ struct MosaicPhoto
   * Пропустить первую фотографию и запомнить названия следующих 16
   * Загрузить 16 фотографии в QHash<int, MosaicPhoto> photos заполнив photo и fileName;
   * в цикле перебрать photos
-    * убедиться что exif поля {Make, Model, LensInfo, FocalLength, Megapixels, FullImageSize, ModifyDate, ExposureProgram, ISOAutoMin, ISOAutoMax} одинаковые, если да, то запомнить их в переменные(например QHash<QString, QString> globalEXIF;), иначе вывести об этом сообщение и перейти в изначальное состояние программы
-    * записать в структуру MosaicPhoto значения тэгов {ExposureTime, FNumber, ISO, FlashExposureComp}
-  * Спросить у пользователя текстовое значение для "Производитель объектива", добавить в globalEXIF
+    * убедиться что exif поля {Exif.Image.Make, Exif.Image.Model, Exif.Photo.LensMake, {Exif.Image.ReelName, Exif.Photo.LensSerialNumber, Exif.Image.LensInfo}, Exif.Photo.FocalLength, Exif.Photo.PixelXDimension * Exif.Photo.PixelYDimension, Exif.Photo.ExposureProgram} одинаковые, если да, то запомнить их в переменные(например QHash<QString, QString> globalEXIF;), иначе вывести об этом сообщение и перейти в изначальное состояние программы
+    * убедиться что у первого фото есть exif поле {Exif.Image.DateTime} и записать его в globalEXIF, иначе вывести об этом сообщение и перейти в изначальное состояние программы
+    * записать в структуру MosaicPhoto значения тэгов для соответсвующих фотографии {{Exif.Image.ImageID, Exif.Image.ReelName}, Exif.Photo.ExposureTime, Exif.Photo.FNumber, Exif.Photo.ExposureBiasValue}, если у какого-либо файла хотя бы одного тэга нет, то вывести об этом сообщение и перейти в изначальное состояние программы
   * Создать QPixmap result; размером {photoSize.width, photoSize.height + 200}
 
 Далее нужно представить что result и все фотографии в photos разбиты на 16 одинаковых сегментов сеткой 4х4, размеры одного сегмента QSize(photoSize.width / 4, photoSize.height / 4).
