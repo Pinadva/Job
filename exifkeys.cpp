@@ -8,23 +8,25 @@ ExifKeys::ExifKeys()
 
 void ExifKeys::setSegment()
 {
+    segment["ImageID"]= "Exif.Image.ImageID";
+    segment["ReelName"]= "Exif.Image.ReelName";
     segment["ExposureTime"] = "Exif.Photo.ExposureTime";
     segment["FNumber"] = "Exif.Photo.FNumber";
     segment["ISO"] = "Exif.Photo.ISOSpeedRatings";
-    segment["FlashExposureComp"] = "Exif.Sony1.FlashExposureComp";
+    segment["ExposureBiasValue"]= "Exif.Photo.ExposureBiasValue";
 }
 
 void ExifKeys::setCommon()
 {
     common["Make"] = "Exif.Image.Make";
     common["Model"] = "Exif.Image.Model";
+    common["LensMake"] = "Exif.Photo.LensMake";
+    common["ReelName"]= "Exif.Image.ReelName";
+    common["LensSerialNumber"]= "Exif.Photo.LensSerialNumber";
     common["LensInfo"] = "Exif.Image.LensInfo";
     common["FocalLength"] = "Exif.Image.FocalLength";
-    //megapixels
     common["Width"] = "Exif.Image.ImageWidth";
     common["Length"] = "Exif.Image.ImageLength";
-    //modifyDate
-    common["ExposureProgram"] = "Exif.Image.ExposureProgram";
-    //iso min
-    //iso max
+    common["DateTime"] = "Exif.Image.DateTime";
+    common["ExposureProgram"] = "Exif.Photo.ExposureProgram";
 }

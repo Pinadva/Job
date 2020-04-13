@@ -17,12 +17,14 @@ public:
     void process(QStringList &);
     bool isGoodCount(QStringList &);
     bool isValid(const QHash<int, PhotoSegment> &);
+    bool isGoodSize(const QHash<int, PhotoSegment> &);
+    bool isSameExifs(const QHash<int, PhotoSegment> &photos);
     const QHash<int, PhotoSegment> &getPhotos();
     const QHash<int, PhotoSegment> &getSegments();
 
     PhotoModel *model;
 signals:
-    void statusChanged(QString);
+    void statusChanged(QString, int);
     void readyPaint();
 };
 

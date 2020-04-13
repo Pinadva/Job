@@ -18,6 +18,7 @@ void PhotoPresenter::process(QStringList &photo_paths)
         this->model->setPaths(photo_paths);
         this->model->setPhotos();
         if (this->isValid(this->model->getPhotos())){
+            qDebug() << "paint";
             emit readyPaint();
         }
         else
@@ -34,7 +35,7 @@ bool PhotoPresenter::isGoodCount(QStringList &photo_paths)
         if (photo_paths.size() == 16)
             is_good = true;
         else {
-            emit statusChanged("Выбрано неверное количество файлов. Необходимо 16 или 17 файлов.");
+            emit statusChanged("Выбрано неверное количество файлов. Необходимо 16 или 17 файлов.", -1);
         }
     }
     return is_good;
@@ -42,21 +43,40 @@ bool PhotoPresenter::isGoodCount(QStringList &photo_paths)
 
 bool PhotoPresenter::isValid(const QHash<int, PhotoSegment> &photos)
 {
-    bool same_size = true;
-    bool same_exif = true;
+    if (!this->isGoodSize(photos))
+        return false;
 
+    if (!this->isSameExifs(photos))
+        return false;
+
+    return true;
+}
+
+bool PhotoPresenter::isGoodSize(const QHash<int, PhotoSegment> &photos)
+{
     auto size = photos[0].photo->size();
-    auto exif = photos[0].common;
+
     for (auto iter = photos.begin(); iter != photos.end(); ++iter){
-        if (size != iter->photo->size()){
-            emit statusChanged("Размер фотографий должен быть одинаковым.");
-            same_size = false;
-            return same_size;
+        if (size != iter.value().photo->size()){
+            emit statusChanged("Размер фотографий должен быть одинаковым.", -1);
+            return false;
         }
-        if (exif != iter->common){
-            emit statusChanged("Общие EXIF данные должны быть одинаковыми.");
-            same_exif = false;
-            return same_exif;
+    }
+    return true;
+}
+
+bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
+{
+    auto exif = photos[0].common;
+
+    for (auto i = photos.begin(); i != photos.end(); ++i){
+        for (auto key: exif.keys()){
+            if (key != "DateTime"){
+                if (exif[key] != i->common[key]){
+                    emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
+                    return false;
+                }
+            }
         }
     }
     return true;

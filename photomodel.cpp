@@ -8,7 +8,7 @@ PhotoModel::PhotoModel()
 
 void PhotoModel::setExifKeys()
 {
-
+    this->keys = ExifKeys();
 }
 
 void PhotoModel::setPaths(QStringList &image_paths)
