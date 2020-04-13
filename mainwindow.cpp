@@ -41,8 +41,17 @@ void MainWindow::paint()
     painter.drawPixmap(ui->label->height(), 0, drawCommonExif());
 
     painter.end();
-
+    this->saveResult(result);
     ui->label->setPixmap(result);
+}
+
+void MainWindow::saveResult(QPixmap &pixmap)
+{
+    auto path = SettingsSingleton::getInstance().getPath();
+    QFile file(path + "\\result.png");
+    if (file.exists())
+        file.remove();
+    qDebug() << pixmap.save(file.fileName());
 }
 
 QPixmap MainWindow::drawPhotos()
