@@ -99,19 +99,24 @@ QPixmap MainWindow::drawCommonExif()
 void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter)
 {
     QString text = "";
-
+    int y = 10;
     for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
-             text += i.key() + " " + i.value() + "\n";
+            if (i.value() == "-")
+                painter.setPen(Qt::red);
+            else
+                painter.setPen(Qt::black);
+             text = i.key() + ": " + i.value() + " \n";
+                 painter.drawText(QPointF(1, y), text);
+             y += 15;
     }
-    painter.drawText(rect(), Qt::AlignLeft, text);
 
 }
 
 void MainWindow::setPainterFont(QPainter &painter)
 {
     painter.setBackgroundMode(Qt::OpaqueMode);
-    painter.setBackground(Qt::black);
-    painter.setPen(Qt::white);
+    painter.setBackground(Qt::white);
+    painter.setPen(Qt::black);
     painter.setFont(QFont("Arial", 9));
 }
 

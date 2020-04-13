@@ -70,7 +70,7 @@ void PhotoModel::setExif(QHash<QString, QString> &src_keys, QHash<QString, QStri
             dst_keys.insert(i.key(), QString::fromStdString(tag));
         }
         else {
-            dst_keys.insert(i.key(), "- ");
+            dst_keys.insert(i.key(), "-");
         }
     }
 }
