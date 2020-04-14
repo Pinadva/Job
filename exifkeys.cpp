@@ -9,7 +9,6 @@ ExifKeys::ExifKeys()
 void ExifKeys::setSegment()
 {
     segment["ImageID"]= "Exif.Image.ImageID";
-    segment["ReelName"]= "Exif.Image.ReelName";
     segment["ExposureTime"] = "Exif.Photo.ExposureTime";
     segment["FNumber"] = "Exif.Photo.FNumber";
     segment["ISO"] = "Exif.Photo.ISOSpeedRatings";

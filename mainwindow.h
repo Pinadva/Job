@@ -37,7 +37,6 @@ private slots:
     QPixmap drawPhotos();
     QPixmap drawCommonExif();
     void drawText(const QHash<QString, QString> &, QPainter &, QColor);
-    void drawCommonText(const QHash<QString, QString> &, QPainter &, QColor);
 
 private:
     Ui::MainWindow *ui;
