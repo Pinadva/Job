@@ -104,8 +104,3 @@ const QHash<int, PhotoSegment> &PhotoPresenter::getPhotos()
     return this->model->getPhotos();
 }
 
-const QHash<int, PhotoSegment> &PhotoPresenter::getSegments()
-{
-    return this->model->getPhotos();
-}
-

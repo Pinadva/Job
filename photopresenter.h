@@ -21,7 +21,6 @@ public:
     bool isGoodSize(const QHash<int, PhotoSegment> &);
     bool isSameExifs(const QHash<int, PhotoSegment> &);
     const QHash<int, PhotoSegment> &getPhotos();
-    const QHash<int, PhotoSegment> &getSegments();
 
     PhotoModel *model;
 signals:

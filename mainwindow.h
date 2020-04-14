@@ -33,10 +33,11 @@ private slots:
 
     void paint();
     void saveResult(QPixmap &);
-    QPixmap drawSegmentExif(const PhotoSegment &);
+    QPixmap drawSegmentExif(const PhotoSegment &, int &, int &);
     QPixmap drawPhotos();
     QPixmap drawCommonExif();
     void drawText(const QHash<QString, QString> &, QPainter &, QColor);
+    void drawCommonText(const QHash<QString, QString> &, QPainter &, QColor);
 
 private:
     Ui::MainWindow *ui;
@@ -45,6 +46,7 @@ private:
     int label_w; // ширина label для отображения плиток
     int bars_cnt; // количество отображаемых плиток
     int bar_w; // ширина одной плитки
-
+    QSize photo_size;
+    QSize segment_size;
 };
 #endif // MAINWINDOW_H

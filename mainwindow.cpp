@@ -34,15 +34,18 @@ void MainWindow::paint()
 {
 
     qDebug() << "strart paint";
-    QPixmap result(ui->label->width(), ui->label->height());
+    this->photo_size = this->presenter->getPhotos()[0].photo->size();
+    this->segment_size = this->photo_size / 4;
+
+    QPixmap result(this->photo_size.width()+ 800, this->photo_size.height());
     result.fill(Qt::white);
     QPainter painter(&result);
     painter.drawPixmap(0, 0, drawPhotos());
-    painter.drawPixmap(ui->label->height() + 10, 0, drawCommonExif());
+    painter.drawPixmap(photo_size.width() + 20, 20, drawCommonExif());
 
     painter.end();
     this->saveResult(result);
-    ui->label->setPixmap(result);
+    ui->label->setPixmap(result.scaled(ui->label->width(), ui->label->height()));
 }
 
 void MainWindow::saveResult(QPixmap &pixmap)
@@ -57,30 +60,31 @@ void MainWindow::saveResult(QPixmap &pixmap)
 QPixmap MainWindow::drawPhotos()
 {
     qDebug() << "draw photos";
-    auto photo_segments = this->presenter->getSegments();
-    QPixmap photos(ui->label->height(), ui->label->height());
+    auto photo_segments = this->presenter->getPhotos();
+    QPixmap photos(this->photo_size.width(), this->photo_size.height());
     QPainter painter(&photos);
     for (int i = 0; i < photo_segments.size(); ++i) {
-        painter.drawPixmap(this->bar_w * (i % this->bars_cnt),
-                           this->bar_w * (i / this->bars_cnt),
-                           drawSegmentExif(photo_segments[i]));
+        int x = this->segment_size.width()  * (i % this->bars_cnt);
+        int y = this->segment_size.height() * (i / this->bars_cnt);
+
+        painter.drawPixmap(x, y, drawSegmentExif(photo_segments[i], x, y));
     }
 
     painter.end();
     return photos;
 }
 
-QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment)
+QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
 {
-    QPixmap photo = segment.photo->scaled(this->bar_w, this->bar_w);
+    QPixmap photo = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
     QPainter painter(&photo);
     painter.setBackgroundMode(Qt::OpaqueMode);
     painter.setBackground(Qt::black);
     painter.setOpacity(0.5);
-    painter.setPen(Qt::white);
-    painter.setFont(QFont("Arial", 9));
+    painter.setPen(Qt::green);
+    painter.setFont(QFont("Arial", 36));
 
-    drawText(segment.segment, painter, Qt::white);
+    drawText(segment.segment, painter, Qt::green);
 
     painter.end();
     return photo;
@@ -89,14 +93,14 @@ QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment)
 QPixmap MainWindow::drawCommonExif()
 {
     qDebug() << "draw common exif";
-    auto segment = this->presenter->getSegments()[0];
-    QPixmap common(200, ui->label->height());
+    auto segment = this->presenter->getPhotos()[0];
+    QPixmap common(800, this->photo_size.height());
     common.fill(Qt::white);
     QPainter painter(&common);
     painter.setBackgroundMode(Qt::OpaqueMode);
     painter.setBackground(Qt::white);
-    painter.setPen(Qt::black);
-    painter.setFont(QFont("Arial", 9));
+    painter.setOpacity(0.5);
+    painter.setFont(QFont("Arial", 48));
 
     drawText(segment.common, painter, Qt::black);
 
@@ -107,7 +111,7 @@ QPixmap MainWindow::drawCommonExif()
 void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter, QColor text_color)
 {
     QString text = "";
-    int y = 10;
+    int y = 50;
     for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
             if (i.value() == "-"){
                 painter.setPen(Qt::red);
@@ -115,10 +119,26 @@ void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &pa
             else
                  painter.setPen(text_color);
              text = i.key() + ": " + i.value() + " \n";
-                 painter.drawText(QPointF(1, y), text);
-             y += 15;
+                 painter.drawText(rect(), text);
+             y += 20;
     }
 
+}
+
+void MainWindow::drawCommonText(const QHash<QString, QString> &exif_data, QPainter &painter, QColor text_color)
+{
+    QString text = "";
+    int x = 70;
+    for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
+            if (i.value() == "-"){
+                painter.setPen(Qt::red);
+            }
+            else
+                 painter.setPen(text_color);
+            text = i.key() + ": " + i.value() + "; ";
+            painter.drawText(rect(), text);
+            x += 750;
+    }
 }
 
 
