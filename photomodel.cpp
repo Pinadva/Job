@@ -1,9 +1,7 @@
 #include "photomodel.h"
 
-
 PhotoModel::PhotoModel()
 {
-
 }
 
 void PhotoModel::setExifKeys()
@@ -15,7 +13,7 @@ void PhotoModel::setPaths(QStringList &image_paths)
 {
     this->photo_paths = image_paths;
 
-    for (auto i: this->photo_paths)
+    for (auto i : this->photo_paths)
         qDebug() << i;
 }
 
@@ -31,7 +29,9 @@ const QHash<int, PhotoSegment> &PhotoModel::getPhotos()
 
 void PhotoModel::setPhotos()
 {
-    for (int i = 0; i < photo_paths.size(); ++i){
+    for (int i = 0; i < photo_paths.size(); ++i)
+    {
+        QApplication::processEvents();
         auto path = this->photo_paths[i];
         qDebug() << "================================================";
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(path.toStdString());
@@ -39,11 +39,12 @@ void PhotoModel::setPhotos()
         image->readMetadata();
 
         Exiv2::ExifData &data = image->exifData();
-        if (data.empty()) {
+        if (data.empty())
+        {
             qDebug() << ": No Exif data found in the file";
             // emit дай все exif
             return;
-            }
+        }
 
         PhotoSegment photo_segment;
         photo_segment.photo = new QPixmap(path);
@@ -64,13 +65,16 @@ void PhotoModel::setPhotos()
 
 void PhotoModel::setExif(QHash<QString, QString> &src_keys, QHash<QString, QString> &dst_keys, Exiv2::ExifData &data)
 {
-    for (auto i = src_keys.begin(); i != src_keys.end(); ++i){
+    for (auto i = src_keys.begin(); i != src_keys.end(); ++i)
+    {
         Exiv2::ExifKey key = Exiv2::ExifKey(i.value().toStdString());
-        if (data.findKey(key) != data.end()){
+        if (data.findKey(key) != data.end())
+        {
             auto tag = data[i.value().toStdString()].value().toString();
             dst_keys.insert(i.key(), QString::fromStdString(tag));
         }
-        else {
+        else
+        {
             dst_keys.insert(i.key(), "-");
         }
     }
@@ -80,18 +84,17 @@ void PhotoModel::setSizeExif(QHash<QString, QString> &dst_keys, Exiv2::ExifData 
 {
     Exiv2::ExifKey pX_key = Exiv2::ExifKey("Exif.Photo.PixelXDimension");
     Exiv2::ExifKey pY_key = Exiv2::ExifKey("Exif.Photo.PixelYDimension");
-    if (data.findKey(pX_key) != data.end() and data.findKey(pY_key) != data.end()){
+    if (data.findKey(pX_key) != data.end() and data.findKey(pY_key) != data.end())
+    {
         dst_keys.remove("PixelX");
         dst_keys.remove("PixelY");
 
         auto pX_std_str = data["Exif.Photo.PixelXDimension"].value().toString();
         auto pY_std_str = data["Exif.Photo.PixelYDimension"].value().toString();
 
-        dst_keys["Size"] = QString::fromStdString(pX_std_str) + "x" +
-                                      QString::fromStdString(pY_std_str);
+        dst_keys["Size"] = QString::fromStdString(pX_std_str) + "x" + QString::fromStdString(pY_std_str);
     }
 }
-
 
 void PhotoModel::clear()
 {
@@ -99,7 +102,3 @@ void PhotoModel::clear()
     this->photos.clear();
     this->keys = ExifKeys();
 }
-
-
-
-
