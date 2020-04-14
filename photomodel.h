@@ -27,6 +27,7 @@ public:
     void setPhotos();
     const QHash<int, PhotoSegment> &getPhotos();
     void setExif(QHash<QString, QString> &source_keys, QHash<QString, QString> &dist_keys, Exiv2::ExifData &);
+    void setSizeExif(QHash<QString, QString> &, Exiv2::ExifData &);
     void clear();
 
     QStringList photo_paths;

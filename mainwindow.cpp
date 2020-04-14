@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->presenter = new PhotoPresenter();
-    this->model = new PhotoModel();
 
     this->label_w = ui->label->height(); // ширина label для отображения плиток
     this->bars_cnt = 4;  // количество отображаемых плиток
@@ -19,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete this->presenter;
-    delete this->model;
     delete ui;
 }
 
@@ -76,8 +74,13 @@ QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment)
 {
     QPixmap photo = segment.photo->scaled(this->bar_w, this->bar_w);
     QPainter painter(&photo);
-    this->setPainterFont(painter);
-    drawText(segment.segment, painter);
+    painter.setBackgroundMode(Qt::OpaqueMode);
+    painter.setBackground(Qt::black);
+    painter.setOpacity(0.5);
+    painter.setPen(Qt::white);
+    painter.setFont(QFont("Arial", 9));
+
+    drawText(segment.segment, painter, Qt::white);
 
     painter.end();
     return photo;
@@ -90,21 +93,27 @@ QPixmap MainWindow::drawCommonExif()
     QPixmap common(200, ui->label->height());
     common.fill(Qt::white);
     QPainter painter(&common);
-    drawText(segment.common, painter);
+    painter.setBackgroundMode(Qt::OpaqueMode);
+    painter.setBackground(Qt::white);
+    painter.setPen(Qt::black);
+    painter.setFont(QFont("Arial", 9));
+
+    drawText(segment.common, painter, Qt::black);
 
     painter.end();
     return common;
 }
 
-void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter)
+void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter, QColor text_color)
 {
     QString text = "";
     int y = 10;
     for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
-            if (i.value() == "-")
+            if (i.value() == "-"){
                 painter.setPen(Qt::red);
+            }
             else
-                painter.setPen(Qt::black);
+                 painter.setPen(text_color);
              text = i.key() + ": " + i.value() + " \n";
                  painter.drawText(QPointF(1, y), text);
              y += 15;
@@ -112,13 +121,6 @@ void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &pa
 
 }
 
-void MainWindow::setPainterFont(QPainter &painter)
-{
-    painter.setBackgroundMode(Qt::OpaqueMode);
-    painter.setBackground(Qt::white);
-    painter.setPen(Qt::black);
-    painter.setFont(QFont("Arial", 9));
-}
 
 
 void MainWindow::updateStatusBar(QString status_message = "", int error_code = 0)

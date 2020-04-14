@@ -73,6 +73,23 @@ void PhotoModel::setExif(QHash<QString, QString> &src_keys, QHash<QString, QStri
             dst_keys.insert(i.key(), "-");
         }
     }
+    setSizeExif(dst_keys, data);
+}
+
+void PhotoModel::setSizeExif(QHash<QString, QString> &dst_keys, Exiv2::ExifData &data)
+{
+    Exiv2::ExifKey pX_key = Exiv2::ExifKey("Exif.Photo.PixelXDimension");
+    Exiv2::ExifKey pY_key = Exiv2::ExifKey("Exif.Photo.PixelYDimension");
+    if (data.findKey(pX_key) != data.end() and data.findKey(pY_key) != data.end()){
+        dst_keys.remove("PixelX");
+        dst_keys.remove("PixelY");
+
+        auto pX_std_str = data["Exif.Photo.PixelXDimension"].value().toString();
+        auto pY_std_str = data["Exif.Photo.PixelYDimension"].value().toString();
+
+        dst_keys["Size"] = QString::fromStdString(pX_std_str) + "x" +
+                                      QString::fromStdString(pY_std_str);
+    }
 }
 
 

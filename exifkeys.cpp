@@ -29,4 +29,7 @@ void ExifKeys::setCommon()
     common["Length"] = "Exif.Image.ImageLength";
     common["DateTime"] = "Exif.Image.DateTime";
     common["ExposureProgram"] = "Exif.Photo.ExposureProgram";
+    common["PixelX"] = "Exif.Photo.PixelXDimension";
+    common["PixelY"] = "Exif.Photo.PixelYDimension";
+
 }

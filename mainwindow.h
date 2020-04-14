@@ -3,7 +3,6 @@
 
 #include "settingssingleton.h"
 #include "photopresenter.h"
-#include "photomodel.h"
 
 #include <QMainWindow>
 #include <QFileDialog>
@@ -37,14 +36,12 @@ private slots:
     QPixmap drawSegmentExif(const PhotoSegment &);
     QPixmap drawPhotos();
     QPixmap drawCommonExif();
-    void drawText(const QHash<QString, QString> &, QPainter &);
-    void setPainterFont(QPainter &);
+    void drawText(const QHash<QString, QString> &, QPainter &, QColor);
 
 private:
     Ui::MainWindow *ui;
 
     PhotoPresenter *presenter;
-    const PhotoModel *model;
     int label_w; // ширина label для отображения плиток
     int bars_cnt; // количество отображаемых плиток
     int bar_w; // ширина одной плитки
