@@ -38,8 +38,8 @@ void PhotoModel::setPhotos()
         assert(image.get() != 0);
         image->readMetadata();
 
-        Exiv2::ExifData &exifData = image->exifData();
-        if (exifData.empty()) {
+        Exiv2::ExifData &data = image->exifData();
+        if (data.empty()) {
             qDebug() << ": No Exif data found in the file";
             // emit дай все exif
             return;
@@ -49,8 +49,9 @@ void PhotoModel::setPhotos()
         photo_segment.photo = new QPixmap(path);
         photo_segment.segment.insert("FileName", QFileInfo(path).fileName());
 
-        setExif(this->keys.segment, photo_segment.segment, exifData);
-        setExif(this->keys.common, photo_segment.common, exifData);
+        setExif(this->keys.segment, photo_segment.segment, data);
+        setExif(this->keys.common, photo_segment.common, data);
+        setSizeExif(photo_segment.common, data);
 
         this->photos.insert(photos.size(), photo_segment);
 
@@ -73,7 +74,6 @@ void PhotoModel::setExif(QHash<QString, QString> &src_keys, QHash<QString, QStri
             dst_keys.insert(i.key(), "-");
         }
     }
-    setSizeExif(dst_keys, data);
 }
 
 void PhotoModel::setSizeExif(QHash<QString, QString> &dst_keys, Exiv2::ExifData &data)

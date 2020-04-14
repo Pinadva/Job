@@ -25,8 +25,6 @@ void ExifKeys::setCommon()
     common["LensSerialNumber"]= "Exif.Photo.LensSerialNumber";
     common["LensInfo"] = "Exif.Image.LensInfo";
     common["FocalLength"] = "Exif.Image.FocalLength";
-    common["Width"] = "Exif.Image.ImageWidth";
-    common["Length"] = "Exif.Image.ImageLength";
     common["DateTime"] = "Exif.Image.DateTime";
     common["ExposureProgram"] = "Exif.Photo.ExposureProgram";
     common["PixelX"] = "Exif.Photo.PixelXDimension";
