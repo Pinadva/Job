@@ -1,17 +1,19 @@
 #ifndef PHOTOMODEL_H
 #define PHOTOMODEL_H
 
-#include <QFileInfo>
-#include <QStringList>
-#include <QImage>
+#include <QApplication>
+#include <QByteArray>
 #include <QDebug>
-#include <exiv2/exiv2.hpp>
+#include <QFileInfo>
 #include <QHash>
-#include <iostream>
+#include <QImage>
 #include <QPixmap>
+#include <QStringList>
+#include <exiv2/exiv2.hpp>
+#include <iostream>
 
-#include <photosegment.h>
 #include <exifkeys.h>
+#include <photosegment.h>
 
 using namespace std;
 
@@ -35,7 +37,6 @@ public:
     ExifKeys keys;
 signals:
     void statusChanged(QString, int);
-
 };
 
 #endif // PHOTOMODEL_H
