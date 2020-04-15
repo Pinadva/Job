@@ -1,18 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     this->presenter = new PhotoPresenter();
 
-    this->label_w = ui->label->height(); // ширина label для отображения плиток
-    this->bars_cnt = 4;  // количество отображаемых плиток
-    this->bar_w = label_w / bars_cnt; // ширина одной плитки
-    connect(presenter, SIGNAL(statusChanged(QString, int)), this, SLOT(updateStatusBar(QString, int)));
-    connect(presenter, SIGNAL(readyPaint()), this, SLOT(paint()));
+    this->label_w  = ui->label->height(); // ширина label для отображения плиток
+    this->bars_cnt = 4;                   // количество отображаемых плиток
+    this->bar_w    = label_w / bars_cnt;  // ширина одной плитки
+    connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
+    connect(presenter, &PhotoPresenter::readyPaint, this, &MainWindow::paint);
+    movie = new QMovie("://loader.gif");
 }
 
 MainWindow::~MainWindow()
@@ -21,40 +20,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    QStringList filenames = QFileDialog::getOpenFileNames(this,
-                                                          "Выберите фотографии",
-                                                          SettingsSingleton::getInstance().getPath(),
-                                                          "*.jpg; *.jpeg");
-    this->presenter->process(filenames);
-}
-
 void MainWindow::paint()
 {
-
-    qDebug() << "strart paint";
-    this->photo_size = this->presenter->getPhotos()[0].photo->size();
+    qDebug() << "start paint";
+    this->photo_size   = this->presenter->getPhotos()[0].photo->size();
     this->segment_size = this->photo_size / 4;
 
-    QPixmap result(this->photo_size.width()+ 1000, this->photo_size.height());
+    QPixmap result(this->photo_size.width() + 1000, this->photo_size.height());
     result.fill(Qt::white);
     QPainter painter(&result);
     painter.drawPixmap(0, 0, drawPhotos());
     painter.drawPixmap(photo_size.width() + 20, 20, drawCommonExif());
-
     painter.end();
     this->saveResult(result);
-    ui->label->setPixmap(result.scaled(ui->label->width(), ui->label->height()));
+    resultPixmap = result.copy();
+    movie->stop();
+    ui->label->setPixmap(resultPixmap.scaled(ui->label->width(), ui->label->height()));
 }
 
 void MainWindow::saveResult(QPixmap &pixmap)
 {
+    qDebug() << "saving result";
     auto path = SettingsSingleton::getInstance().getPath();
     QFile file(path + "\\result.png");
     if (file.exists())
         file.remove();
-    qDebug() << pixmap.save(file.fileName());
+    pixmap.save(file.fileName());
 }
 
 QPixmap MainWindow::drawPhotos()
@@ -63,8 +54,9 @@ QPixmap MainWindow::drawPhotos()
     auto photo_segments = this->presenter->getPhotos();
     QPixmap photos(this->photo_size.width(), this->photo_size.height());
     QPainter painter(&photos);
-    for (int i = 0; i < photo_segments.size(); ++i) {
-        int x = this->segment_size.width()  * (i % this->bars_cnt);
+    for (int i = 0; i < photo_segments.size(); ++i)
+    {
+        int x = this->segment_size.width() * (i % this->bars_cnt);
         int y = this->segment_size.height() * (i / this->bars_cnt);
 
         painter.drawPixmap(x, y, drawSegmentExif(photo_segments[i], x, y));
@@ -111,35 +103,51 @@ QPixmap MainWindow::drawCommonExif()
 void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter, QColor text_color)
 {
     QString text = "";
-    int y = 60;
-    for (auto i = exif_data.begin(); i != exif_data.end(); ++i) {
-            if (i.value() == "-"){
-                painter.setPen(Qt::red);
-            }
-            else
-                 painter.setPen(text_color);
-             text = i.key() + ": " + i.value() + " \n";
-                 painter.drawText(20, y, text);
-             y += 80;
+    int y        = 60;
+    for (auto i = exif_data.begin(); i != exif_data.end(); ++i)
+    {
+        if (i.value() == "-")
+        {
+            painter.setPen(Qt::red);
+        }
+        else
+            painter.setPen(text_color);
+        text = i.key() + ": " + i.value() + " \n";
+        painter.drawText(20, y, text);
+        y += 80;
     }
-
 }
 
 void MainWindow::updateStatusBar(QString status_message = "", int error_code = 0)
 {
     qDebug() << status_message;
-    switch (error_code) {
+    switch (error_code)
+    {
         case -1:
             ui->statusbar->setStyleSheet("QStatusBar{color:red;}"); //:rgba(255,0,0,255)
-        break;
+            break;
         case 0:
             ui->statusbar->setStyleSheet("QStatusBar{color:black;}");
-        break;
+            break;
         case 1:
             ui->statusbar->setStyleSheet("QStatusBar{color:green;}");
-        break;
+            break;
     }
     ui->statusbar->showMessage(status_message, 10000);
 }
 
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    if (!resultPixmap.isNull())
+        ui->label->setPixmap(resultPixmap.scaled(ui->label->width(), ui->label->height()));
+    QMainWindow::resizeEvent(event);
+}
 
+void MainWindow::on_actionSelect_photos_triggered()
+{
+    QStringList filenames =
+    QFileDialog::getOpenFileNames(this, "Выберите фотографии", SettingsSingleton::getInstance().getPath(), "*.jpg; *.jpeg");
+    ui->label->setMovie(movie);
+    movie->start();
+    this->presenter->process(filenames);
+}
