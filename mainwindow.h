@@ -3,6 +3,7 @@
 
 #include "photopresenter.h"
 #include "settingssingleton.h"
+#include "textbase.h"
 
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -38,10 +39,9 @@ protected:
 private slots:
     void paint();
     void saveResult(QPixmap &);
-    QPixmap drawSegmentExif(const PhotoSegment &, int &, int &);
     QPixmap drawPhotos();
     QPixmap drawCommonExif();
-    void drawText(const QHash<QString, QString> &, QPainter &, QColor);
+    QPixmap drawSegmentExif(const PhotoSegment &, int &, int &);
     void on_actionSelect_photos_triggered();
 
 private:

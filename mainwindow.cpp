@@ -66,54 +66,37 @@ QPixmap MainWindow::drawPhotos()
 
 QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
 {
+    qDebug() << "draw segment exif";
     QPixmap photo = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
-    QPainter painter(&photo);
-    painter.setBackgroundMode(Qt::OpaqueMode);
-    painter.setBackground(Qt::black);
-    painter.setOpacity(0.5);
-    painter.setPen(Qt::green);
-    painter.setFont(QFont("Arial", 48));
+    qDebug() << "photo.size =" << photo.size();
+    auto data = segment.segment;
 
-    drawText(segment.segment, painter, Qt::green);
+    TextBase text(photo, Qt::black, Qt::green);
+    text.drawText("FileName", data["FileName"]);
+    text.drawText("ISO", data["ISO"]);
+    text.drawText("ExposureTime", data["ExposureTime"]);
+    text.drawText("FNumber", data["FNumber"]);
+    text.drawText("ExposureBiasValue", data["ExposureBiasValue"]);
 
-    painter.end();
-    return photo;
+    return text.pixmap;
 }
 
 QPixmap MainWindow::drawCommonExif()
 {
     qDebug() << "draw common exif";
-    auto segment = this->presenter->getPhotos()[0];
     QPixmap common(1000, this->photo_size.height());
     common.fill(Qt::white);
-    QPainter painter(&common);
-    painter.setBackgroundMode(Qt::OpaqueMode);
-    painter.setBackground(Qt::white);
-    painter.setOpacity(0.5);
-    painter.setFont(QFont("Arial", 48));
+    auto segment = this->presenter->getPhotos()[0];
+    auto data    = segment.common;
 
-    drawText(segment.common, painter, Qt::black);
+    TextBase text(common, Qt::white, Qt::black);
+    text.drawText("Make", data["Make"]);
+    text.drawText("Model", data["Model"]);
+    text.drawText("Date", data["DateTime"]);
+    text.drawText("Size", data["Size"]);
+    text.drawText("ExposureProgram", data["ExposureProgram"]);
 
-    painter.end();
-    return common;
-}
-
-void MainWindow::drawText(const QHash<QString, QString> &exif_data, QPainter &painter, QColor text_color)
-{
-    QString text = "";
-    int y        = 60;
-    for (auto i = exif_data.begin(); i != exif_data.end(); ++i)
-    {
-        if (i.value() == "-")
-        {
-            painter.setPen(Qt::red);
-        }
-        else
-            painter.setPen(text_color);
-        text = i.key() + ": " + i.value() + " \n";
-        painter.drawText(20, y, text);
-        y += 80;
-    }
+    return text.pixmap;
 }
 
 void MainWindow::updateStatusBar(QString status_message = "", int error_code = 0)

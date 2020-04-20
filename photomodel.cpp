@@ -67,10 +67,8 @@ void PhotoModel::setPhotos()
 
         this->photos.insert(photos.size(), photo_segment);
 
-        qDebug() << "*****************";
         qDebug() << photo_segment.segment;
         qDebug() << photo_segment.common;
-        qDebug() << "*****************";
     }
 }
 

@@ -21,7 +21,9 @@ SOURCES += \
     mainwindow.cpp \
     photomodel.cpp \
     photopresenter.cpp \
-    settingssingleton.cpp
+    photoview.cpp \
+    settingssingleton.cpp \
+    textbase.cpp
 
 HEADERS += \
     exifkeys.h \
@@ -29,7 +31,9 @@ HEADERS += \
     photomodel.h \
     photopresenter.h \
     photosegment.h \
-    settingssingleton.h
+    photoview.h \
+    settingssingleton.h \
+    textbase.h
 
 FORMS += \
     mainwindow.ui
