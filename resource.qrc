@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>../../../Downloads/Telegram Desktop/loader.gif</file>
+        <file>loader.gif</file>
     </qresource>
 </RCC>
