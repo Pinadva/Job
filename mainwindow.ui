@@ -30,10 +30,6 @@
   <property name="windowTitle">
    <string>Mosaic</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../Pictures/Icons/mosaic.ico</normaloff>../../../Pictures/Icons/mosaic.ico</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>

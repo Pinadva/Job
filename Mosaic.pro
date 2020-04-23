@@ -54,7 +54,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 LIBS += -lexiv2.dll
 
 RESOURCES += \
-    resource.qrc
-
+    resource.qrc \
+    mosaic_icon.ico
 
 RC_ICONS = mosaic_icon.ico
