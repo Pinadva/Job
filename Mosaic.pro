@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     exifkeys.cpp \
+    fraction.cpp \
     main.cpp \
     mainwindow.cpp \
     photomodel.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     exifkeys.h \
+    fraction.h \
     mainwindow.h \
     photomodel.h \
     photopresenter.h \

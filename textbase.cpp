@@ -31,16 +31,19 @@ void TextBase::setDefaultTextColor()
 
 void TextBase::drawText(QString key, QString value)
 {
+    qDebug() << "start*********************************";
     qDebug() << "drTxt pxmp.size" << pixmap.size();
     painter.begin(&pixmap);
     painterInit();
     qDebug() << "drawText";
     if (value == "-")
     {
+        qDebug() << "if";
         painter.setPen(Qt::red);
     }
     else
     {
+        qDebug() << "else";
         setDefaultTextColor();
     }
     QString text = key + ": " + value + " \n";

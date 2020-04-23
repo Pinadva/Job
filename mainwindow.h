@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "fraction.h"
 #include "photopresenter.h"
 #include "settingssingleton.h"
 #include "textbase.h"

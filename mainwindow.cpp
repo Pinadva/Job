@@ -70,13 +70,16 @@ QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
     QPixmap photo = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
     qDebug() << "photo.size =" << photo.size();
     auto data = segment.segment;
+    Fraction fraction;
 
     TextBase text(photo, Qt::black, Qt::green);
+    qDebug() << "start===================================";
     text.drawText("FileName", data["FileName"]);
     text.drawText("ISO", data["ISO"]);
-    text.drawText("ExposureTime", data["ExposureTime"]);
-    text.drawText("FNumber", data["FNumber"]);
-    text.drawText("ExposureBiasValue", data["ExposureBiasValue"]);
+    qDebug() << "Human ExposureTime =" << fraction.stringToDouble(data["ExposureTime"]);
+    text.drawText("ExposureTime", fraction.stringToDouble(data["ExposureTime"]));
+    text.drawText("FNumber", fraction.stringToDouble(data["FNumber"]));
+    text.drawText("ExposureBiasValue", fraction.stringToDouble(data["ExposureBiasValue"]));
 
     return text.pixmap;
 }
@@ -87,7 +90,8 @@ QPixmap MainWindow::drawCommonExif()
     QPixmap common(1000, this->photo_size.height());
     common.fill(Qt::white);
     auto segment = this->presenter->getPhotos()[0];
-    auto data    = segment.common;
+
+    auto data = segment.common;
 
     TextBase text(common, Qt::white, Qt::black);
     text.drawText("Make", data["Make"]);
