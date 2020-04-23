@@ -3,10 +3,9 @@
 TextBase::TextBase()
 {
 }
-TextBase::TextBase(QPixmap &pixmap, QColor bg_color, QColor text_color)
+TextBase::TextBase(QColor bg_color, QColor text_color)
 {
     qDebug() << "textBase";
-    this->pixmap     = pixmap;
     this->bg_color   = bg_color;
     this->text_color = text_color;
     this->data       = data;
@@ -32,10 +31,18 @@ void TextBase::setDefaultTextColor()
 void TextBase::drawText(QString key, QString value)
 {
     qDebug() << "start*********************************";
-    qDebug() << "drTxt pxmp.size" << pixmap.size();
-    painter.begin(&pixmap);
-    painterInit();
     qDebug() << "drawText";
+
+    QString text = key + ": " + value + " \n";
+    qDebug() << "key + value = " << key << value;
+    qDebug() << "text = " << text;
+    painter.drawText(20, y, text);
+    y += delta_y;
+    qDebug() << "painter.drawText";
+}
+
+void TextBase::chooseColor(QString value)
+{
     if (value == "-")
     {
         qDebug() << "if";
@@ -46,11 +53,4 @@ void TextBase::drawText(QString key, QString value)
         qDebug() << "else";
         setDefaultTextColor();
     }
-    QString text = key + ": " + value + " \n";
-    qDebug() << "key + value = " << key << value;
-    qDebug() << "text = " << text;
-    painter.drawText(20, y, text);
-    y += delta_y;
-    qDebug() << "painter.drawText";
-    painter.end();
 }

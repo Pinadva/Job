@@ -68,20 +68,20 @@ QPixmap MainWindow::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
 {
     qDebug() << "draw segment exif";
     QPixmap photo = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
-    qDebug() << "photo.size =" << photo.size();
-    auto data = segment.segment;
+    auto data     = segment.segment;
     Fraction fraction;
 
-    TextBase text(photo, Qt::black, Qt::green);
-    qDebug() << "start===================================";
+    TextBase text(Qt::black, Qt::green);
+    text.painter.begin(&photo);
+    text.painterInit();
+
     text.drawText("FileName", data["FileName"]);
     text.drawText("ISO", data["ISO"]);
-    qDebug() << "Human ExposureTime =" << fraction.stringToDouble(data["ExposureTime"]);
     text.drawText("ExposureTime", fraction.stringToDouble(data["ExposureTime"]));
     text.drawText("FNumber", fraction.stringToDouble(data["FNumber"]));
     text.drawText("ExposureBiasValue", fraction.stringToDouble(data["ExposureBiasValue"]));
 
-    return text.pixmap;
+    return photo;
 }
 
 QPixmap MainWindow::drawCommonExif()
@@ -90,17 +90,20 @@ QPixmap MainWindow::drawCommonExif()
     QPixmap common(1000, this->photo_size.height());
     common.fill(Qt::white);
     auto segment = this->presenter->getPhotos()[0];
+    auto data    = segment.common;
 
-    auto data = segment.common;
+    TextBase text(Qt::white, Qt::black);
+    text.painter.begin(&common);
+    text.painterInit();
 
-    TextBase text(common, Qt::white, Qt::black);
     text.drawText("Make", data["Make"]);
     text.drawText("Model", data["Model"]);
     text.drawText("Date", data["DateTime"]);
     text.drawText("Size", data["Size"]);
     text.drawText("ExposureProgram", data["ExposureProgram"]);
+    text.painter.end();
 
-    return text.pixmap;
+    return common;
 }
 
 void MainWindow::updateStatusBar(QString status_message = "", int error_code = 0)

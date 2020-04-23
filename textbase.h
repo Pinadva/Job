@@ -8,7 +8,6 @@ class TextBase
 {
 public:
     QPainter painter;
-    QPixmap pixmap;
     QColor bg_color;
     QColor text_color;
     QHash<QString, QString> data;
@@ -16,11 +15,12 @@ public:
     int delta_y;
 
     TextBase();
-    TextBase(QPixmap &, QColor, QColor);
+    TextBase(QColor, QColor);
 
     void painterInit();
     void setDefaultTextColor();
     void drawText(QString, QString);
+    void chooseColor(QString);
 };
 
 #endif // TEXTBASE_H

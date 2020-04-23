@@ -15,6 +15,8 @@ void Fraction::calculate(QString f)
     x                = nums.first().toDouble();
     if (nums.first() == nums.last())
         y = 1.;
+    else if (nums.last() == "0")
+        y = 1.;
     else
         y = nums.last().toDouble();
 }
