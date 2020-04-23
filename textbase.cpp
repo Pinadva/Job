@@ -8,7 +8,6 @@ TextBase::TextBase(QColor bg_color, QColor text_color)
     qDebug() << "textBase";
     this->bg_color   = bg_color;
     this->text_color = text_color;
-    this->data       = data;
 
     this->y       = 60;
     this->delta_y = 80;
@@ -30,15 +29,16 @@ void TextBase::setDefaultTextColor()
 
 void TextBase::drawText(QString key, QString value)
 {
-    qDebug() << "start*********************************";
     qDebug() << "drawText";
-
     QString text = key + ": " + value + " \n";
-    qDebug() << "key + value = " << key << value;
-    qDebug() << "text = " << text;
     painter.drawText(20, y, text);
     y += delta_y;
-    qDebug() << "painter.drawText";
+}
+
+void TextBase::drawText(QString text)
+{
+    painter.drawText(20, y, text);
+    y += delta_y;
 }
 
 void TextBase::chooseColor(QString value)

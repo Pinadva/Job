@@ -9,15 +9,16 @@
 #include <QImage>
 #include <QPixmap>
 #include <QStringList>
+#include <exifkeys.h>
 #include <exiv2/exiv2.hpp>
 #include <iostream>
 
-#include <exifkeys.h>
-#include <photosegment.h>
+#include "photobase.h"
+#include "photosegment.h"
 
 using namespace std;
 
-class PhotoModel
+class PhotoModel : public PhotoBase
 {
 private:
     void setExifKeys();
@@ -35,8 +36,6 @@ public:
     QStringList photo_paths;
     QHash<int, PhotoSegment> photos; // <i, exif данные>
     ExifKeys keys;
-signals:
-    void statusChanged(QString, int);
 };
 
 #endif // PHOTOMODEL_H

@@ -69,12 +69,29 @@
     </property>
     <addaction name="actionSelect_photos"/>
    </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionAdd_tags"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSelect_photos">
    <property name="text">
     <string>Select photos</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionAdd_tags">
+   <property name="text">
+    <string>Add tags</string>
    </property>
   </action>
  </widget>

@@ -5,6 +5,11 @@ PhotoPresenter::PhotoPresenter()
     this->model = new PhotoModel();
 }
 
+PhotoPresenter::PhotoPresenter(PhotoModel *&model)
+{
+    this->model = model;
+}
+
 PhotoPresenter::~PhotoPresenter()
 {
     delete this->model;

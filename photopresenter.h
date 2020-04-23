@@ -6,12 +6,13 @@
 
 #include <QObject>
 
-class PhotoPresenter : public QObject
+class PhotoPresenter : public PhotoBase
 {
     Q_OBJECT
 
 public:
     PhotoPresenter();
+    PhotoPresenter(PhotoModel *&);
     ~PhotoPresenter();
 
     void process(QStringList &);
@@ -22,9 +23,8 @@ public:
     bool isSameExifs(const QHash<int, PhotoSegment> &);
     const QHash<int, PhotoSegment> &getPhotos();
 
-    PhotoModel *model;
+    PhotoModel *model = nullptr;
 signals:
-    void statusChanged(QString, int);
     void readyPaint();
 };
 

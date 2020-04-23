@@ -20,6 +20,7 @@ SOURCES += \
     fraction.cpp \
     main.cpp \
     mainwindow.cpp \
+    photobase.cpp \
     photomodel.cpp \
     photopresenter.cpp \
     photoview.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     exifkeys.h \
     fraction.h \
     mainwindow.h \
+    photobase.h \
     photomodel.h \
     photopresenter.h \
     photosegment.h \
@@ -45,7 +47,6 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_ICONS = mosaic.ico
 
 LIBS += -lexiv2.dll
 

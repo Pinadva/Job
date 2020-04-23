@@ -3,6 +3,7 @@
 
 #include "fraction.h"
 #include "photopresenter.h"
+#include "photoview.h"
 #include "settingssingleton.h"
 #include "textbase.h"
 
@@ -33,26 +34,21 @@ public:
 
 public slots:
     void updateStatusBar(QString, int);
+    void viewResult(QPixmap &);
 
 protected:
     void resizeEvent(QResizeEvent *event);
 
 private slots:
-    void paint();
-    void saveResult(QPixmap &);
-    QPixmap drawPhotos();
-    QPixmap drawCommonExif();
-    QPixmap drawSegmentExif(const PhotoSegment &, int &, int &);
     void on_actionSelect_photos_triggered();
 
 private:
     Ui::MainWindow *ui;
 
-    PhotoPresenter *presenter;
+    PhotoView *view           = nullptr;
+    PhotoPresenter *presenter = nullptr;
+    PhotoModel *model         = nullptr;
 
-    QSize photo_size;
-    QSize segment_size;
-    int segment_cnt;
     QPixmap result_pixmap;
     QMovie *movie;
 };
