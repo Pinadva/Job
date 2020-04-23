@@ -2,25 +2,29 @@
 
 ExifKeys::ExifKeys()
 {
-    setSegment();
-    setCommon();
+    setUnique();
+    setSimilar();
 }
 
-void ExifKeys::setSegment()
+void ExifKeys::setUnique()
 {
-    segment["ExposureTime"]      = "Exif.Photo.ExposureTime";
-    segment["FNumber"]           = "Exif.Photo.FNumber";
-    segment["ISO"]               = "Exif.Photo.ISOSpeedRatings";
-    segment["ExposureBiasValue"] = "Exif.Photo.ExposureBiasValue";
+    unique["ExposureTime"]      = "Exif.Photo.ExposureTime";
+    unique["FNumber"]           = "Exif.Photo.FNumber";
+    unique["ISO"]               = "Exif.Photo.ISOSpeedRatings";
+    unique["ExposureBiasValue"] = "Exif.Photo.ExposureBiasValue";
 }
 
-void ExifKeys::setCommon()
+void ExifKeys::setSimilar()
 {
-    common["Make"]            = "Exif.Image.Make";
-    common["Model"]           = "Exif.Image.Model";
-    common["FocalLength"]     = "Exif.Image.FocalLength";
-    common["DateTime"]        = "Exif.Image.DateTime";
-    common["ExposureProgram"] = "Exif.Photo.ExposureProgram";
-    common["PixelX"]          = "Exif.Photo.PixelXDimension";
-    common["PixelY"]          = "Exif.Photo.PixelYDimension";
+    similar["Make"]            = "Exif.Image.Make";
+    similar["Model"]           = "Exif.Image.Model";
+    similar["FocalLength"]     = "Exif.Image.FocalLength";
+    similar["DateTime"]        = "Exif.Image.DateTime";
+    similar["ExposureProgram"] = "Exif.Photo.ExposureProgram";
+    similar["PixelX"]          = "Exif.Photo.PixelXDimension";
+    similar["PixelY"]          = "Exif.Photo.PixelYDimension";
+}
+
+void ExifKeys::setExtra()
+{
 }

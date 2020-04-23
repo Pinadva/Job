@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->model     = new PhotoModel();
     this->presenter = new PhotoPresenter(model);
     this->view      = new PhotoView(presenter);
+    this->add_tag   = new AddTagForm();
 
     connect(model, &PhotoModel::statusChanged, this, &MainWindow::updateStatusBar);
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
@@ -65,4 +66,16 @@ void MainWindow::on_actionSelect_photos_triggered()
     ui->label->setMovie(movie);
     movie->start();
     this->presenter->process(filenames);
+}
+
+void MainWindow::on_actionAdd_tags_triggered()
+{
+    QHash<QString, QString> hash;
+    hash.insert("1", "first");
+    hash.insert("2", "second");
+
+    SettingsSingleton::getInstance().setExtraExif(hash);
+
+    qDebug() << SettingsSingleton::getInstance().getExtraExif();
+    add_tag->show();
 }

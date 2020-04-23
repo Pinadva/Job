@@ -24,3 +24,21 @@ QString SettingsSingleton::getPath()
 {
     return this->settings->value("path").toString();
 }
+
+void SettingsSingleton::setExtraExif(QHash<QString, QString> &data)
+{
+    QByteArray bytes;
+    QDataStream ds(&bytes, QIODevice::WriteOnly);
+    ds << data;
+    this->settings->setValue("extra_exif", bytes);
+}
+
+QHash<QString, QString> SettingsSingleton::getExtraExif()
+{
+    QHash<QString, QString> data;
+    QByteArray bytes = this->settings->value("extra_exif").toByteArray();
+    QDataStream ds(&bytes, QIODevice::ReadOnly);
+    ds >> data;
+
+    return data;
+}

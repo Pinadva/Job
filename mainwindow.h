@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "addtagform.h"
 #include "fraction.h"
 #include "photopresenter.h"
 #include "photoview.h"
@@ -41,6 +42,7 @@ protected:
 
 private slots:
     void on_actionSelect_photos_triggered();
+    void on_actionAdd_tags_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -48,6 +50,7 @@ private:
     PhotoView *view           = nullptr;
     PhotoPresenter *presenter = nullptr;
     PhotoModel *model         = nullptr;
+    AddTagForm *add_tag       = nullptr;
 
     QPixmap result_pixmap;
     QMovie *movie;

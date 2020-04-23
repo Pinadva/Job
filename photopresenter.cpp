@@ -10,11 +10,6 @@ PhotoPresenter::PhotoPresenter(PhotoModel *&model)
     this->model = model;
 }
 
-PhotoPresenter::~PhotoPresenter()
-{
-    delete this->model;
-}
-
 void PhotoPresenter::process(QStringList &photo_paths)
 {
     if (this->isGoodCount(photo_paths))

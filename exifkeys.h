@@ -4,17 +4,21 @@
 #include <QHash>
 #include <QString>
 
+#include "settingssingleton.h"
+
 class ExifKeys
 {
 public:
     ExifKeys();
 
-    QHash<QString, QString> segment; // <short name, full name> example: <"Make", "Exif.Image.Make">
-    QHash<QString, QString> common;  // <short name, full name> example: <"Make", "Exif.Image.Make">
+    QHash<QString, QString> unique;  // <short name, full name> example: <"Make", "Exif.Image.Make">
+    QHash<QString, QString> similar; // <short name, full name> example: <"Make", "Exif.Image.Make">
+    QHash<QString, QString> extra;
 
 private:
-    void setSegment();
-    void setCommon();
+    void setUnique();
+    void setSimilar();
+    void setExtra();
 };
 
 #endif // EXIFKEYS_H

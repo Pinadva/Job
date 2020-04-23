@@ -13,7 +13,6 @@ class PhotoPresenter : public PhotoBase
 public:
     PhotoPresenter();
     PhotoPresenter(PhotoModel *&);
-    ~PhotoPresenter();
 
     void process(QStringList &);
     bool isGoodCount(QStringList &);

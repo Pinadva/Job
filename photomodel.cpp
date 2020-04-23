@@ -61,8 +61,8 @@ void PhotoModel::setPhotos()
         photo_segment.photo = new QPixmap(path);
         photo_segment.segment.insert("FileName", QFileInfo(path).fileName());
 
-        setExif(this->keys.segment, photo_segment.segment, data);
-        setExif(this->keys.common, photo_segment.common, data);
+        setExif(this->keys.unique, photo_segment.segment, data);
+        setExif(this->keys.similar, photo_segment.common, data);
         setSizeExif(photo_segment.common, data);
 
         this->photos.insert(photos.size(), photo_segment);
