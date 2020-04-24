@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
-    <height>320</height>
+    <width>320</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,9 +20,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>270</y>
-     <width>221</width>
-     <height>41</height>
+     <y>451</y>
+     <width>301</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="orientation">
@@ -33,6 +33,53 @@
    </property>
    <property name="centerButtons">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QScrollArea" name="scrollArea">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>271</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>269</width>
+      <height>429</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>-1</y>
+       <width>271</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="tags"/>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QScrollBar" name="verticalScrollBar">
+   <property name="geometry">
+    <rect>
+     <x>291</x>
+     <y>10</y>
+     <width>20</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
    </property>
   </widget>
  </widget>
@@ -46,7 +93,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>248</x>
-     <y>254</y>
+     <y>451</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -61,12 +108,28 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>310</x>
+     <y>451</y>
     </hint>
     <hint type="destinationlabel">
      <x>239</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalScrollBar</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>scrollArea</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>120</y>
     </hint>
    </hints>
   </connection>

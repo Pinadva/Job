@@ -4,6 +4,7 @@
 #include "tagwidget.h"
 
 #include <QDialog>
+#include <QListWidget>
 
 namespace Ui
 {
@@ -20,6 +21,7 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    void addTagWidget();
 
 private:
     Ui::AddTagForm *ui;

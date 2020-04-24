@@ -6,7 +6,7 @@ TagWidget::TagWidget(QWidget *parent) : QWidget(parent)
     exif_name     = new QComboBox(this);
     delete_button = new QPushButton(this);
 
-    margin = 20;
+    margin = 10;
 
     setShortName();
     setExifName();
