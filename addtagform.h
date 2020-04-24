@@ -1,8 +1,7 @@
 #ifndef ADDTAGFORM_H
 #define ADDTAGFORM_H
 
-#include "tag.h"
-#include "tag1.h"
+#include "tagwidget.h"
 
 #include <QDialog>
 
@@ -24,8 +23,7 @@ private slots:
 
 private:
     Ui::AddTagForm *ui;
-
-    Tag1 *t;
+    TagWidget *tag = nullptr;
 };
 
 #endif // ADDTAGFORM_H
