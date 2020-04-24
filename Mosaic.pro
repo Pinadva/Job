@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     addtagform.cpp \
+    exifextra.cpp \
     exifkeys.cpp \
     fraction.cpp \
     main.cpp \
@@ -26,10 +27,13 @@ SOURCES += \
     photopresenter.cpp \
     photoview.cpp \
     settingssingleton.cpp \
+    tag.cpp \
+    tag1.cpp \
     textbase.cpp
 
 HEADERS += \
     addtagform.h \
+    exifextra.h \
     exifkeys.h \
     fraction.h \
     mainwindow.h \
@@ -39,6 +43,8 @@ HEADERS += \
     photosegment.h \
     photoview.h \
     settingssingleton.h \
+    tag.h \
+    tag1.h \
     textbase.h
 
 FORMS += \

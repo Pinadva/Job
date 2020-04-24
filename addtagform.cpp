@@ -3,6 +3,7 @@
 
 AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm)
 {
+    t = new Tag1();
     ui->setupUi(this);
 }
 

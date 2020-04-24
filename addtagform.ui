@@ -35,6 +35,17 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>201</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
+  </widget>
  </widget>
  <resources/>
  <connections>
@@ -65,7 +76,7 @@
      <y>260</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
+     <x>239</x>
      <y>274</y>
     </hint>
    </hints>
