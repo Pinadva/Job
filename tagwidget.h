@@ -4,6 +4,7 @@
 
 #include <QComboBox>
 #include <QDebug>
+#include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QObject>
@@ -30,8 +31,9 @@ private:
     QLineEdit *short_name      = nullptr;
     QComboBox *exif_name       = nullptr;
     QPushButton *delete_button = nullptr;
+    QLayout *layout            = nullptr;
 
-    int margin;
+    int widget_height;
     // QWidget interface
 private slots:
     void setShortName();
@@ -40,6 +42,13 @@ private slots:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+    // QWidget interface
+
+    // QWidget interface
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // TAG1_H

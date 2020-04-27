@@ -3,9 +3,7 @@
 
 AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm)
 {
-    tag = new TagWidget(this);
     ui->setupUi(this);
-    ui->tags->addWidget(tag);
 }
 
 AddTagForm::~AddTagForm()
@@ -17,9 +15,23 @@ void AddTagForm::on_buttonBox_accepted()
 {
 }
 
-void AddTagForm::addTagWidget()
+void AddTagForm::addTag()
 {
-    //    TagWidget *t = new TagWidget(this);
-    //    ui->tags->addWidget(t);
-    //    repaint();
+    TagWidget *tag1 = new TagWidget(this);
+
+    QListWidgetItem *item = new QListWidgetItem(ui->tagList);
+    item->setSizeHint(tag1->sizeHint());
+    ui->tagList->setItemWidget(item, tag1);
+    ui->tagList->addItem(item);
+    // ui->tags->addWidget(tag1);
+}
+
+void AddTagForm::deleteTag()
+{
+}
+
+void AddTagForm::on_button_clicked()
+{
+    deleteTag();
+    addTag();
 }

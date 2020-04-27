@@ -2,12 +2,16 @@
 
 TagWidget::TagWidget(QWidget *parent) : QWidget(parent)
 {
-    short_name    = new QLineEdit(this);
-    exif_name     = new QComboBox(this);
-    delete_button = new QPushButton(this);
+    short_name    = new QLineEdit();
+    exif_name     = new QComboBox();
+    delete_button = new QPushButton();
+    layout        = new QHBoxLayout();
 
-    margin = 10;
+    layout->addWidget(short_name);
+    layout->addWidget(exif_name);
+    layout->addWidget(delete_button);
 
+    this->setLayout(layout);
     setShortName();
     setExifName();
     setDeleteButton();
@@ -15,34 +19,34 @@ TagWidget::TagWidget(QWidget *parent) : QWidget(parent)
 
 void TagWidget::setShortName()
 {
-    short_name->setGeometry(margin, margin, 50, 20);
-
-    short_name->saveGeometry();
-    repaint();
 }
 
 void TagWidget::setExifName()
 {
     exif_name->addItems(extra.getExtra());
-    exif_name->setGeometry(short_name->width() + margin, margin, 140, 20);
 
-    exif_name->saveGeometry();
-    repaint();
+    delete_button->saveGeometry();
 }
 
 void TagWidget::setDeleteButton()
 {
-    delete_button->setGeometry(210, margin, 20, 20);
     QPixmap pm(20, 20);
     pm.fill(Qt::red);
     QIcon icon;
     icon.addPixmap(pm);
     delete_button->setIcon(icon);
 
-    delete_button->saveGeometry();
     repaint();
 }
 
 void TagWidget::paintEvent(QPaintEvent *event)
+{
+}
+
+void TagWidget::keyReleaseEvent(QKeyEvent *event)
+{
+}
+
+void TagWidget::keyPressEvent(QKeyEvent *event)
 {
 }

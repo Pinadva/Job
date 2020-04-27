@@ -19,9 +19,12 @@ public:
     explicit AddTagForm(QWidget *parent = nullptr);
     ~AddTagForm();
 
+    void addTag();
+    void deleteTag();
+
 private slots:
     void on_buttonBox_accepted();
-    void addTagWidget();
+    void on_button_clicked();
 
 private:
     Ui::AddTagForm *ui;
