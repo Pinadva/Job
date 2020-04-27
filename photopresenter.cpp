@@ -65,8 +65,8 @@ bool PhotoPresenter::isValid(const QHash<int, PhotoSegment> &photos)
 bool PhotoPresenter::isDateTimeExists(const QHash<int, PhotoSegment> &photos)
 {
     auto common = photos[0].common;
-    qDebug() << common.keys();
-    if (common.find("DateTime") == common.end())
+    qDebug() << common;
+    if (common.first().find("DateTime") == common.first().end())
     {
         emit statusChanged("В exif данных отсутствует поле даты и времени", -1);
         return false;
@@ -91,18 +91,24 @@ bool PhotoPresenter::isGoodSize(const QHash<int, PhotoSegment> &photos)
 
 bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
 {
-    auto exif = photos[0].common;
+    QList<QHash<QString, QString>> exifList = photos[0].common;
 
-    for (auto i = photos.begin(); i != photos.end(); ++i)
+    for (auto hash : exifList)
     {
-        for (auto key : exif.keys())
+        for (auto key : hash.keys())
         {
             if (key != "DateTime")
             {
-                if (exif[key] != i->common[key])
+                for (auto photo_iter = photos.begin(); photo_iter != photos.end(); ++photo_iter)
                 {
-                    emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
-                    return false;
+                    for (auto photo_hash : photo_iter->common)
+                    {
+                        if (hash[key] != photo_hash[key])
+                        {
+                            emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
+                            return false;
+                        }
+                    }
                 }
             }
         }

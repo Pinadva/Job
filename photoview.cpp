@@ -61,12 +61,16 @@ QPixmap PhotoView::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
 {
     qDebug() << "draw segment exif";
     QPixmap photo = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
-    auto data     = segment.segment;
+    auto data     = segment.unique;
     Fraction fraction;
 
     TextBase text(Qt::black, Qt::green);
     text.painter.begin(&photo);
-    text.painterInit();
+
+    for (auto item : segment.unique)
+    {
+        text.drawText(item.begin().key(), item.begin().value());
+    }
 
     text.drawText("FileName", data["FileName"]);
     text.drawText("ISO", data["ISO"]);
@@ -85,21 +89,22 @@ const QPixmap &PhotoView::getResult()
 QPixmap PhotoView::drawCommonExif()
 {
     qDebug() << "draw common exif";
-    QPixmap common(1000, this->photo_size.height());
-    common.fill(Qt::white);
+    QPixmap pixmap(1000, this->photo_size.height());
+    pixmap.fill(Qt::white);
     auto segment = this->presenter->getPhotos()[0];
-    auto data    = segment.common;
+    auto common  = segment.common;
+    auto extra   = segment.extra;
 
     TextBase text(Qt::white, Qt::black);
-    text.painter.begin(&common);
-    text.painterInit();
+    text.painter.begin(&pixmap);
 
-    text.drawText("Make", data["Make"]);
-    text.drawText("Model", data["Model"]);
-    text.drawText("Date", data["DateTime"]);
-    text.drawText("Size", data["Size"]);
-    text.drawText("ExposureProgram", data["ExposureProgram"]);
+    text.drawText("Make", common["Make"]);
+    text.drawText("Model", common["Model"]);
+    text.drawText("Date", common["DateTime"]);
+    text.drawText("Size", common["Size"]);
+    text.drawText("ExposureProgram", common["ExposureProgram"]);
+
     text.painter.end();
 
-    return common;
+    return pixmap;
 }

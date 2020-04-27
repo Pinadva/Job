@@ -11,14 +11,19 @@ class ExifKeys
 public:
     ExifKeys();
 
-    QHash<QString, QString> unique;  // <short name, full name> example: <"Make", "Exif.Image.Make">
-    QHash<QString, QString> similar; // <short name, full name> example: <"Make", "Exif.Image.Make">
-    QHash<QString, QString> extra;
-
-private:
+public:
     void setUnique();
     void setCommon();
     void setExtra();
+    const QList<QHash<QString, QString>> &getUnique();
+    const QList<QHash<QString, QString>> &getCommon();
+    const QList<QHash<QString, QString>> &getExtra();
+
+private:
+    // <short name, full name> example: <"Make", "Exif.Image.Make">
+    QList<QHash<QString, QString>> unique;
+    QList<QHash<QString, QString>> common;
+    QList<QHash<QString, QString>> extra;
 };
 
 #endif // EXIFKEYS_H

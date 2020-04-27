@@ -46,29 +46,15 @@ void AddTagForm::saveTags()
     qDebug() << "count" << ui->tagList->count();
     for (int i = 0; i < ui->tagList->count(); ++i)
     {
-        qDebug() << "1";
-        QListWidgetItem *item = ui->tagList->item(i);
-        qDebug() << "2";
-        qDebug() << "item children" << item;
-        QWidget *tag_wgt = ui->tagList->itemWidget(item);
-        qDebug() << "3";
-        auto tag_sub_wgts = tag_wgt->children();
-        qDebug() << "4";
-        QLineEdit *ldt = qobject_cast<QLineEdit *>(tag_sub_wgts[1]);
-        qDebug() << "5";
-        QComboBox *cbx = qobject_cast<QComboBox *>(tag_sub_wgts[2]);
-        qDebug() << "6";
+        QListWidgetItem *item    = ui->tagList->item(i);
+        QWidget *tag_wgt         = ui->tagList->itemWidget(item);
+        QObjectList tag_sub_wgts = tag_wgt->children();
+        QLineEdit *ldt           = qobject_cast<QLineEdit *>(tag_sub_wgts[1]);
+        QComboBox *cbx           = qobject_cast<QComboBox *>(tag_sub_wgts[2]);
 
         extra_exif.insert(ldt->text(), cbx->currentText());
-        qDebug() << "7";
-
-        qDebug() << "tag =" << tag_sub_wgts;
-        qDebug() << "tag cbx field =" << cbx->currentText();
-        qDebug() << "tag ldt field =" << ldt->text();
     }
-    qDebug() << "8";
     SettingsSingleton::getInstance().setExtraExif(extra_exif);
-    qDebug() << "9";
 }
 
 void AddTagForm::loadTags()

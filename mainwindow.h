@@ -8,13 +8,19 @@
 #include "settingssingleton.h"
 #include "textbase.h"
 
+#include <QByteArray>
+#include <QDataStream>
+#include <QDebug>
+#include <QDir>
 #include <QDragEnterEvent>
 #include <QFileDialog>
+#include <QHash>
 #include <QMainWindow>
 #include <QMimeData>
 #include <QMovie>
 #include <QPainter>
 #include <QPixmap>
+#include <QSettings>
 #include <QTextItem>
 #include <Qt>
 
@@ -43,6 +49,8 @@ protected:
 private slots:
     void on_actionSelect_photos_triggered();
     void on_actionAdd_tags_triggered();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -72,3 +72,24 @@ void MainWindow::on_actionAdd_tags_triggered()
 {
     add_tag->show();
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    QHash<QString, QString> h1;
+    h1.insert("1", "first");
+    QHash<QString, QString> h2;
+    h2.insert("2", "second");
+
+    QList<QHash<QString, QString>> data;
+    data.append(h1);
+    data.append(h2);
+
+    QByteArray b;
+    QDataStream d(&b, QIODevice::WriteOnly);
+    d << data;
+
+    QList<QHash<QString, QString>> data_res;
+    QDataStream d_res(&b, QIODevice::ReadOnly);
+    d_res >> data_res;
+    qDebug() << data_res;
+}

@@ -8,23 +8,36 @@ ExifKeys::ExifKeys()
 
 void ExifKeys::setUnique()
 {
-    unique["ExposureTime"]      = "Exif.Photo.ExposureTime";
-    unique["FNumber"]           = "Exif.Photo.FNumber";
-    unique["ISO"]               = "Exif.Photo.ISOSpeedRatings";
-    unique["ExposureBiasValue"] = "Exif.Photo.ExposureBiasValue";
+    unique.append(QHash<QString, QString> {{"ExposureTime", "Exif.Photo.ExposureTime"}});
+    unique.append(QHash<QString, QString> {{"FNumber", "Exif.Photo.FNumber"}});
+    unique.append(QHash<QString, QString> {{"ISO", "Exif.Photo.ISOSpeedRatings"}});
+    unique.append(QHash<QString, QString> {{"ExposureBiasValue", "Exif.Photo.ExposureBiasValue"}});
 }
 
 void ExifKeys::setCommon()
 {
-    similar["Make"]            = "Exif.Image.Make";
-    similar["Model"]           = "Exif.Image.Model";
-    similar["FocalLength"]     = "Exif.Image.FocalLength";
-    similar["DateTime"]        = "Exif.Image.DateTime";
-    similar["ExposureProgram"] = "Exif.Photo.ExposureProgram";
-    similar["PixelX"]          = "Exif.Photo.PixelXDimension";
-    similar["PixelY"]          = "Exif.Photo.PixelYDimension";
+    common.append(QHash<QString, QString> {{"Make", "Exif.Image.Make"}});
+    common.append(QHash<QString, QString> {{"Model", "Exif.Image.Model"}});
+    common.append(QHash<QString, QString> {{"FocalLength", "Exif.Image.FocalLength"}});
+    common.append(QHash<QString, QString> {{"DateTime", "Exif.Image.DateTime"}});
+    common.append(QHash<QString, QString> {{"ExposureProgram", "Exif.Photo.ExposureProgram"}});
 }
 
 void ExifKeys::setExtra()
 {
+}
+
+const QList<QHash<QString, QString>> &ExifKeys::getUnique()
+{
+    return unique;
+}
+
+const QList<QHash<QString, QString>> &ExifKeys::getCommon()
+{
+    return common;
+}
+
+const QList<QHash<QString, QString>> &ExifKeys::getExtra()
+{
+    return extra;
 }

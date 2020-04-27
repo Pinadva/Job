@@ -59,49 +59,48 @@ void PhotoModel::setPhotos()
         }
         PhotoSegment photo_segment;
         photo_segment.photo = new QPixmap(path);
-        photo_segment.segment.insert("FileName", QFileInfo(path).fileName());
+        photo_segment.unique.append(QHash<QString, QString> {{"FileName", QFileInfo(path).fileName()}});
 
-        setExif(this->keys.unique, photo_segment.segment, data);
-        setExif(this->keys.similar, photo_segment.common, data);
+        setExif(this->keys.getUnique(), photo_segment.unique, data);
+        setExif(this->keys.getCommon(), photo_segment.common, data);
+        setExif(this->keys.getExtra(), photo_segment.extra, data);
         setSizeExif(photo_segment.common, data);
 
         this->photos.insert(photos.size(), photo_segment);
 
-        qDebug() << photo_segment.segment;
+        qDebug() << photo_segment.unique;
         qDebug() << photo_segment.common;
     }
 }
 
-void PhotoModel::setExif(QHash<QString, QString> &src_keys, QHash<QString, QString> &dst_keys, Exiv2::ExifData &data)
+void PhotoModel::setExif(const QList<QHash<QString, QString>> &src_keys, QList<QHash<QString, QString>> &dst_keys, Exiv2::ExifData &data)
 {
-    for (auto i = src_keys.begin(); i != src_keys.end(); ++i)
+    for (auto hash : src_keys)
     {
-        Exiv2::ExifKey key = Exiv2::ExifKey(i.value().toStdString());
+        auto item          = hash.begin();
+        Exiv2::ExifKey key = Exiv2::ExifKey(item.value().toStdString());
         if (data.findKey(key) != data.end())
         {
-            auto tag = data[i.value().toStdString()].value().toString();
-            dst_keys.insert(i.key(), QString::fromStdString(tag));
+            auto tag = data[item.value().toStdString()].value().toString(); // create tag
+            dst_keys.append(QHash<QString, QString> {{item.key(), QString::fromStdString(tag)}});
         }
         else
         {
-            dst_keys.insert(i.key(), "-");
+            dst_keys.append(QHash<QString, QString> {{item.key(), "-"}});
         }
     }
 }
 
-void PhotoModel::setSizeExif(QHash<QString, QString> &dst_keys, Exiv2::ExifData &data)
+void PhotoModel::setSizeExif(QList<QHash<QString, QString>> &dst_keys, Exiv2::ExifData &data)
 {
     Exiv2::ExifKey pX_key = Exiv2::ExifKey("Exif.Photo.PixelXDimension");
     Exiv2::ExifKey pY_key = Exiv2::ExifKey("Exif.Photo.PixelYDimension");
     if (data.findKey(pX_key) != data.end() and data.findKey(pY_key) != data.end())
     {
-        dst_keys.remove("PixelX");
-        dst_keys.remove("PixelY");
-
         auto pX_std_str = data["Exif.Photo.PixelXDimension"].value().toString();
         auto pY_std_str = data["Exif.Photo.PixelYDimension"].value().toString();
 
-        dst_keys["Size"] = QString::fromStdString(pX_std_str) + "x" + QString::fromStdString(pY_std_str);
+        dst_keys.append({{"Size", QString::fromStdString(pX_std_str) + "x" + QString::fromStdString(pY_std_str)}});
     }
 }
 
@@ -109,5 +108,4 @@ void PhotoModel::clear()
 {
     this->photo_paths.clear();
     this->photos.clear();
-    this->keys = ExifKeys();
 }
