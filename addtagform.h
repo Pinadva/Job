@@ -1,6 +1,7 @@
 #ifndef ADDTAGFORM_H
 #define ADDTAGFORM_H
 
+#include "settingssingleton.h"
 #include "tagwidget.h"
 
 #include <QDialog>
@@ -20,15 +21,24 @@ public:
     ~AddTagForm();
 
     void addTag();
-    void deleteTag();
+    void addTag(TagWidget *);
+    void removeTag(QListWidgetItem *);
+    void saveTags();
+    void loadTags();
+
+public slots:
+    void accept() override;
 
 private slots:
     void on_buttonBox_accepted();
     void on_button_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::AddTagForm *ui;
-    TagWidget *tag = nullptr;
+
+    // QDialog interface
 };
 
 #endif // ADDTAGFORM_H

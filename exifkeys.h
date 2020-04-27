@@ -17,7 +17,7 @@ public:
 
 private:
     void setUnique();
-    void setSimilar();
+    void setCommon();
     void setExtra();
 };
 

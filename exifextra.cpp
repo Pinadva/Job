@@ -12,7 +12,7 @@ const QStringList &ExifExtra::getExtra()
 
 void ExifExtra::extraInit()
 {
-    extra = QStringList({"Exif.Image.ProcessingSoftware ",
+    extra = QStringList({"Exif.Image.ProcessingSoftware",
                          "Exif.Image.NewSubfileType",
                          "Exif.Image.SubfileType",
                          "Exif.Image.ImageWidth",

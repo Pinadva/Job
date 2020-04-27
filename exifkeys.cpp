@@ -3,7 +3,7 @@
 ExifKeys::ExifKeys()
 {
     setUnique();
-    setSimilar();
+    setCommon();
 }
 
 void ExifKeys::setUnique()
@@ -14,7 +14,7 @@ void ExifKeys::setUnique()
     unique["ExposureBiasValue"] = "Exif.Photo.ExposureBiasValue";
 }
 
-void ExifKeys::setSimilar()
+void ExifKeys::setCommon()
 {
     similar["Make"]            = "Exif.Image.Make";
     similar["Model"]           = "Exif.Image.Model";

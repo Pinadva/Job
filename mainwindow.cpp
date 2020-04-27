@@ -70,12 +70,5 @@ void MainWindow::on_actionSelect_photos_triggered()
 
 void MainWindow::on_actionAdd_tags_triggered()
 {
-    QHash<QString, QString> hash;
-    hash.insert("1", "first");
-    hash.insert("2", "second");
-
-    SettingsSingleton::getInstance().setExtraExif(hash);
-
-    qDebug() << SettingsSingleton::getInstance().getExtraExif();
     add_tag->show();
 }
