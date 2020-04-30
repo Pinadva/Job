@@ -66,11 +66,11 @@ bool PhotoPresenter::isDateTimeExists(const QHash<int, PhotoSegment> &photos)
 {
     auto common = photos[0].common;
     qDebug() << common;
-    if (common.first().find("DateTime") == common.first().end())
-    {
-        emit statusChanged("В exif данных отсутствует поле даты и времени", -1);
-        return false;
-    }
+    //    if (common.first().find("DateTime") == common.first().end())
+    //    {
+    //        emit statusChanged("В exif данных отсутствует поле даты и времени", -1);
+    //        return false;
+    //    }
     return true;
 }
 
@@ -93,26 +93,26 @@ bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
 {
     QList<QHash<QString, QString>> exifList = photos[0].common;
 
-    for (auto hash : exifList)
-    {
-        for (auto key : hash.keys())
-        {
-            if (key != "DateTime")
-            {
-                for (auto photo_iter = photos.begin(); photo_iter != photos.end(); ++photo_iter)
-                {
-                    for (auto photo_hash : photo_iter->common)
-                    {
-                        if (hash[key] != photo_hash[key])
-                        {
-                            emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    //    for (auto hash : exifList)
+    //    {
+    //        for (auto key : hash.keys())
+    //        {
+    //            if (key != "DateTime")
+    //            {
+    //                for (auto photo_iter = photos.begin(); photo_iter != photos.end(); ++photo_iter)
+    //                {
+    //                    for (auto photo_hash : photo_iter->common)
+    //                    {
+    //                        if (hash[key] != photo_hash[key])
+    //                        {
+    //                            emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
+    //                            return false;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     return true;
 }
 

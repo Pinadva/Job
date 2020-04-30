@@ -19,7 +19,6 @@ public:
     TextBase(QColor, QColor);
 
     void painterInit();
-    void setDefaultTextColor();
     void chooseColor(QString);
     void drawText(QString, QString);
     void drawText(QString);

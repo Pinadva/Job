@@ -20,17 +20,13 @@ void TextBase::painterInit()
     painter.setOpacity(0.5);
     painter.setPen(text_color);
     painter.setFont(QFont("Arial", 48));
-    painter.save();
-}
-
-void TextBase::setDefaultTextColor()
-{
-    painter.setPen(text_color);
+    //    painter.save();
 }
 
 void TextBase::drawText(QString key, QString value)
 {
     qDebug() << "drawText";
+    chooseColor(value);
     QString text = key + ": " + value + " \n";
     painter.drawText(20, y, text);
     y += delta_y;
@@ -52,6 +48,7 @@ void TextBase::chooseColor(QString value)
     else
     {
         qDebug() << "else";
-        painter.restore();
+        //        painter.restore();
+        painter.setPen(text_color);
     }
 }

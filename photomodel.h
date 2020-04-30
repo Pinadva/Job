@@ -8,6 +8,7 @@
 #include <QHash>
 #include <QImage>
 #include <QPixmap>
+#include <QRegularExpression>
 #include <QStringList>
 #include <exifkeys.h>
 #include <exiv2/exiv2.hpp>
@@ -30,14 +31,15 @@ public:
     const QStringList &getPaths();
     void setPhotos();
     const QHash<int, PhotoSegment> &getPhotos();
-    void setExif(const QList<QHash<QString, QString>> &source_keys, QList<QHash<QString, QString>> &dist_keys, Exiv2::ExifData &);
-    void setSizeExif(QList<QHash<QString, QString>> &, Exiv2::ExifData &);
+    void setExif(const QList<QHash<QString, QString>> &source_keys, QList<QHash<QString, QString>> &dist_keys);
+    void setSizeExif(QList<QHash<QString, QString>> &);
     void clear();
-    QString createTagText(Exiv2::ExifKey, Exiv2::ExifData &);
+    QString createTagText(Exiv2::ExifKey &, string);
 
     QStringList photo_paths;
     QHash<int, PhotoSegment> photos; // <i, exif данные>
     ExifKeys keys;
+    Exiv2::ExifData data;
 };
 
 #endif // PHOTOMODEL_H
