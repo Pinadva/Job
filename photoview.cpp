@@ -64,7 +64,7 @@ QPixmap PhotoView::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
 
     TextBase text(Qt::black, Qt::green);
     text.painter.begin(&photo);
-
+    text.painterInit();
     for (auto item : segment.unique)
     {
         text.drawText(item.begin().key(), item.begin().value());
@@ -95,7 +95,7 @@ QPixmap PhotoView::drawCommonExif()
 
     TextBase text(Qt::white, Qt::black);
     text.painter.begin(&pixmap);
-
+    text.painterInit();
     for (auto item : common)
     {
         text.drawText(item.begin().key(), item.begin().value());

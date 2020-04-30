@@ -110,7 +110,7 @@ QString PhotoModel::createTagText(Exiv2::ExifKey &key, std::string value)
     {
         auto std_str_tag = data[value].value().toString();
         tag              = QString::fromStdString(std_str_tag); // create tag
-        if (tag.contains(QRegExp("^\\d+\\/\\d+$")))
+        if (tag.contains(QRegExp("^-?\\d+\\/\\d+$")))
         {
             Fraction f;
             tag = f.stringToDouble(tag);
