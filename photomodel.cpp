@@ -71,6 +71,7 @@ void PhotoModel::setPhotos()
 
         qDebug() << photo_segment.unique;
         qDebug() << photo_segment.common;
+        qDebug() << photo_segment.extra;
     }
 }
 

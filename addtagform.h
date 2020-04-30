@@ -22,12 +22,13 @@ public:
 
     void addTag();
     void addTag(TagWidget *);
-    void removeTag(QListWidgetItem *);
     void saveTags();
     void loadTags();
 
 public slots:
     void accept() override;
+    void removeTag(QObject *);
+    bool isValid();
 
 private slots:
     void on_buttonBox_accepted();

@@ -19,7 +19,7 @@ void ExifKeys::setCommon()
 {
     common.append(QHash<QString, QString> {{"Make", "Exif.Image.Make"}});
     common.append(QHash<QString, QString> {{"Model", "Exif.Image.Model"}});
-    common.append(QHash<QString, QString> {{"FocalLength", "Exif.Image.FocalLength"}});
+    common.append(QHash<QString, QString> {{"FocalLength", "Exif.Photo.FocalLength"}});
     common.append(QHash<QString, QString> {{"DateTime", "Exif.Image.DateTime"}});
     common.append(QHash<QString, QString> {{"ExposureProgram", "Exif.Photo.ExposureProgram"}});
 }

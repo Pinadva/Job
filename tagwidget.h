@@ -3,6 +3,7 @@
 #include "exifextra.h"
 
 #include <QComboBox>
+#include <QCompleter>
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QKeyEvent>
@@ -24,6 +25,7 @@ public slots:
     void setExifName();
     void setExifName(const QString &);
     void setDeleteButton();
+    void sendRemoveTag();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -32,9 +34,8 @@ protected:
 
     // QWidget interface
 signals:
-    void shortNameChanged();
-    void exifNameChanged();
-    void removeTag();
+    void checkValid();
+    void removeTag(QObject *);
 
 private:
     ExifExtra extra;
