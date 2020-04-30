@@ -60,23 +60,18 @@ QPixmap PhotoView::drawPhotos()
 QPixmap PhotoView::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
 {
     qDebug() << "draw segment exif";
-    QPixmap photo = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
+    QPixmap pixmap = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
 
     TextBase text(Qt::black, Qt::green);
-    text.painter.begin(&photo);
+    text.painter.begin(&pixmap);
     text.painterInit();
     for (auto item : segment.unique)
     {
         text.drawText(item.begin().key(), item.begin().value());
     }
-    text.painter.end();
-    //    text.drawText("FileName", data["FileName"]);
-    //    text.drawText("ISO", data["ISO"]);
-    //    text.drawText("ExposureTime", fraction.stringToDouble(data["ExposureTime"]));
-    //    text.drawText("FNumber", fraction.stringToDouble(data["FNumber"]));
-    //    text.drawText("ExposureBiasValue", fraction.stringToDouble(data["ExposureBiasValue"]));
 
-    return photo;
+    text.painter.end();
+    return pixmap;
 }
 
 const QPixmap &PhotoView::getResult()
@@ -100,11 +95,11 @@ QPixmap PhotoView::drawCommonExif()
     {
         text.drawText(item.begin().key(), item.begin().value());
     }
-    //    text.drawText("Make", common["Make"]);
-    //    text.drawText("Model", common["Model"]);
-    //    text.drawText("Date", common["DateTime"]);
-    //    text.drawText("Size", common["Size"]);
-    //    text.drawText("ExposureProgram", common["ExposureProgram"]);
+    text.drawText("----------------");
+    for (auto item : extra)
+    {
+        text.drawText(item.begin().key(), item.begin().value());
+    }
 
     text.painter.end();
 

@@ -29,6 +29,7 @@ const QHash<int, PhotoSegment> &PhotoModel::getPhotos()
 
 void PhotoModel::setPhotos()
 {
+    this->keys.setExtra();
     for (int i = 0; i < photo_paths.size(); ++i)
     {
         QApplication::processEvents();

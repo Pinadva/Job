@@ -42,7 +42,7 @@ void AddTagForm::removeTag(QListWidgetItem *item)
 void AddTagForm::saveTags()
 {
     qDebug() << "saveTags";
-    QHash<QString, QString> extra_exif;
+    QList<QHash<QString, QString>> extra_exif;
     qDebug() << "count" << ui->tagList->count();
     for (int i = 0; i < ui->tagList->count(); ++i)
     {
@@ -52,7 +52,7 @@ void AddTagForm::saveTags()
         QLineEdit *ldt           = qobject_cast<QLineEdit *>(tag_sub_wgts[1]);
         QComboBox *cbx           = qobject_cast<QComboBox *>(tag_sub_wgts[2]);
 
-        extra_exif.insert(ldt->text(), cbx->currentText());
+        extra_exif.append(QHash<QString, QString> {{ldt->text(), cbx->currentText()}});
     }
     SettingsSingleton::getInstance().setExtraExif(extra_exif);
 }
@@ -60,12 +60,12 @@ void AddTagForm::saveTags()
 void AddTagForm::loadTags()
 {
     qDebug() << "loadTags";
-    QHash<QString, QString> extra_exif = SettingsSingleton::getInstance().getExtraExif();
-    for (auto iter = extra_exif.begin(); iter != extra_exif.end(); ++iter)
+    QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif();
+    for (auto item : tags)
     {
         TagWidget *tag = new TagWidget(this);
-        tag->setShortName(iter.key());
-        tag->setExifName(iter.value());
+        tag->setShortName(item.begin().key());
+        tag->setExifName(item.begin().value());
         addTag(tag);
     }
 }

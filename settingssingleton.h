@@ -14,8 +14,8 @@ public:
     static SettingsSingleton &getInstance();
     void setPath(QString &);
     QString getPath();
-    void setExtraExif(QHash<QString, QString> &);
-    QHash<QString, QString> getExtraExif();
+    void setExtraExif(QList<QHash<QString, QString> > &);
+    QList<QHash<QString, QString> > getExtraExif();
 
 private:
     SettingsSingleton();

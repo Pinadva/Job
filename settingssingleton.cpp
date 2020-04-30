@@ -25,7 +25,7 @@ QString SettingsSingleton::getPath()
     return this->settings->value("path").toString();
 }
 
-void SettingsSingleton::setExtraExif(QHash<QString, QString> &data)
+void SettingsSingleton::setExtraExif(QList<QHash<QString, QString>> &data)
 {
     QByteArray bytes;
     QDataStream ds(&bytes, QIODevice::WriteOnly);
@@ -33,9 +33,9 @@ void SettingsSingleton::setExtraExif(QHash<QString, QString> &data)
     this->settings->setValue("extra_exif", bytes);
 }
 
-QHash<QString, QString> SettingsSingleton::getExtraExif()
+QList<QHash<QString, QString>> SettingsSingleton::getExtraExif()
 {
-    QHash<QString, QString> data;
+    QList<QHash<QString, QString>> data;
     QByteArray bytes = this->settings->value("extra_exif").toByteArray();
     QDataStream ds(&bytes, QIODevice::ReadOnly);
     ds >> data;

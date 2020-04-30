@@ -4,6 +4,7 @@ ExifKeys::ExifKeys()
 {
     setUnique();
     setCommon();
+    setExtra();
 }
 
 void ExifKeys::setUnique()
@@ -25,6 +26,7 @@ void ExifKeys::setCommon()
 
 void ExifKeys::setExtra()
 {
+    extra = SettingsSingleton::getInstance().getExtraExif();
 }
 
 const QList<QHash<QString, QString>> &ExifKeys::getUnique()
