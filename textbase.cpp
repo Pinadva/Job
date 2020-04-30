@@ -48,7 +48,6 @@ void TextBase::chooseColor(QString value)
     else
     {
         qDebug() << "else";
-        painter.restore();
-        //        painter.setPen(text_color);
+        painter.setPen(text_color);
     }
 }
