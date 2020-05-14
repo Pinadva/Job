@@ -63,8 +63,11 @@ void MainWindow::on_actionSelect_photos_triggered()
 {
     QStringList filenames =
     QFileDialog::getOpenFileNames(this, "Выберите фотографии", SettingsSingleton::getInstance().getPath(), "*.jpg; *.jpeg; *jpe");
-    ui->label->setMovie(movie);
-    movie->start();
+    if (filenames.count())
+    {
+        ui->label->setMovie(movie);
+        movie->start();
+    }
     this->presenter->process(filenames);
 }
 
