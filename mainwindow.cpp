@@ -4,6 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->testBtn->setVisible(false);
     this->model     = new PhotoModel();
     this->presenter = new PhotoPresenter(model);
     this->view      = new PhotoView(presenter);
@@ -54,9 +55,9 @@ void MainWindow::viewResult(QPixmap &result)
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
+    QMainWindow::resizeEvent(event);
     if (!result_pixmap.isNull())
         ui->label->setPixmap(result_pixmap.scaled(ui->label->width(), ui->label->height()));
-    QMainWindow::resizeEvent(event);
 }
 
 void MainWindow::on_actionSelect_photos_triggered()

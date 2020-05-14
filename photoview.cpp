@@ -18,7 +18,7 @@ void PhotoView::paint()
     this->photo_size   = this->presenter->getPhotos()[0].photo->size();
     this->segment_size = this->photo_size / 4;
 
-    QPixmap result(this->photo_size.width() + 1000, this->photo_size.height());
+    QPixmap result(this->photo_size.width() + 1200, this->photo_size.height());
     result.fill(Qt::white);
     QPainter painter(&result);
     painter.drawPixmap(0, 0, drawPhotos());
@@ -82,18 +82,12 @@ const QPixmap &PhotoView::getResult()
 QPixmap PhotoView::drawCommonExif()
 {
     qDebug() << "draw common exif";
-    QPixmap pixmap(1000, this->photo_size.height());
+    QPixmap pixmap(1200, this->photo_size.height());
     pixmap.fill(Qt::white);
     auto segment = this->presenter->getPhotos()[0];
     auto common  = segment.common;
     auto extra   = segment.extra;
 
-    qDebug() << "=========extra============";
-    for (auto item : extra)
-    {
-        qDebug() << item;
-    }
-    qDebug() << "=========end=========extra============";
     TextBase text(Qt::white, Qt::black);
     text.painter.begin(&pixmap);
     text.painterInit();

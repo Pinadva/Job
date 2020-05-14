@@ -4,6 +4,8 @@
 AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm)
 {
     ui->setupUi(this);
+
+    ui->testBtn->setVisible(false);
     loadTags();
 
     TagWidget *t = new TagWidget();
@@ -15,15 +17,11 @@ AddTagForm::~AddTagForm()
     delete ui;
 }
 
-void AddTagForm::on_buttonBox_accepted()
-{
-}
-
 void AddTagForm::addTag()
 {
     TagWidget *tag = new TagWidget(this);
     connect(tag, &TagWidget::checkValid, this, &AddTagForm::isValid);
-    connect(tag, &TagWidget::removeTag, this, &AddTagForm::removeTag);
+    connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
     QListWidgetItem *item = new QListWidgetItem(ui->tagList);
     item->setSizeHint(tag->sizeHint());
     ui->tagList->setItemWidget(item, tag);
@@ -33,7 +31,7 @@ void AddTagForm::addTag()
 void AddTagForm::addTag(TagWidget *tag)
 {
     connect(tag, &TagWidget::checkValid, this, &AddTagForm::isValid);
-    connect(tag, &TagWidget::removeTag, this, &AddTagForm::removeTag);
+    connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
     QListWidgetItem *item = new QListWidgetItem(ui->tagList);
     item->setSizeHint(tag->sizeHint());
     ui->tagList->setItemWidget(item, tag);
@@ -78,12 +76,21 @@ void AddTagForm::loadTags()
     }
 }
 
-void AddTagForm::accept()
+void AddTagForm::chooseKeyAction(QString key)
 {
-    if (isValid())
+    if (key == "\u000E")
+        addTag();
+    else if (key == "\u007F")
+        removeTag();
+}
+
+void AddTagForm::removeTag()
+{
+    if (!ui->tagList->selectedItems().isEmpty())
     {
-        saveTags();
-        close();
+        auto item = ui->tagList->selectedItems().first();
+        int row   = ui->tagList->row(item);
+        delete ui->tagList->takeItem(row);
     }
 }
 
@@ -110,11 +117,36 @@ bool AddTagForm::isValid()
     return isValid;
 }
 
-void AddTagForm::on_button_clicked()
+void AddTagForm::on_buttonBox_accepted()
+{
+    if (isValid())
+    {
+        saveTags();
+        close();
+    }
+}
+
+void AddTagForm::on_addBtn_clicked()
 {
     addTag();
 }
 
-void AddTagForm::on_pushButton_clicked()
+void AddTagForm::on_testBtn_clicked()
 {
+}
+
+void AddTagForm::keyReleaseEvent(QKeyEvent *event)
+{
+    event->accept();
+    qDebug() << event->text();
+    chooseKeyAction(event->text());
+}
+
+void AddTagForm::accept()
+{
+    if (isValid())
+    {
+        saveTags();
+        close();
+    }
 }

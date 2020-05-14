@@ -38,6 +38,7 @@ public:
     QHash<int, PhotoSegment> photos; // <i, exif данные>
     ExifKeys keys;
     Exiv2::ExifData data;
+    QHash<QString, QString> exposure_programm_human;
 };
 
 #endif // PHOTOMODEL_H

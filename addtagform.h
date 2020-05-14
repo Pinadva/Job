@@ -23,23 +23,33 @@ public:
     void addTag();
     void addTag(TagWidget *);
     void saveTags();
+    void removeTag();
     void loadTags();
+    void chooseKeyAction(QString);
 
 public slots:
-    void accept() override;
+
     void removeTag(QPoint);
     bool isValid();
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_button_clicked();
 
-    void on_pushButton_clicked();
+    void on_buttonBox_accepted();
+    void on_addBtn_clicked();
+    void on_testBtn_clicked();
 
 private:
     Ui::AddTagForm *ui;
 
     // QDialog interface
+
+    // QWidget interface
+protected:
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+    // QDialog interface
+public slots:
+    void accept() override;
 };
 
 #endif // ADDTAGFORM_H

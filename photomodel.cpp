@@ -2,6 +2,15 @@
 
 PhotoModel::PhotoModel()
 {
+    exposure_programm_human = {{"0", "Not defined"},
+                               {"1", "Manual"},
+                               {"2", "Normal program"},
+                               {"3", "Aperture priority"},
+                               {"4", "Shutter priority"},
+                               {"5", "Creative program"},
+                               {"6", "Action program"},
+                               {"7", "Portrait mode"},
+                               {"8", "Landscape mode"}};
 }
 
 void PhotoModel::setExifKeys()
@@ -55,7 +64,7 @@ void PhotoModel::setPhotos()
         if (data.empty())
         {
             qDebug() << ": No Exif data found in the file";
-            // emit дай все exif
+            emit statusChanged("Exif данные не найдены", -1);
             return;
         }
         PhotoSegment photo_segment;
@@ -124,7 +133,11 @@ QString PhotoModel::createTagText(Exiv2::ExifKey &key, std::string value)
         {
             Fraction f;
             tag = f.stringToDouble(tag);
+            if (QString::fromStdString(key.key()).contains("ExposureTime"))
+                tag += " EV";
         }
+        if (QString::fromStdString(key.key()).contains("ExposureProgram"))
+            tag = exposure_programm_human[tag];
     }
     else
         tag = "-";
