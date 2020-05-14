@@ -55,7 +55,12 @@ void TagWidget::setDeleteButton()
 
 void TagWidget::sendRemoveTag()
 {
-    emit removeTag(this->parent());
+    qDebug() << this;
+    qDebug() << this->parent();
+    qDebug() << this->parent()->parent();
+    qDebug() << this->parent()->parent()->parent();
+    qDebug() << "tagwid sendrmtag" << this->pos();
+    removeTag(this->pos());
 }
 
 void TagWidget::paintEvent(QPaintEvent *event)

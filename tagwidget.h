@@ -35,7 +35,7 @@ protected:
     // QWidget interface
 signals:
     void checkValid();
-    void removeTag(QObject *);
+    void removeTag(QPoint);
 
 private:
     ExifExtra extra;

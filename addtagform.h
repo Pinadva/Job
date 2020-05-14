@@ -27,7 +27,7 @@ public:
 
 public slots:
     void accept() override;
-    void removeTag(QObject *);
+    void removeTag(QPoint);
     bool isValid();
 
 private slots:

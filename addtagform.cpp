@@ -40,11 +40,12 @@ void AddTagForm::addTag(TagWidget *tag)
     ui->tagList->addItem(item);
 }
 
-void AddTagForm::removeTag(QObject *obj)
+void AddTagForm::removeTag(QPoint p)
 {
-    qDebug() << obj;
-    //    QListWidgetItem *item = qobject_cast<QListWidgetItem *>(obj);
-    //    delete ui->tagList->takeItem(ui->tagList->row(item));
+    qDebug() << "addtag removetag" << p;
+    auto current_tag = ui->tagList->itemAt(p);
+    auto row         = ui->tagList->row(current_tag);
+    delete ui->tagList->takeItem(row);
 }
 
 void AddTagForm::saveTags()
