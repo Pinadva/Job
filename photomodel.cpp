@@ -49,6 +49,7 @@ void PhotoModel::setPhotos()
         if (!tmpFile.open(QIODevice::ReadOnly))
         {
             qWarning() << "Failed to open file " << path;
+            emit statusChanged("Не удалось открыть файл." + path, -1);
             return;
         }
         QByteArray bytes = tmpFile.readAll();

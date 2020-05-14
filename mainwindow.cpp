@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     ui->testBtn->setVisible(false);
+    this->setAcceptDrops(true);
     this->model     = new PhotoModel();
     this->presenter = new PhotoPresenter(model);
     this->view      = new PhotoView(presenter);
@@ -72,6 +73,8 @@ void MainWindow::on_actionSelect_photos_triggered()
 {
     QStringList filenames =
     QFileDialog::getOpenFileNames(this, "Выберите фотографии", SettingsSingleton::getInstance().getPath(), "*.jpg; *.jpeg; *jpe");
+    qDebug() << "action";
+    qDebug() << filenames;
     if (filenames.count())
     {
         ui->label->setMovie(movie);
@@ -111,4 +114,25 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     event->accept();
     qDebug() << event->text();
     chooseKeyAction(event->text());
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    QStringList filenames = QUrl::toStringList(event->mimeData()->urls());
+    for (QString &item : filenames)
+    {
+        item.replace("file:///", "");
+    }
+    if (filenames.count())
+    {
+        ui->label->setMovie(movie);
+        movie->start();
+    }
+
+    this->presenter->process(filenames);
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    event->acceptProposedAction();
 }

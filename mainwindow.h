@@ -67,5 +67,7 @@ private:
     // QWidget interface
 protected:
     void keyReleaseEvent(QKeyEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
 };
 #endif // MAINWINDOW_H
