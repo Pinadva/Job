@@ -22,11 +22,9 @@ using namespace std;
 
 class PhotoModel : public PhotoBase
 {
-private:
-    void setExifKeys();
-
 public:
     PhotoModel();
+    void setExifKeys();
     void setPaths(QStringList &);
     const QStringList &getPaths();
     void setPhotos();

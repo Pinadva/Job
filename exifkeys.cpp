@@ -26,7 +26,14 @@ void ExifKeys::setCommon()
 
 void ExifKeys::setExtra()
 {
+    qDebug() << "***********************************************";
+    qDebug() << "setExtra";
     extra = SettingsSingleton::getInstance().getExtraExif();
+    for (auto item : extra)
+    {
+        qDebug() << item;
+    }
+    qDebug() << "***********************************************";
 }
 
 const QList<QHash<QString, QString>> &ExifKeys::getUnique()

@@ -20,12 +20,10 @@ void TextBase::painterInit()
     painter.setOpacity(0.5);
     painter.setPen(text_color);
     painter.setFont(QFont("Arial", 48));
-    painter.save();
 }
 
 void TextBase::drawText(QString key, QString value)
 {
-    qDebug() << "drawText";
     chooseColor(value);
     QString text = key + ": " + value + " \n";
     painter.drawText(20, y, text);
@@ -41,13 +39,7 @@ void TextBase::drawText(QString text)
 void TextBase::chooseColor(QString value)
 {
     if (value == "-")
-    {
-        qDebug() << "if";
         painter.setPen(Qt::red);
-    }
     else
-    {
-        qDebug() << "else";
         painter.setPen(text_color);
-    }
 }

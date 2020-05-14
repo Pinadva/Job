@@ -29,7 +29,7 @@ const QHash<int, PhotoSegment> &PhotoModel::getPhotos()
 
 void PhotoModel::setPhotos()
 {
-    this->keys.setExtra();
+    photos.clear();
     for (int i = 0; i < photo_paths.size(); ++i)
     {
         QApplication::processEvents();
@@ -69,9 +69,17 @@ void PhotoModel::setPhotos()
 
         this->photos.insert(photos.size(), photo_segment);
 
+        qDebug() << "unique";
         qDebug() << photo_segment.unique;
+        qDebug() << "end unique";
+
+        qDebug() << "common";
         qDebug() << photo_segment.common;
+        qDebug() << "end common";
+
+        qDebug() << "extra";
         qDebug() << photo_segment.extra;
+        qDebug() << "end extra";
     }
 }
 

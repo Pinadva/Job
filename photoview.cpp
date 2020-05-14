@@ -88,6 +88,12 @@ QPixmap PhotoView::drawCommonExif()
     auto common  = segment.common;
     auto extra   = segment.extra;
 
+    qDebug() << "=========extra============";
+    for (auto item : extra)
+    {
+        qDebug() << item;
+    }
+    qDebug() << "=========end=========extra============";
     TextBase text(Qt::white, Qt::black);
     text.painter.begin(&pixmap);
     text.painterInit();
@@ -95,7 +101,7 @@ QPixmap PhotoView::drawCommonExif()
     {
         text.drawText(item.begin().key(), item.begin().value());
     }
-    text.drawText("----------------");
+    text.drawText("-------------------------------");
     for (auto item : extra)
     {
         text.drawText(item.begin().key(), item.begin().value());

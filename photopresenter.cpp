@@ -16,6 +16,7 @@ void PhotoPresenter::process(QStringList &photo_paths)
     {
         SettingsSingleton::getInstance().setPath(photo_paths.last());
         this->model->setPaths(photo_paths);
+        this->model->setExifKeys();
         this->model->setPhotos();
         if (this->isValid(this->model->getPhotos()))
         {
