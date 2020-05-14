@@ -78,9 +78,9 @@ void AddTagForm::loadTags()
 
 void AddTagForm::chooseKeyAction(QString key)
 {
-    if (key == "\u000E")
+    if (key == "\u000E") // ctrl + n
         addTag();
-    else if (key == "\u007F")
+    else if (key == "\u007F") // delete
         removeTag();
 }
 

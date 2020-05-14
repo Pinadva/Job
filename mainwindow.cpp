@@ -53,6 +53,14 @@ void MainWindow::viewResult(QPixmap &result)
     ui->label->setPixmap(result.scaled(ui->label->width(), ui->label->height()));
 }
 
+void MainWindow::chooseKeyAction(QString key)
+{
+    if (key == "\u000F" or key == "o") // ctrl + o
+        on_actionSelect_photos_triggered();
+    else if (key == "\u000E") // ctrl + n
+        on_actionAdd_tags_triggered();
+}
+
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     QMainWindow::resizeEvent(event);
@@ -96,4 +104,11 @@ void MainWindow::on_pushButton_clicked()
     QDataStream d_res(&b, QIODevice::ReadOnly);
     d_res >> data_res;
     qDebug() << data_res;
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    event->accept();
+    qDebug() << event->text();
+    chooseKeyAction(event->text());
 }

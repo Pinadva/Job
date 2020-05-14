@@ -42,6 +42,7 @@ public:
 public slots:
     void updateStatusBar(QString, int);
     void viewResult(QPixmap &);
+    void chooseKeyAction(QString);
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -62,5 +63,9 @@ private:
 
     QPixmap result_pixmap;
     QMovie *movie;
+
+    // QWidget interface
+protected:
+    void keyReleaseEvent(QKeyEvent *event) override;
 };
 #endif // MAINWINDOW_H
