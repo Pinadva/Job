@@ -6,6 +6,9 @@
 #include "photopresenter.h"
 #include "photoview.h"
 #include "settingssingleton.h"
+#include "tagbasewidget.h"
+#include "tagkeyeditwidget.h"
+#include "taglistwidget.h"
 #include "textbase.h"
 
 #include <QByteArray>
@@ -52,6 +55,8 @@ private slots:
     void on_actionAdd_tags_triggered();
 
     void on_pushButton_clicked();
+
+    void on_testBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -2,7 +2,9 @@
 #define ADDTAGFORM_H
 
 #include "settingssingleton.h"
-#include "tagwidget.h"
+#include "tagkeyeditwidget.h"
+#include "taglistwidget.h"
+#include "tagvalueeditwidget.h"
 
 #include <QDialog>
 #include <QListWidget>
@@ -21,7 +23,10 @@ public:
     ~AddTagForm();
 
     void addTag();
-    void addTag(TagWidget *);
+    template <typename T>
+    void addTagTest(T *);
+    void addTag(TagKeyEditWidget *);
+
     void saveTags();
     void removeTag();
     void loadTags();
@@ -41,6 +46,7 @@ private slots:
 private:
     Ui::AddTagForm *ui;
 
+    //    TagListWidget *list = nullptr;
     // QDialog interface
 
     // QWidget interface

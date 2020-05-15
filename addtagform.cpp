@@ -5,11 +5,13 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
 {
     ui->setupUi(this);
 
-    ui->testBtn->setVisible(false);
+    //    ui->testBtn->setVisible(false);
     loadTags();
 
-    TagWidget *t = new TagWidget();
-    connect(t, &TagWidget::checkValid, this, &AddTagForm::isValid);
+    //    list = new TagListWidget(this);
+
+    TagKeyEditWidget *t = new TagKeyEditWidget();
+    connect(t, &TagKeyEditWidget::checkValid, this, &AddTagForm::isValid);
 }
 
 AddTagForm::~AddTagForm()
@@ -19,8 +21,8 @@ AddTagForm::~AddTagForm()
 
 void AddTagForm::addTag()
 {
-    TagWidget *tag = new TagWidget(this);
-    connect(tag, &TagWidget::checkValid, this, &AddTagForm::isValid);
+    TagKeyEditWidget *tag = new TagKeyEditWidget(this);
+    connect(tag, &TagKeyEditWidget::checkValid, this, &AddTagForm::isValid);
     connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
     QListWidgetItem *item = new QListWidgetItem(ui->tagList);
     item->setSizeHint(tag->sizeHint());
@@ -28,9 +30,9 @@ void AddTagForm::addTag()
     ui->tagList->addItem(item);
 }
 
-void AddTagForm::addTag(TagWidget *tag)
+void AddTagForm::addTag(TagKeyEditWidget *tag)
 {
-    connect(tag, &TagWidget::checkValid, this, &AddTagForm::isValid);
+    connect(tag, &TagKeyEditWidget::checkValid, this, &AddTagForm::isValid);
     connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
     QListWidgetItem *item = new QListWidgetItem(ui->tagList);
     item->setSizeHint(tag->sizeHint());
@@ -69,7 +71,7 @@ void AddTagForm::loadTags()
     QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif();
     for (auto item : tags)
     {
-        TagWidget *tag = new TagWidget(this);
+        TagKeyEditWidget *tag = new TagKeyEditWidget(this);
         tag->setShortName(item.begin().key());
         tag->setExifName(item.begin().value());
         addTag(tag);
@@ -99,8 +101,10 @@ bool AddTagForm::isValid()
     bool isValid = true;
     for (int i = 0; i < ui->tagList->count(); ++i)
     {
-        QListWidgetItem *item    = ui->tagList->item(i);
-        QWidget *tag_wgt         = ui->tagList->itemWidget(item);
+        QListWidgetItem *item = ui->tagList->item(i);
+        QWidget *tag_wgt      = ui->tagList->itemWidget(item);
+        TagKeyEditWidget *t   = dynamic_cast<TagKeyEditWidget *>(tag_wgt);
+
         QObjectList tag_sub_wgts = tag_wgt->children();
         QLineEdit *ldt           = qobject_cast<QLineEdit *>(tag_sub_wgts[1]);
         QComboBox *cbx           = qobject_cast<QComboBox *>(tag_sub_wgts[2]);
@@ -133,6 +137,9 @@ void AddTagForm::on_addBtn_clicked()
 
 void AddTagForm::on_testBtn_clicked()
 {
+    TagKeyEditWidget *t = new TagKeyEditWidget();
+    //    TagValueEditWidget *t = new TagValueEditWidget();
+    ui->list->addTag(t);
 }
 
 void AddTagForm::keyReleaseEvent(QKeyEvent *event)
@@ -149,4 +156,15 @@ void AddTagForm::accept()
         saveTags();
         close();
     }
+}
+
+template <typename T>
+void AddTagForm::addTagTest(T *tag)
+{
+    connect(tag, &T::checkValid, this, &AddTagForm::isValid);
+    connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
+    QListWidgetItem *item = new QListWidgetItem(ui->tagList);
+    item->setSizeHint(tag->sizeHint());
+    ui->tagList->setItemWidget(item, tag);
+    ui->tagList->addItem(item);
 }

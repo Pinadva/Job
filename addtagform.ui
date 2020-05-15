@@ -22,7 +22,7 @@
      <x>10</x>
      <y>10</y>
      <width>461</width>
-     <height>431</height>
+     <height>211</height>
     </rect>
    </property>
   </widget>
@@ -71,7 +71,24 @@
     </item>
    </layout>
   </widget>
+  <widget class="TagListWidget" name="list">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>461</width>
+     <height>211</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TagListWidget</class>
+   <extends>QListWidget</extends>
+   <header>taglistwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

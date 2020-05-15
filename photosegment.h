@@ -2,6 +2,7 @@
 #define PHOTOSEGMENT_H
 
 #include <QHash>
+#include <QLabel>
 #include <QPixmap>
 #include <QString>
 

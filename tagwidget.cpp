@@ -24,6 +24,7 @@ TagWidget::TagWidget(QWidget *parent) : QWidget(parent)
 void TagWidget::setShortName(const QString &text)
 {
     short_name->setText(text);
+    short_name->setPlaceholderText("Short name");
     short_name->setClearButtonEnabled(true);
 }
 
@@ -56,16 +57,4 @@ void TagWidget::setDeleteButton()
 void TagWidget::sendRemoveTag()
 {
     removeTag(this->pos());
-}
-
-void TagWidget::paintEvent(QPaintEvent *event)
-{
-}
-
-void TagWidget::keyReleaseEvent(QKeyEvent *event)
-{
-}
-
-void TagWidget::keyPressEvent(QKeyEvent *event)
-{
 }

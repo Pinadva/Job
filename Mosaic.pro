@@ -27,6 +27,10 @@ SOURCES += \
     photopresenter.cpp \
     photoview.cpp \
     settingssingleton.cpp \
+    tagbasewidget.cpp \
+    tagkeyeditwidget.cpp \
+    taglistwidget.cpp \
+    tagvalueeditwidget.cpp \
     tagwidget.cpp \
     textbase.cpp
 
@@ -42,6 +46,10 @@ HEADERS += \
     photosegment.h \
     photoview.h \
     settingssingleton.h \
+    tagbasewidget.h \
+    tagkeyeditwidget.h \
+    taglistwidget.h \
+    tagvalueeditwidget.h \
     tagwidget.h \
     textbase.h
 

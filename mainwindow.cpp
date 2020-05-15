@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(view, &PhotoView::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
     movie = new QMovie("://loader.gif");
+
+    add_tag->show();
 }
 
 MainWindow::~MainWindow()
@@ -135,4 +137,8 @@ void MainWindow::dropEvent(QDropEvent *event)
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
     event->acceptProposedAction();
+}
+
+void MainWindow::on_testBtn_clicked()
+{
 }

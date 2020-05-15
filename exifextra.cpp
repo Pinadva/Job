@@ -68,7 +68,6 @@ void ExifExtra::extraInit()
                          "Exif.Image.SMaxSampleValue",
                          "Exif.Image.TransferRange",
                          "Exif.Image.ClipPath",
-                         "PostScript'functionality.",
                          "Exif.Image.XClipPathUnits",
                          "Exif.Image.YClipPathUnits",
                          "Exif.Image.Indexed",

@@ -27,12 +27,6 @@ public slots:
     void setDeleteButton();
     void sendRemoveTag();
 
-protected:
-    void paintEvent(QPaintEvent *event) override;
-    void keyReleaseEvent(QKeyEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
-
-    // QWidget interface
 signals:
     void checkValid();
     void removeTag(QPoint);
