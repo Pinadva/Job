@@ -16,16 +16,6 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QListWidget" name="tagList">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>461</width>
-     <height>211</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -71,24 +61,18 @@
     </item>
    </layout>
   </widget>
-  <widget class="TagListWidget" name="list">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>10</y>
      <width>461</width>
-     <height>211</height>
+     <height>431</height>
     </rect>
    </property>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TagListWidget</class>
-   <extends>QListWidget</extends>
-   <header>taglistwidget.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

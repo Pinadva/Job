@@ -1,9 +1,4 @@
 #include "taglistwidget.h"
-
-TagListWidget::TagListWidget(QWidget *parent) : QListWidget(parent)
-{
-}
-
 // void TagListWidget::addTag()
 //{
 //    TagListWidget::T *tag = new T(this);

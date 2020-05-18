@@ -26,7 +26,8 @@ private:
 
     // TagBaseWidget interface
 public:
-    QPair<QString, QString> getText();
+    QPair<QString, QString> getData() override;
+    bool isValid() override;
 };
 
 #endif // TAGKEYEDITWIDGET_H

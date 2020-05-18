@@ -15,3 +15,14 @@ void TagValueEditWidget::setValueLineEdit()
 {
     value_lineEdit->setPlaceholderText("Value");
 }
+
+QPair<QString, QString> TagValueEditWidget::getData()
+{
+    QPair<QString, QString> pair(short_name_lineEdit->text(), value_lineEdit->text());
+    return pair;
+}
+
+bool TagValueEditWidget::isValid()
+{
+    return !(short_name_lineEdit->text().isEmpty() and value_lineEdit->text().isEmpty());
+}

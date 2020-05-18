@@ -29,6 +29,7 @@ SOURCES += \
     settingssingleton.cpp \
     tagbasewidget.cpp \
     tagkeyeditwidget.cpp \
+    taglistbase.cpp \
     taglistwidget.cpp \
     tagvalueeditwidget.cpp \
     tagwidget.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     settingssingleton.h \
     tagbasewidget.h \
     tagkeyeditwidget.h \
+    taglistbase.h \
     taglistwidget.h \
     tagvalueeditwidget.h \
     tagwidget.h \

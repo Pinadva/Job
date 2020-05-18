@@ -31,8 +31,13 @@ int TagKeyEditWidget::test()
     return 123;
 }
 
-QPair<QString, QString> TagKeyEditWidget::getText()
+QPair<QString, QString> TagKeyEditWidget::getData()
 {
     QPair<QString, QString> pair(short_name_lineEdit->text(), exif_name->currentText());
     return pair;
+}
+
+bool TagKeyEditWidget::isValid()
+{
+    return !(short_name_lineEdit->text().isEmpty() and exif_name->currentText().isEmpty());
 }

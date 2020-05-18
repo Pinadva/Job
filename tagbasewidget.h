@@ -18,6 +18,8 @@ class TagBaseWidget : public QWidget
     Q_OBJECT
 public:
     explicit TagBaseWidget(QWidget *parent = nullptr);
+    virtual QPair<QString, QString> getData() = 0;
+    virtual bool isValid()                    = 0;
 
 public slots:
     void setShortName(const QString &);
