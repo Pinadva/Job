@@ -72,6 +72,7 @@ template <typename T>
 void TagListWidget<T>::loadTags()
 {
     qDebug() << "loadTags";
+    this->clear();
     QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif();
     for (auto item : tags)
     {

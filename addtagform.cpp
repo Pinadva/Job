@@ -57,6 +57,12 @@ void AddTagForm::keyReleaseEvent(QKeyEvent *event)
     chooseKeyAction(event->text());
 }
 
+void AddTagForm::showEvent(QShowEvent *event)
+{
+    event->accept();
+    tagList->loadTags();
+}
+
 void AddTagForm::accept()
 {
     save();

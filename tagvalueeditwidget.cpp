@@ -13,7 +13,7 @@ TagValueEditWidget::TagValueEditWidget(QWidget *parent) : TagBaseWidget(parent)
 void TagValueEditWidget::setValueLineEdit(const QString &text)
 {
     value_lineEdit->setText(text);
-    value_lineEdit->setPlaceholderText("Value");
+    value_lineEdit->setPlaceholderText("Exif.Photo.FocalLength");
     value_lineEdit->setClearButtonEnabled(true);
 }
 

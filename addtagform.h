@@ -35,6 +35,7 @@ private slots:
 
 protected:
     void keyReleaseEvent(QKeyEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
     Ui::AddTagForm *ui;
