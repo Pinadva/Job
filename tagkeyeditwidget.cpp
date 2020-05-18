@@ -17,6 +17,7 @@ void TagKeyEditWidget::setExifName()
     exif_name->setEditable(true);
     QCompleter *c = new QCompleter(extra.getExtra(), exif_name);
     c->setCaseSensitivity(Qt::CaseInsensitive);
+
     exif_name->setCompleter(c);
 }
 
@@ -24,11 +25,6 @@ void TagKeyEditWidget::setExifName(const QString &cur_text)
 {
     setExifName();
     exif_name->setCurrentIndex(exif_name->findText(cur_text));
-}
-
-int TagKeyEditWidget::test()
-{
-    return 123;
 }
 
 void TagKeyEditWidget::setData()

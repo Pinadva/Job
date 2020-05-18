@@ -50,16 +50,16 @@ QPixmap PhotoView::drawPhotos()
         int x = this->segment_size.width() * (i % this->segment_cnt);
         int y = this->segment_size.height() * (i / this->segment_cnt);
 
-        painter.drawPixmap(x, y, drawSegmentExif(photo_segments[i], x, y));
+        painter.drawPixmap(x, y, drawUniqueExif(photo_segments[i], x, y));
     }
 
     painter.end();
     return photos;
 }
 
-QPixmap PhotoView::drawSegmentExif(const PhotoSegment &segment, int &x, int &y)
+QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
 {
-    qDebug() << "draw segment exif";
+    qDebug() << "draw unique exif";
     QPixmap pixmap = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
 
     TextBase text(Qt::black, Qt::green);

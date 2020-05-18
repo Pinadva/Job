@@ -7,8 +7,8 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
 
     ui->testBtn->setVisible(false);
 
-    //    tagList = new TagListWidget<TagKeyEditWidget>();
-    tagList = new TagListWidget<TagValueEditWidget>();
+    tagList = new TagListWidget<TagKeyEditWidget>();
+    //    tagList = new TagListWidget<TagValueEditWidget>();
     ui->verticalLayout->addWidget(tagList);
 
     tagList->loadTags();
@@ -48,9 +48,6 @@ void AddTagForm::on_addBtn_clicked()
 
 void AddTagForm::on_testBtn_clicked()
 {
-    // TagKeyEditWidget *t = new TagKeyEditWidget();
-    //    TagValueEditWidget *t = new TagValueEditWidget();
-    // ui->list->addTag(t);
 }
 
 void AddTagForm::keyReleaseEvent(QKeyEvent *event)

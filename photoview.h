@@ -28,7 +28,7 @@ public:
     void saveResult(QPixmap &);
     QPixmap drawPhotos();
     QPixmap drawCommonExif();
-    QPixmap drawSegmentExif(const PhotoSegment &, int &, int &);
+    QPixmap drawUniqueExif(const PhotoSegment &, int &, int &);
     const QPixmap &getResult();
 signals:
     void readyView(QPixmap &);

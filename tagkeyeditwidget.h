@@ -18,7 +18,6 @@ public:
 public slots:
     void setExifName();
     void setExifName(const QString &);
-    int test();
 
 private:
     ExifExtra extra;
