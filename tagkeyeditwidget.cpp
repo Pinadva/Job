@@ -4,7 +4,7 @@ TagKeyEditWidget::TagKeyEditWidget(QWidget *parent) : TagBaseWidget(parent)
 {
     this->exif_name = new QComboBox();
     setExifName();
-
+    connect(exif_name, &QComboBox::currentTextChanged, this, &TagKeyEditWidget::checkValid);
     layout->addWidget(short_name_lineEdit);
     layout->addWidget(exif_name);
     layout->addWidget(remove_btn);
@@ -31,6 +31,18 @@ int TagKeyEditWidget::test()
     return 123;
 }
 
+void TagKeyEditWidget::setData()
+{
+    setShortName("");
+    setExifName();
+}
+
+void TagKeyEditWidget::setData(QPair<QString, QString> data)
+{
+    setShortName(data.first);
+    setExifName(data.second);
+}
+
 QPair<QString, QString> TagKeyEditWidget::getData()
 {
     QPair<QString, QString> pair(short_name_lineEdit->text(), exif_name->currentText());
@@ -39,5 +51,6 @@ QPair<QString, QString> TagKeyEditWidget::getData()
 
 bool TagKeyEditWidget::isValid()
 {
-    return !(short_name_lineEdit->text().isEmpty() and exif_name->currentText().isEmpty());
+    return !(short_name_lineEdit->text().isEmpty() or exif_name->currentText().isEmpty() or
+             exif_name->findText(exif_name->currentText()) == -1);
 }

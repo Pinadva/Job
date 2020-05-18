@@ -13,13 +13,15 @@ public:
     explicit TagValueEditWidget(QWidget *parent = nullptr);
 
 public slots:
-    void setValueLineEdit();
+    void setValueLineEdit(const QString &);
 
 private:
     QLineEdit *value_lineEdit = nullptr;
 
     // TagBaseWidget interface
 public:
+    void setData() override;
+    void setData(QPair<QString, QString>) override;
     QPair<QString, QString> getData() override;
     bool isValid() override;
 };

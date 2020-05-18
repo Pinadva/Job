@@ -6,10 +6,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     ui->testBtn->setVisible(false);
     this->setAcceptDrops(true);
-    this->model     = new PhotoModel();
-    this->presenter = new PhotoPresenter(model);
-    this->view      = new PhotoView(presenter);
-    this->add_tag   = new AddTagForm();
+    this->model        = new PhotoModel();
+    this->presenter    = new PhotoPresenter(model);
+    this->view         = new PhotoView(presenter);
+    this->add_tag_form = new AddTagForm();
 
     connect(model, &PhotoModel::statusChanged, this, &MainWindow::updateStatusBar);
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
     movie = new QMovie("://loader.gif");
 
-    add_tag->show();
+    add_tag_form->show();
 }
 
 MainWindow::~MainWindow()
@@ -87,7 +87,7 @@ void MainWindow::on_actionSelect_photos_triggered()
 
 void MainWindow::on_actionAdd_tags_triggered()
 {
-    add_tag->show();
+    add_tag_form->show();
 }
 
 void MainWindow::on_pushButton_clicked()

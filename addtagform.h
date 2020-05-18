@@ -38,7 +38,8 @@ protected:
 
 private:
     Ui::AddTagForm *ui;
-    TagListWidget<TagKeyEditWidget> *tagList = nullptr;
+    //    TagListWidget<TagKeyEditWidget> *tagList = nullptr;
+    TagListWidget<TagValueEditWidget> *tagList = nullptr;
 };
 
 #endif // ADDTAGFORM_H

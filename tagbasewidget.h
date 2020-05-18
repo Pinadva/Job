@@ -18,8 +18,12 @@ class TagBaseWidget : public QWidget
     Q_OBJECT
 public:
     explicit TagBaseWidget(QWidget *parent = nullptr);
-    virtual QPair<QString, QString> getData() = 0;
-    virtual bool isValid()                    = 0;
+    virtual void setData()                        = 0;
+    virtual void setData(QPair<QString, QString>) = 0;
+    virtual QPair<QString, QString> getData()     = 0;
+
+public slots:
+    virtual bool isValid() = 0;
 
 public slots:
     void setShortName(const QString &);
@@ -33,8 +37,6 @@ public:
     QLineEdit *short_name_lineEdit = nullptr;
     QPushButton *remove_btn        = nullptr;
     QLayout *layout                = nullptr;
-
-    int widget_height;
 };
 
 #endif // TAGBASEWIDGET_H

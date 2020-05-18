@@ -31,9 +31,10 @@ template <typename T>
 void TagListWidget<T>::addTag()
 {
     T *tag = new T(this);
+    tag->setData();
+    QListWidgetItem *item = new QListWidgetItem(this);
     connect(tag, &T::checkValid, this, &TagListWidget<T>::isValid);
     connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
-    QListWidgetItem *item = new QListWidgetItem(this);
     item->setSizeHint(tag->sizeHint());
     this->setItemWidget(item, tag);
     this->addItem(item);
@@ -43,6 +44,7 @@ template <typename T>
 void TagListWidget<T>::addTag(T *tag)
 {
     QListWidgetItem *item = new QListWidgetItem(this);
+    tag->setData();
     connect(tag, &T::checkValid, this, &TagListWidget<T>::isValid);
     connect(tag, SIGNAL(removeTag(QPoint)), this, SLOT(removeTag(QPoint)));
     item->setSizeHint(tag->sizeHint());
@@ -75,8 +77,7 @@ void TagListWidget<T>::loadTags()
     for (auto item : tags)
     {
         T *tag = new T(this);
-        tag->setShortName(item.begin().key());
-        tag->setExifName(item.begin().value());
+        tag->setData(QPair<QString, QString>(item.begin().key(), item.begin().value()));
         addTag(tag);
     }
 }

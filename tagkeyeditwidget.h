@@ -26,6 +26,8 @@ private:
 
     // TagBaseWidget interface
 public:
+    void setData() override;
+    void setData(QPair<QString, QString>) override;
     QPair<QString, QString> getData() override;
     bool isValid() override;
 };

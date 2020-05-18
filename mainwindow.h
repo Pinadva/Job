@@ -64,7 +64,7 @@ private:
     PhotoView *view           = nullptr;
     PhotoPresenter *presenter = nullptr;
     PhotoModel *model         = nullptr;
-    AddTagForm *add_tag       = nullptr;
+    AddTagForm *add_tag_form  = nullptr;
 
     QPixmap result_pixmap;
     QMovie *movie;

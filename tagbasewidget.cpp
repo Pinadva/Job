@@ -32,5 +32,5 @@ void TagBaseWidget::setRemoveBtn()
 
 void TagBaseWidget::sendRemoveTag()
 {
-    removeTag(this->pos());
+    emit removeTag(this->pos());
 }
