@@ -1,4 +1,4 @@
-#include "tagbasewidget.h"
+#include "tagbase.h"
 
 TagBaseWidget::TagBaseWidget(QWidget *parent) : QWidget(parent)
 {

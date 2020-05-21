@@ -2,9 +2,9 @@
 #define ADDTAGFORM_H
 
 #include "settingssingleton.h"
-#include "tagkeyeditwidget.h"
-#include "taglistwidget.h"
-#include "tagvalueeditwidget.h"
+#include "tagkeyedit.h"
+#include "tagkeyeditlist.h"
+#include "tagvalueedit.h"
 
 #include <QDialog>
 #include <QListWidget>
@@ -39,7 +39,7 @@ protected:
 
 private:
     Ui::AddTagForm *ui;
-    TagListWidget<TagKeyEditWidget> *tagList = nullptr;
+    TagKeyEditList *tagList = nullptr;
     //    TagListWidget<TagValueEditWidget> *tagList = nullptr;
 };
 

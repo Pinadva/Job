@@ -6,9 +6,9 @@
 #include "photopresenter.h"
 #include "photoview.h"
 #include "settingssingleton.h"
-#include "tagbasewidget.h"
-#include "tagkeyeditwidget.h"
-#include "taglistwidget.h"
+#include "tagbase.h"
+#include "tagkeyedit.h"
+#include "tagkeyeditlist.h"
 #include "textbase.h"
 
 #include <QByteArray>

@@ -1,4 +1,4 @@
-#include "tagkeyeditwidget.h"
+#include "tagkeyeditlist.h"
 
 TagKeyEditWidget::TagKeyEditWidget(QWidget *parent) : TagBaseWidget(parent)
 {

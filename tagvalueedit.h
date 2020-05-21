@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QWidget>
 
-#include "tagbasewidget.h"
+#include "tagbase.h"
 
 class TagValueEditWidget : public TagBaseWidget
 {

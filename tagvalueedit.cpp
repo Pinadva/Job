@@ -1,4 +1,4 @@
-#include "tagvalueeditwidget.h"
+#include "tagvalueedit.h"
 
 TagValueEditWidget::TagValueEditWidget(QWidget *parent) : TagBaseWidget(parent)
 {

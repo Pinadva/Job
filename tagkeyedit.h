@@ -7,7 +7,7 @@
 #include <QWidget>
 
 #include "exifextra.h"
-#include "tagbasewidget.h"
+#include "tagbase.h"
 
 class TagKeyEditWidget : public TagBaseWidget
 {
