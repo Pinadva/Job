@@ -86,7 +86,7 @@ QPixmap PhotoView::drawCommonExif()
     pixmap.fill(Qt::white);
     auto segment = this->presenter->getPhotos()[0];
     auto common  = segment.common;
-    auto extra   = segment.extra;
+    auto extra   = segment.common_extra;
 
     TextBase text(Qt::white, Qt::black);
     text.painter.begin(&pixmap);

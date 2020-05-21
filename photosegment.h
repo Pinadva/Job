@@ -11,7 +11,10 @@ struct PhotoSegment
 {
     QPixmap *photo = nullptr;
     QList<QPair<QString, QString>> unique;
+    QList<QPair<QString, QString> *> unique_empty;
+    QList<QPair<QString, QString>> unique_extra;
     QList<QPair<QString, QString>> common;
-    QList<QPair<QString, QString>> extra;
+    QList<QPair<QString, QString> *> common_empty;
+    QList<QPair<QString, QString>> common_extra;
 };
 #endif // PHOTOSEGMENT_H

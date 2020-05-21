@@ -28,8 +28,10 @@ public:
     void setPaths(QStringList &);
     const QStringList &getPaths();
     void setPhotos();
-    const QHash<int, PhotoSegment> &getPhotos();
-    void setExif(const QList<QHash<QString, QString>> &source_keys, QList<QPair<QString, QString>> &dist_keys);
+    QHash<int, PhotoSegment> &getPhotos();
+    void setExif(const QList<QHash<QString, QString>> &source_keys,
+                 QList<QPair<QString, QString>> &tags,
+                 QList<QPair<QString, QString> *> &);
     void setSizeExif(QList<QPair<QString, QString>> &);
     void clear();
     QString createTagText(Exiv2::ExifKey &, string);

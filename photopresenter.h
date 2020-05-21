@@ -20,7 +20,7 @@ public:
     bool isDateTimeExists(const QHash<int, PhotoSegment> &);
     bool isGoodSize(const QHash<int, PhotoSegment> &);
     bool isSameExifs(const QHash<int, PhotoSegment> &);
-    const QHash<int, PhotoSegment> &getPhotos();
+    QHash<int, PhotoSegment> &getPhotos();
 
     PhotoModel *model = nullptr;
 signals:

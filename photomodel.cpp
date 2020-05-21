@@ -31,7 +31,7 @@ const QStringList &PhotoModel::getPaths()
     return this->photo_paths;
 }
 
-const QHash<int, PhotoSegment> &PhotoModel::getPhotos()
+QHash<int, PhotoSegment> &PhotoModel::getPhotos()
 {
     return this->photos;
 }
@@ -72,9 +72,9 @@ void PhotoModel::setPhotos()
         photo_segment.photo = new QPixmap(path);
         photo_segment.unique.append(QPair<QString, QString>("FileName", QFileInfo(path).fileName()));
 
-        setExif(this->keys.getUnique(), photo_segment.unique);
-        setExif(this->keys.getCommon(), photo_segment.common);
-        setExif(this->keys.getExtra(), photo_segment.extra);
+        setExif(this->keys.getUnique(), photo_segment.unique, photo_segment.unique_empty);
+        setExif(this->keys.getCommon(), photo_segment.common, photo_segment.common_empty);
+        setExif(this->keys.getExtra(), photo_segment.common_extra, photo_segment.common_empty);
         setSizeExif(photo_segment.common);
 
         this->photos.insert(photos.size(), photo_segment);
@@ -88,19 +88,23 @@ void PhotoModel::setPhotos()
         qDebug() << "end common";
 
         qDebug() << "extra";
-        qDebug() << photo_segment.extra;
+        qDebug() << photo_segment.common_extra;
         qDebug() << "end extra";
     }
 }
 
-void PhotoModel::setExif(const QList<QHash<QString, QString>> &src_keys, QList<QPair<QString, QString>> &dst_keys)
+void PhotoModel::setExif(const QList<QHash<QString, QString>> &src_keys,
+                         QList<QPair<QString, QString>> &tags,
+                         QList<QPair<QString, QString> *> &empty_tags)
 {
     for (auto hash : src_keys)
     {
         auto item          = hash.begin();
         Exiv2::ExifKey key = Exiv2::ExifKey(item.value().toStdString());
         auto tag           = createTagText(key, item.value().toStdString());
-        dst_keys.append(QPair<QString, QString>(item.key(), tag));
+        tags.append(QPair<QString, QString>(item.key(), tag));
+        if (tag.isEmpty() or tag == "-")
+            empty_tags.append(&tags.last());
     }
 }
 

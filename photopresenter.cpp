@@ -117,7 +117,7 @@ bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
     return true;
 }
 
-const QHash<int, PhotoSegment> &PhotoPresenter::getPhotos()
+QHash<int, PhotoSegment> &PhotoPresenter::getPhotos()
 {
     return this->model->getPhotos();
 }
