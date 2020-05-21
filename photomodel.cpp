@@ -74,7 +74,7 @@ void PhotoModel::setPhotos()
 
         setExif(this->keys.getUnique(), photo_segment.unique, photo_segment.unique_empty);
         setExif(this->keys.getCommon(), photo_segment.common, photo_segment.common_empty);
-        setExif(this->keys.getExtra(), photo_segment.common_extra, photo_segment.common_empty);
+        setExif(this->keys.getCommonExtra(), photo_segment.common_extra, photo_segment.common_empty);
         setSizeExif(photo_segment.common);
 
         this->photos.insert(photos.size(), photo_segment);

@@ -59,7 +59,7 @@ QPixmap PhotoView::drawPhotos()
 
 QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
 {
-    qDebug() << "draw unique exif";
+    //    qDebug() << "draw unique exif";
     QPixmap pixmap = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
 
     TextBase text(Qt::black, Qt::green);
@@ -81,7 +81,7 @@ const QPixmap &PhotoView::getResult()
 
 QPixmap PhotoView::drawCommonExif()
 {
-    qDebug() << "draw common exif";
+    //    qDebug() << "draw common exif";
     QPixmap pixmap(1200, this->photo_size.height());
     pixmap.fill(Qt::white);
     auto segment = this->presenter->getPhotos()[0];

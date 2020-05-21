@@ -157,4 +157,5 @@ void MainWindow::on_testBtn_clicked()
     qDebug() << "pair after = " << pair1.first << pair1.second;
     ui->label->clear();
     this->view->paint();
+    this->repaint();
 }

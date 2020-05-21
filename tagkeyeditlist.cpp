@@ -25,7 +25,7 @@ void TagKeyEditList::loadTags()
 {
     qDebug() << "loadTags";
     this->clear();
-    QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif();
+    QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif(this->tag_kind);
     for (auto item : tags)
     {
         TagKeyEditWidget *tag = new TagKeyEditWidget(this);

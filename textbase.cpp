@@ -5,7 +5,7 @@ TextBase::TextBase()
 }
 TextBase::TextBase(QColor bg_color, QColor text_color)
 {
-    qDebug() << "textBase";
+    //    qDebug() << "textBase";
     this->bg_color   = bg_color;
     this->text_color = text_color;
 

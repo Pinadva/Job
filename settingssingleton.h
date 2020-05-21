@@ -15,7 +15,7 @@ public:
     void setPath(QString &);
     QString getPath();
     void setExtraExif(QList<QHash<QString, QString>> &, QString);
-    QList<QHash<QString, QString>> getExtraExif();
+    QList<QHash<QString, QString>> getExtraExif(QString tag_kind);
 
 private:
     SettingsSingleton();

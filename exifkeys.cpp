@@ -4,7 +4,7 @@ ExifKeys::ExifKeys()
 {
     setUnique();
     setCommon();
-    setExtra();
+    setCommonExtra();
 }
 
 void ExifKeys::setUnique()
@@ -13,6 +13,11 @@ void ExifKeys::setUnique()
     unique.append(QHash<QString, QString> {{"FNumber", "Exif.Photo.FNumber"}});
     unique.append(QHash<QString, QString> {{"ISO", "Exif.Photo.ISOSpeedRatings"}});
     unique.append(QHash<QString, QString> {{"ExposureBiasValue", "Exif.Photo.ExposureBiasValue"}});
+}
+
+void ExifKeys::setUniqueExtra()
+{
+    unique_extra = SettingsSingleton::getInstance().getExtraExif("unique_extra");
 }
 
 void ExifKeys::setCommon()
@@ -24,15 +29,15 @@ void ExifKeys::setCommon()
     common.append(QHash<QString, QString> {{"ExposureProgram", "Exif.Photo.ExposureProgram"}});
 }
 
-void ExifKeys::setExtra()
+void ExifKeys::setCommonExtra()
 {
     qDebug() << "***********************************************";
-    qDebug() << "setExtra";
-    extra = SettingsSingleton::getInstance().getExtraExif();
-    for (auto item : extra)
-    {
-        qDebug() << item;
-    }
+    qDebug() << "setCommonExtra";
+    common_extra = SettingsSingleton::getInstance().getExtraExif("common_extra");
+    //    for (auto item : extra)
+    //    {
+    //        qDebug() << item;
+    //    }
     qDebug() << "***********************************************";
 }
 
@@ -41,12 +46,17 @@ const QList<QHash<QString, QString>> &ExifKeys::getUnique()
     return unique;
 }
 
+const QList<QHash<QString, QString>> &ExifKeys::getUniqueExtra()
+{
+    return unique_extra;
+}
+
 const QList<QHash<QString, QString>> &ExifKeys::getCommon()
 {
     return common;
 }
 
-const QList<QHash<QString, QString>> &ExifKeys::getExtra()
+const QList<QHash<QString, QString>> &ExifKeys::getCommonExtra()
 {
-    return extra;
+    return common_extra;
 }

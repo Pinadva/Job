@@ -33,10 +33,10 @@ void SettingsSingleton::setExtraExif(QList<QHash<QString, QString>> &data, QStri
     this->settings->setValue(tag_kind, bytes);
 }
 
-QList<QHash<QString, QString>> SettingsSingleton::getExtraExif()
+QList<QHash<QString, QString>> SettingsSingleton::getExtraExif(QString tag_kind)
 {
     QList<QHash<QString, QString>> data;
-    QByteArray bytes = this->settings->value("extra_exif").toByteArray();
+    QByteArray bytes = this->settings->value(tag_kind).toByteArray();
     QDataStream ds(&bytes, QIODevice::ReadOnly);
     ds >> data;
 
