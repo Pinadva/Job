@@ -1,41 +1,41 @@
 #include "tagvalueedit.h"
 
-TagValueEditWidget::TagValueEditWidget(QWidget *parent) : TagBaseWidget(parent)
+TagValueEdit::TagValueEdit(QWidget *parent) : TagBaseWidget(parent)
 {
     this->value_lineEdit = new QLineEdit();
-    connect(value_lineEdit, &QLineEdit::textChanged, this, &TagValueEditWidget::checkValid);
+    connect(value_lineEdit, &QLineEdit::textChanged, this, &TagValueEdit::checkValid);
     layout->addWidget(short_name_lineEdit);
     layout->addWidget(value_lineEdit);
     layout->addWidget(remove_btn);
     setLayout(layout);
 }
 
-void TagValueEditWidget::setValueLineEdit(const QString &text)
+void TagValueEdit::setValueLineEdit(const QString &text)
 {
     value_lineEdit->setText(text);
     value_lineEdit->setPlaceholderText("Exif.Photo.FocalLength");
     value_lineEdit->setClearButtonEnabled(true);
 }
 
-void TagValueEditWidget::setData()
+void TagValueEdit::setData()
 {
     setShortName("");
     setValueLineEdit("");
 }
 
-void TagValueEditWidget::setData(QPair<QString, QString> data)
+void TagValueEdit::setData(QPair<QString, QString> data)
 {
     setShortName(data.first);
     setValueLineEdit(data.second);
 }
 
-QPair<QString, QString> TagValueEditWidget::getData()
+QPair<QString, QString> TagValueEdit::getData()
 {
     QPair<QString, QString> pair(short_name_lineEdit->text(), value_lineEdit->text());
     return pair;
 }
 
-bool TagValueEditWidget::isValid()
+bool TagValueEdit::isValid()
 {
     return !(short_name_lineEdit->text().isEmpty() or value_lineEdit->text().isEmpty());
 }

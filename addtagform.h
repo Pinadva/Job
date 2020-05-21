@@ -5,6 +5,7 @@
 #include "tagkeyedit.h"
 #include "tagkeyeditlist.h"
 #include "tagvalueedit.h"
+#include "tagvalueeditlist.h"
 
 #include <QDialog>
 #include <QListWidget>
@@ -39,8 +40,8 @@ protected:
 
 private:
     Ui::AddTagForm *ui;
-    TagKeyEditList *tagList = nullptr;
-    //    TagListWidget<TagValueEditWidget> *tagList = nullptr;
+    //    TagKeyEditList *tagList = nullptr;
+    TagValueEditList *tagList = nullptr;
 };
 
 #endif // ADDTAGFORM_H

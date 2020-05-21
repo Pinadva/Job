@@ -13,7 +13,7 @@ void TagKeyEditList::saveTags()
     {
         QListWidgetItem *item        = this->item(i);
         QWidget *tag_wgt             = this->itemWidget(item);
-        TagKeyEditWidget *tag        = dynamic_cast<TagKeyEditWidget *>(tag_wgt);
+        TagKeyEdit *tag              = dynamic_cast<TagKeyEdit *>(tag_wgt);
         QPair<QString, QString> data = tag->getData();
 
         extra_exif.append(QHash<QString, QString> {{data.first, data.second}});
@@ -28,7 +28,7 @@ void TagKeyEditList::loadTags()
     QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif(this->tag_kind);
     for (auto item : tags)
     {
-        TagKeyEditWidget *tag = new TagKeyEditWidget(this);
+        TagKeyEdit *tag = new TagKeyEdit(this);
         qDebug() << item.begin().key() << item.begin().value();
         tag->setData(QPair<QString, QString>(item.begin().key(), item.begin().value()));
         addTag(tag);

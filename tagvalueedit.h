@@ -6,11 +6,11 @@
 
 #include "tagbase.h"
 
-class TagValueEditWidget : public TagBaseWidget
+class TagValueEdit : public TagBaseWidget
 {
     Q_OBJECT
 public:
-    explicit TagValueEditWidget(QWidget *parent = nullptr);
+    explicit TagValueEdit(QWidget *parent = nullptr);
 
 public slots:
     void setValueLineEdit(const QString &);

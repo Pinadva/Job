@@ -9,11 +9,11 @@
 #include "exifextra.h"
 #include "tagbase.h"
 
-class TagKeyEditWidget : public TagBaseWidget
+class TagKeyEdit : public TagBaseWidget
 {
     Q_OBJECT
 public:
-    explicit TagKeyEditWidget(QWidget *parent = nullptr);
+    explicit TagKeyEdit(QWidget *parent = nullptr);
 
 public slots:
     void setExifName();

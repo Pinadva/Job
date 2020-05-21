@@ -7,8 +7,8 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
 
     ui->testBtn->setVisible(false);
 
-    tagList = new TagKeyEditList("common_extra");
-    //    tagList = new TagListWidget<TagValueEditWidget>();
+    //    tagList = new TagKeyEditList("common_extra");
+    tagList = new TagValueEditList();
     ui->verticalLayout->addWidget(tagList);
 
     tagList->loadTags();
@@ -22,7 +22,7 @@ AddTagForm::~AddTagForm()
 void AddTagForm::chooseKeyAction(QString key)
 {
     if (key == "\u000E") // ctrl + n
-        tagList->addTag(new TagKeyEditWidget());
+        tagList->addTag(new TagKeyEdit());
     else if (key == "\u007F") // delete
         tagList->removeTag();
 }
@@ -43,7 +43,7 @@ void AddTagForm::on_buttonBox_accepted()
 
 void AddTagForm::on_addBtn_clicked()
 {
-    tagList->addTag(new TagKeyEditWidget());
+    tagList->addTag(new TagKeyEdit());
 }
 
 void AddTagForm::on_testBtn_clicked()

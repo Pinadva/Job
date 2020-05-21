@@ -73,23 +73,24 @@ void PhotoModel::setPhotos()
         photo_segment.unique.append(QPair<QString, QString>("FileName", QFileInfo(path).fileName()));
 
         setExif(this->keys.getUnique(), photo_segment.unique, photo_segment.unique_empty);
+        setExif(this->keys.getUniqueExtra(), photo_segment.unique_extra, photo_segment.unique_empty);
         setExif(this->keys.getCommon(), photo_segment.common, photo_segment.common_empty);
         setExif(this->keys.getCommonExtra(), photo_segment.common_extra, photo_segment.common_empty);
         setSizeExif(photo_segment.common);
 
         this->photos.insert(photos.size(), photo_segment);
 
-        qDebug() << "unique";
-        qDebug() << photo_segment.unique;
-        qDebug() << "end unique";
+        //        qDebug() << "unique";
+        //        qDebug() << photo_segment.unique;
+        //        qDebug() << "end unique";
 
-        qDebug() << "common";
-        qDebug() << photo_segment.common;
-        qDebug() << "end common";
+        //        qDebug() << "common";
+        //        qDebug() << photo_segment.common;
+        //        qDebug() << "end common";
 
-        qDebug() << "extra";
-        qDebug() << photo_segment.common_extra;
-        qDebug() << "end extra";
+        //        qDebug() << "extra";
+        //        qDebug() << photo_segment.common_extra;
+        //        qDebug() << "end extra";
     }
 }
 
