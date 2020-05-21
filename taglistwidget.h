@@ -13,8 +13,9 @@ template <typename T>
 class TagListWidget : public TagListBase
 {
 public:
-    explicit TagListWidget(QWidget *parent = nullptr) : TagListBase(parent)
+    explicit TagListWidget(QString tag_kind, QWidget *parent = nullptr) : TagListBase(parent)
     {
+        this->tag_kind = tag_kind;
     }
 
 public:
@@ -25,6 +26,7 @@ public:
     bool isValid();
 
 private:
+    QString tag_kind; // common_extra or common_edit, u
 };
 
 template <typename T>
@@ -65,7 +67,7 @@ void TagListWidget<T>::saveTags()
 
         extra_exif.append(QHash<QString, QString> {{data.first, data.second}});
     }
-    SettingsSingleton::getInstance().setExtraExif(extra_exif);
+    SettingsSingleton::getInstance().setExtraExif(extra_exif, this->tag_kind);
 }
 
 template <typename T>

@@ -70,7 +70,7 @@ void PhotoModel::setPhotos()
         }
         PhotoSegment photo_segment;
         photo_segment.photo = new QPixmap(path);
-        photo_segment.unique.append(QHash<QString, QString> {{"FileName", QFileInfo(path).fileName()}});
+        photo_segment.unique.append(QPair<QString, QString>("FileName", QFileInfo(path).fileName()));
 
         setExif(this->keys.getUnique(), photo_segment.unique);
         setExif(this->keys.getCommon(), photo_segment.common);
@@ -93,27 +93,27 @@ void PhotoModel::setPhotos()
     }
 }
 
-void PhotoModel::setExif(const QList<QHash<QString, QString>> &src_keys, QList<QHash<QString, QString>> &dst_keys)
+void PhotoModel::setExif(const QList<QHash<QString, QString>> &src_keys, QList<QPair<QString, QString>> &dst_keys)
 {
     for (auto hash : src_keys)
     {
         auto item          = hash.begin();
         Exiv2::ExifKey key = Exiv2::ExifKey(item.value().toStdString());
         auto tag           = createTagText(key, item.value().toStdString());
-        dst_keys.append(QHash<QString, QString> {{item.key(), tag}});
+        dst_keys.append(QPair<QString, QString>(item.key(), tag));
     }
 }
 
-void PhotoModel::setSizeExif(QList<QHash<QString, QString>> &dst_keys)
+void PhotoModel::setSizeExif(QList<QPair<QString, QString>> &dst_keys)
 {
     Exiv2::ExifKey pX_key = Exiv2::ExifKey("Exif.Photo.PixelXDimension");
     Exiv2::ExifKey pY_key = Exiv2::ExifKey("Exif.Photo.PixelYDimension");
     if (data.findKey(pX_key) != data.end() and data.findKey(pY_key) != data.end())
     {
-        auto pX_std_str = data["Exif.Photo.PixelXDimension"].value().toString();
-        auto pY_std_str = data["Exif.Photo.PixelYDimension"].value().toString();
-
-        dst_keys.append({{"Size", QString::fromStdString(pX_std_str) + "x" + QString::fromStdString(pY_std_str)}});
+        auto pX_std_str    = data["Exif.Photo.PixelXDimension"].value().toString();
+        auto pY_std_str    = data["Exif.Photo.PixelYDimension"].value().toString();
+        QString total_text = QString::fromStdString(pX_std_str) + "x" + QString::fromStdString(pY_std_str);
+        dst_keys.append(QPair<QString, QString>("Size", total_text));
     }
 }
 

@@ -92,7 +92,7 @@ bool PhotoPresenter::isGoodSize(const QHash<int, PhotoSegment> &photos)
 
 bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
 {
-    QList<QHash<QString, QString>> exifList = photos[0].common;
+    //    QList<QHash<QString, QString>> exifList = photos[0].common;
 
     //    for (auto hash : exifList)
     //    {

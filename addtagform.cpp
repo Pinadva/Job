@@ -7,7 +7,7 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
 
     ui->testBtn->setVisible(false);
 
-    tagList = new TagListWidget<TagKeyEditWidget>();
+    tagList = new TagListWidget<TagKeyEditWidget>("common_edit");
     //    tagList = new TagListWidget<TagValueEditWidget>();
     ui->verticalLayout->addWidget(tagList);
 

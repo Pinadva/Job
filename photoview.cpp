@@ -67,7 +67,7 @@ QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
     text.painterInit();
     for (auto item : segment.unique)
     {
-        text.drawText(item.begin().key(), item.begin().value());
+        text.drawText(item.first, item.second);
     }
 
     text.painter.end();
@@ -93,12 +93,12 @@ QPixmap PhotoView::drawCommonExif()
     text.painterInit();
     for (auto item : common)
     {
-        text.drawText(item.begin().key(), item.begin().value());
+        text.drawText(item.first, item.second);
     }
     text.drawText("-------------------------------");
     for (auto item : extra)
     {
-        text.drawText(item.begin().key(), item.begin().value());
+        text.drawText(item.first, item.second);
     }
 
     text.painter.end();
