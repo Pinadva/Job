@@ -37,8 +37,8 @@ void AddTagForm::save()
     if (tagList->isValid())
     {
         tagList->saveTags();
-        emit valuesChanged();
         close();
+        emit valuesChanged();
     }
 }
 

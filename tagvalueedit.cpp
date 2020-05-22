@@ -6,7 +6,7 @@ TagValueEdit::TagValueEdit(QWidget *parent) : TagBaseWidget(parent)
     connect(value_lineEdit, &QLineEdit::textChanged, this, &TagValueEdit::checkValid);
     layout->addWidget(short_name_lineEdit);
     layout->addWidget(value_lineEdit);
-    layout->addWidget(remove_btn);
+    //    layout->addWidget(remove_btn);
     setLayout(layout);
 }
 
@@ -20,12 +20,14 @@ void TagValueEdit::setValueLineEdit(const QString &text)
 void TagValueEdit::setData()
 {
     setShortName("");
+    short_name_lineEdit->setReadOnly(true);
     setValueLineEdit("");
 }
 
 void TagValueEdit::setData(QPair<QString, QString> data)
 {
     setShortName(data.first);
+    short_name_lineEdit->setReadOnly(true);
     setValueLineEdit(data.second);
 }
 
