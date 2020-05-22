@@ -31,6 +31,7 @@ SOURCES += \
     tagkeyedit.cpp \
     tagkeyeditlist.cpp \
     taglistbase.cpp \
+    tagmediator.cpp \
     tagvalueedit.cpp \
     tagvalueeditlist.cpp \
     textbase.cpp
@@ -51,6 +52,7 @@ HEADERS += \
     tagkeyedit.h \
     tagkeyeditlist.h \
     taglistbase.h \
+    tagmediator.h \
     tagvalueedit.h \
     tagvalueeditlist.h \
     textbase.h

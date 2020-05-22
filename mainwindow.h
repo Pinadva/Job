@@ -9,6 +9,7 @@
 #include "tagbase.h"
 #include "tagkeyedit.h"
 #include "tagkeyeditlist.h"
+#include "tagmediator.h"
 #include "textbase.h"
 
 #include <QByteArray>

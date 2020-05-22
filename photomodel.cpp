@@ -43,7 +43,7 @@ void PhotoModel::setPhotos()
     {
         QApplication::processEvents();
         auto path = this->photo_paths[i];
-        qDebug() << "================================================";
+        //        qDebug() << "================================================";
 
         QFile tmpFile(path);
         if (!tmpFile.open(QIODevice::ReadOnly))

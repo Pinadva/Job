@@ -4,6 +4,11 @@ TagValueEditList::TagValueEditList(QString file_name, QWidget *parent) : TagList
 {
 }
 
+void TagValueEditList::setPhotos(QHash<int, QString> &photos)
+{
+    this->photos = photos;
+}
+
 void TagValueEditList::setEmptyTags(QList<QPair<QString, QString> *> &empty_tags)
 {
     this->empty_tags = empty_tags;
@@ -26,6 +31,10 @@ void TagValueEditList::saveTags()
                 empty_tags[i]->second = data.second;
             }
         }
+    for (auto item : empty_tags)
+    {
+        qDebug() << "item in empty tags = " << item->first << item->second;
+    }
 }
 
 void TagValueEditList::loadTags()

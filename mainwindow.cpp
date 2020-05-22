@@ -7,26 +7,28 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //    ui->testBtn->setVisible(false);
     ui->testBtn->setVisible(true);
     this->setAcceptDrops(true);
+
     this->model        = new PhotoModel();
     this->presenter    = new PhotoPresenter(model);
     this->view         = new PhotoView(presenter);
     this->add_tag_form = new AddTagForm();
+    this->movie        = new QMovie("://loader.gif");
 
+    add_tag_form->setPhotoPresenter(presenter);
     connect(model, &PhotoModel::statusChanged, this, &MainWindow::updateStatusBar);
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
-    movie = new QMovie("://loader.gif");
 
-    add_tag_form->show();
+    //    add_tag_form->show();
 }
 
 MainWindow::~MainWindow()
 {
-    delete this->movie;
     delete this->model;
     delete this->presenter;
     delete this->view;
+    delete this->movie;
     delete ui;
 }
 
@@ -142,20 +144,7 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 
 void MainWindow::on_testBtn_clicked()
 {
-    qDebug() << "testBtn clicked";
-    QHash<int, PhotoSegment> photos = presenter->getPhotos();
-    qDebug() << "photos";
-    for (auto i : photos)
-    {
-        for (auto j : i.common_empty)
-            qDebug() << j->first << j->second;
-    }
-    QPair<QString, QString> *pair = photos.begin().value().common_empty.first();
-    qDebug() << "pair before = " << pair->first << pair->second;
-    pair->second                  = "132132123132";
-    QPair<QString, QString> pair1 = photos.begin().value().common_extra.first();
-    qDebug() << "pair after = " << pair1.first << pair1.second;
     ui->label->clear();
     this->view->paint();
-    this->repaint();
+    //    this->repaint();
 }

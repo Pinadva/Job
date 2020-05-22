@@ -9,9 +9,9 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
 
     //    tagList = new TagKeyEditList("common_extra");
     tagList = new TagValueEditList();
+    //    tagList->setEmptyTags();
     ui->verticalLayout->addWidget(tagList);
-
-    tagList->loadTags();
+    //    this->load();
 }
 
 AddTagForm::~AddTagForm()
@@ -27,12 +27,37 @@ void AddTagForm::chooseKeyAction(QString key)
         tagList->removeTag();
 }
 
+void AddTagForm::setPhotoPresenter(PhotoPresenter *presenter)
+{
+    this->photo_presenter = presenter;
+}
+
 void AddTagForm::save()
 {
     if (tagList->isValid())
     {
         tagList->saveTags();
         close();
+    }
+}
+
+void AddTagForm::load()
+{
+    qDebug() << "0";
+    if (photo_presenter->getPhotos().size() > 0)
+    {
+        QHash<int, PhotoSegment> photos = photo_presenter->getPhotos();
+        qDebug() << "1";
+        if (photos.size() > 0)
+        {
+            qDebug() << "2";
+            auto photo_segment = photos.begin().value();
+            qDebug() << "3";
+            tagList->setEmptyTags(photo_segment.common_empty);
+            qDebug() << "4";
+            tagList->loadTags();
+            qDebug() << "5";
+        }
     }
 }
 
@@ -60,7 +85,7 @@ void AddTagForm::keyReleaseEvent(QKeyEvent *event)
 void AddTagForm::showEvent(QShowEvent *event)
 {
     event->accept();
-    tagList->loadTags();
+    this->load();
 }
 
 void AddTagForm::accept()

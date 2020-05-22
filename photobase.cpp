@@ -2,5 +2,4 @@
 
 PhotoBase::PhotoBase()
 {
-
 }

@@ -1,6 +1,8 @@
 #ifndef PHOTOBASE_H
 #define PHOTOBASE_H
 
+#include "tagmediator.h"
+
 #include <QObject>
 
 class PhotoBase : public QObject
@@ -10,6 +12,8 @@ public:
     PhotoBase();
 signals:
     void statusChanged(QString, int);
+
+private:
 };
 
 #endif // PHOTOBASE_H
