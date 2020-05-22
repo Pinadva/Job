@@ -11,7 +11,7 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
     tagList = new TagValueEditList();
     //    tagList->setEmptyTags();
 
-    //    ui->verticalLayout->addWidget(tagList);
+    ui->verticalLayout->addWidget(tagList);
     //    this->load();
 }
 
@@ -35,17 +35,13 @@ void AddTagForm::setPhotoPresenter(PhotoPresenter *presenter)
 
 void AddTagForm::save()
 {
-    //    if (tagList->isValid())
-    //    {
-    //        tagList->saveTags();
-    //        close();
-    //        emit valuesChanged();
-    //    }
+    tagList->save();
+
     for (int i = 0; i < 4; ++i)
     {
         auto item              = ui->gridLayout->itemAtPosition(i / 4, i % 4)->widget();
         TagValueEditList *tags = dynamic_cast<TagValueEditList *>(item);
-        tags->saveTags();
+        tags->save();
     }
     close();
     emit valuesChanged();
@@ -56,12 +52,12 @@ void AddTagForm::load()
     if (photo_presenter->getPhotos().size() > 0)
     {
         QHash<int, PhotoSegment> photos = photo_presenter->getPhotos();
-        //        if (photos.size() > 0)
-        //        {
-        //            auto photo_segment = photos[0];
-        //            tagList->setEmptyTags(photo_segment.common_empty);
-        //            tagList->loadTags();
-        //        }
+        if (photos.size() > 0)
+        {
+            auto photo_segment = photos[0];
+            tagList->setEmptyTags(photo_segment.common_empty);
+            tagList->loadTags();
+        }
         for (int i = 0; i < photos.size(); ++i)
         {
             PhotoSegment photo     = photos[i];

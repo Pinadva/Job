@@ -5,7 +5,7 @@ TagKeyEditList::TagKeyEditList(QString tag_kind, QString file_name, QWidget *par
     this->tag_kind = tag_kind;
 }
 
-void TagKeyEditList::saveTags()
+void TagKeyEditList::save()
 {
     qDebug() << "taglist saveTags";
     QList<QHash<QString, QString>> extra_exif;

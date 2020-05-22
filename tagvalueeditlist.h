@@ -21,7 +21,7 @@ public:
 
     // TagListBase interface
 public:
-    void saveTags() override;
+    void save() override;
     void loadTags() override;
 
 private:

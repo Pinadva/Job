@@ -15,7 +15,7 @@ public:
     explicit TagKeyEditList(QString tag_kind, QString file_name = "", QWidget *parent = nullptr);
 
 public:
-    void saveTags() override;
+    void save() override;
     void loadTags() override;
 
 private:

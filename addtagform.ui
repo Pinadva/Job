@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>600</height>
+    <width>1481</width>
+    <height>729</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <rect>
      <x>10</x>
      <y>570</y>
-     <width>1011</width>
+     <width>1461</width>
      <height>23</height>
     </rect>
    </property>
@@ -116,10 +116,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>461</width>
-     <height>21</height>
+     <x>1020</x>
+     <y>60</y>
+     <width>451</width>
+     <height>501</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout"/>
@@ -155,7 +155,7 @@
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>1011</width>
+     <width>1001</width>
      <height>501</height>
     </rect>
    </property>

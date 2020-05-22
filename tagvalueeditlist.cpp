@@ -14,7 +14,7 @@ void TagValueEditList::setEmptyTags(QList<QPair<QString, QString> *> &empty_tags
     this->empty_tags = empty_tags;
 }
 
-void TagValueEditList::saveTags()
+void TagValueEditList::save()
 {
     qDebug() << "taglist saveTags";
     if (empty_tags.length() > 0)
