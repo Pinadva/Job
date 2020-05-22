@@ -41,9 +41,9 @@ void AddTagForm::save()
     //        close();
     //        emit valuesChanged();
     //    }
-    for (int i = 0; i < 16; ++i)
+    for (int i = 0; i < 4; ++i)
     {
-        auto item              = ui->gridLayout->itemAtPosition(i % 4, i / 4)->widget();
+        auto item              = ui->gridLayout->itemAtPosition(i / 4, i % 4)->widget();
         TagValueEditList *tags = dynamic_cast<TagValueEditList *>(item);
         tags->saveTags();
     }
@@ -68,7 +68,7 @@ void AddTagForm::load()
             TagValueEditList *tags = new TagValueEditList();
             tags->setEmptyTags(photo.unique_empty);
             tags->loadTags();
-            ui->gridLayout->addWidget(tags, i % 4, i / 4);
+            ui->gridLayout->addWidget(tags, i / 4, i % 4);
         }
     }
 }
