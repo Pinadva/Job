@@ -47,6 +47,7 @@ public slots:
     void updateStatusBar(QString, int);
     void viewResult(QPixmap &);
     void chooseKeyAction(QString);
+    void updateResult();
 
 protected:
     void resizeEvent(QResizeEvent *event);

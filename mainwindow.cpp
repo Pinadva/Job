@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
-
+    connect(add_tag_form, &AddTagForm::valuesChanged, this, &MainWindow::updateResult);
     //    add_tag_form->show();
 }
 
@@ -65,6 +65,12 @@ void MainWindow::chooseKeyAction(QString key)
         on_actionSelect_photos_triggered();
     else if (key == "\u000E") // ctrl + n
         on_actionAdd_tags_triggered();
+}
+
+void MainWindow::updateResult()
+{
+    ui->label->clear();
+    this->view->paint();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

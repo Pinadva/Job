@@ -43,6 +43,9 @@ protected:
     void keyReleaseEvent(QKeyEvent *event) override;
     void showEvent(QShowEvent *event) override;
 
+signals:
+    void valuesChanged();
+
 private:
     Ui::AddTagForm *ui;
     //    TagKeyEditList *tagList = nullptr;

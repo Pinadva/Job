@@ -37,26 +37,21 @@ void AddTagForm::save()
     if (tagList->isValid())
     {
         tagList->saveTags();
+        emit valuesChanged();
         close();
     }
 }
 
 void AddTagForm::load()
 {
-    qDebug() << "0";
     if (photo_presenter->getPhotos().size() > 0)
     {
         QHash<int, PhotoSegment> photos = photo_presenter->getPhotos();
-        qDebug() << "1";
         if (photos.size() > 0)
         {
-            qDebug() << "2";
-            auto photo_segment = photos.begin().value();
-            qDebug() << "3";
+            auto photo_segment = photos[0];
             tagList->setEmptyTags(photo_segment.common_empty);
-            qDebug() << "4";
             tagList->loadTags();
-            qDebug() << "5";
         }
     }
 }
