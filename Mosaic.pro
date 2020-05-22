@@ -34,6 +34,7 @@ SOURCES += \
     tagmediator.cpp \
     tagvalueedit.cpp \
     tagvalueeditlist.cpp \
+    tagvalueedittable.cpp \
     textbase.cpp
 
 HEADERS += \
@@ -55,6 +56,7 @@ HEADERS += \
     tagmediator.h \
     tagvalueedit.h \
     tagvalueeditlist.h \
+    tagvalueedittable.h \
     textbase.h
 
 FORMS += \

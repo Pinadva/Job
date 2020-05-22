@@ -11,7 +11,10 @@
 #include "tagvalueeditlist.h"
 
 #include <QDialog>
+#include <QLayout>
 #include <QListWidget>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 
 namespace Ui
 {
