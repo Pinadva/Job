@@ -98,6 +98,7 @@ QPixmap PhotoView::drawCommonExif()
     text.drawText("-------------------------------");
     for (auto item : extra)
     {
+        qDebug() << "extra item" << item.first << item.second;
         text.drawText(item.first, item.second);
     }
 
