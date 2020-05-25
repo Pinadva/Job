@@ -13,7 +13,7 @@ void ExifKeys::setUnique()
     unique.append(QHash<QString, QString> {{"FNumber", "Exif.Photo.FNumber"}});
     unique.append(QHash<QString, QString> {{"ISO", "Exif.Photo.ISOSpeedRatings"}});
     unique.append(QHash<QString, QString> {{"ExposureBiasValue", "Exif.Photo.ExposureBiasValue"}});
-    unique.append(QHash<QString, QString> {{"FocalLength", "Exif.Image.FocalLength"}});
+    //    unique.append(QHash<QString, QString> {{"FocalLength", "Exif.Image.FocalLength"}});
 }
 
 void ExifKeys::setUniqueExtra()

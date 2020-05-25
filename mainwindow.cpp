@@ -4,23 +4,28 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //    ui->testBtn->setVisible(false);
-    ui->testBtn->setVisible(true);
+    ui->testBtn->setVisible(false);
+    //    ui->testBtn->setVisible(true);
     this->setAcceptDrops(true);
 
-    this->model        = new PhotoModel();
-    this->presenter    = new PhotoPresenter(model);
-    this->view         = new PhotoView(presenter);
-    this->add_tag_form = new AddTagForm();
-    this->movie        = new QMovie("://loader.gif");
+    this->model             = new PhotoModel();
+    this->presenter         = new PhotoPresenter(model);
+    this->view              = new PhotoView(presenter);
+    this->change_value_form = new ChangeTagValueForm();
+    this->change_key_form   = new ChangeTagKeyForm();
+    this->movie             = new QMovie("://loader.gif");
 
-    add_tag_form->setPhotoPresenter(presenter);
+    change_value_form->setPhotoPresenter(presenter);
+    change_value_form->setPhotoPresenter(presenter);
+
     connect(model, &PhotoModel::statusChanged, this, &MainWindow::updateStatusBar);
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
-    connect(add_tag_form, &AddTagForm::valuesChanged, this, &MainWindow::updateResult);
+    connect(change_value_form, &ChangeTagValueForm::valuesChanged, this, &MainWindow::updateResult);
+
     //    add_tag_form->show();
+    //    change_key_form->show();
 }
 
 MainWindow::~MainWindow()
@@ -96,7 +101,12 @@ void MainWindow::on_actionSelect_photos_triggered()
 
 void MainWindow::on_actionAdd_tags_triggered()
 {
-    add_tag_form->show();
+    change_key_form->show();
+}
+
+void MainWindow::on_actionSet_empty_triggered()
+{
+    change_value_form->show();
 }
 
 void MainWindow::on_pushButton_clicked()

@@ -1,8 +1,6 @@
 #ifndef PHOTOBASE_H
 #define PHOTOBASE_H
 
-#include "tagmediator.h"
-
 #include <QObject>
 
 class PhotoBase : public QObject

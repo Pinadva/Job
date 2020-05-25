@@ -37,7 +37,7 @@ void TagValueEditList::save()
     }
 }
 
-void TagValueEditList::loadTags()
+void TagValueEditList::load()
 {
     this->clear();
     qDebug() << empty_tags.length();

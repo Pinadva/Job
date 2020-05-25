@@ -16,7 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    addtagform.cpp \
+    changetagkeyform.cpp \
+    changetagvalueform.cpp \
     exifextra.cpp \
     exifkeys.cpp \
     fraction.cpp \
@@ -31,14 +32,14 @@ SOURCES += \
     tagkeyedit.cpp \
     tagkeyeditlist.cpp \
     taglistbase.cpp \
-    tagmediator.cpp \
     tagvalueedit.cpp \
     tagvalueeditlist.cpp \
     tagvalueedittable.cpp \
     textbase.cpp
 
 HEADERS += \
-    addtagform.h \
+    changetagkeyform.h \
+    changetagvalueform.h \
     exifextra.h \
     exifkeys.h \
     fraction.h \
@@ -53,14 +54,14 @@ HEADERS += \
     tagkeyedit.h \
     tagkeyeditlist.h \
     taglistbase.h \
-    tagmediator.h \
     tagvalueedit.h \
     tagvalueeditlist.h \
     tagvalueedittable.h \
     textbase.h
 
 FORMS += \
-    addtagform.ui \
+    changetagkeyform.ui \
+    changetagvalueform.ui \
     mainwindow.ui
 
 # Default rules for deployment.

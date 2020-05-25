@@ -22,7 +22,7 @@ public:
     // TagListBase interface
 public:
     void save() override;
-    void loadTags() override;
+    void load() override;
 
 private:
     QHash<int, QString> photos;

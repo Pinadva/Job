@@ -1,11 +1,11 @@
-#include "addtagform.h"
-#include "ui_addtagform.h"
+#include "changetagvalueform.h"
+#include "ui_changetagvalueform.h"
 
-AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm)
+ChangeTagValueForm::ChangeTagValueForm(QWidget *parent) : QDialog(parent), ui(new Ui::ChangeTagValueForm)
 {
     ui->setupUi(this);
 
-    ui->testBtn->setVisible(false);
+    //    ui->testBtn->setVisible(false);
 
     //    tagList = new TagKeyEditList("common_extra");
     tagList = new TagValueEditList();
@@ -15,31 +15,31 @@ AddTagForm::AddTagForm(QWidget *parent) : QDialog(parent), ui(new Ui::AddTagForm
     //    this->load();
 }
 
-AddTagForm::~AddTagForm()
+ChangeTagValueForm::~ChangeTagValueForm()
 {
     delete ui;
 }
 
-void AddTagForm::chooseKeyAction(QString key)
+void ChangeTagValueForm::chooseKeyAction(QString key)
 {
-    if (key == "\u000E") // ctrl + n
-        tagList->addTag(new TagKeyEdit());
-    else if (key == "\u007F") // delete
-        tagList->removeTag();
+    //    if (key == "\u000E") // ctrl + n
+    //        tagList->addTag(new TagKeyEdit());
+    //    else if (key == "\u007F") // delete
+    //        tagList->removeTag();
 }
 
-void AddTagForm::setPhotoPresenter(PhotoPresenter *presenter)
+void ChangeTagValueForm::setPhotoPresenter(PhotoPresenter *presenter)
 {
     this->photo_presenter = presenter;
 }
 
-void AddTagForm::save()
+void ChangeTagValueForm::save()
 {
     tagList->save();
 
     for (int i = 0; i < 4; ++i)
     {
-        auto item              = ui->gridLayout->itemAtPosition(i / 4, i % 4)->widget();
+        auto item              = ui->tags_gridLayout->itemAtPosition(i / 4, i % 4)->widget();
         TagValueEditList *tags = dynamic_cast<TagValueEditList *>(item);
         tags->save();
     }
@@ -47,7 +47,7 @@ void AddTagForm::save()
     emit valuesChanged();
 }
 
-void AddTagForm::load()
+void ChangeTagValueForm::load()
 {
     if (photo_presenter->getPhotos().size() > 0)
     {
@@ -56,47 +56,42 @@ void AddTagForm::load()
         {
             auto photo_segment = photos[0];
             tagList->setEmptyTags(photo_segment.common_empty);
-            tagList->loadTags();
+            tagList->load();
         }
         for (int i = 0; i < photos.size(); ++i)
         {
             PhotoSegment photo     = photos[i];
             TagValueEditList *tags = new TagValueEditList();
             tags->setEmptyTags(photo.unique_empty);
-            tags->loadTags();
-            ui->gridLayout->addWidget(tags, i / 4, i % 4);
+            tags->load();
+            ui->tags_gridLayout->addWidget(tags, i / 4, i % 4);
         }
     }
 }
 
-void AddTagForm::on_buttonBox_accepted()
+void ChangeTagValueForm::on_buttonBox_accepted()
 {
     save();
 }
 
-void AddTagForm::on_addBtn_clicked()
-{
-    tagList->addTag(new TagKeyEdit());
-}
-
-void AddTagForm::on_testBtn_clicked()
+void ChangeTagValueForm::on_testBtn_clicked()
 {
 }
 
-void AddTagForm::keyReleaseEvent(QKeyEvent *event)
+void ChangeTagValueForm::keyReleaseEvent(QKeyEvent *event)
 {
     event->accept();
     qDebug() << event->text();
     chooseKeyAction(event->text());
 }
 
-void AddTagForm::showEvent(QShowEvent *event)
+void ChangeTagValueForm::showEvent(QShowEvent *event)
 {
     event->accept();
     this->load();
 }
 
-void AddTagForm::accept()
+void ChangeTagValueForm::accept()
 {
     save();
 }

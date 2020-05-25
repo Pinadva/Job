@@ -80,6 +80,7 @@
      <string>Settings</string>
     </property>
     <addaction name="actionAdd_tags"/>
+    <addaction name="actionSet_empty"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -98,6 +99,11 @@
   <action name="actionAdd_tags">
    <property name="text">
     <string>Add tags</string>
+   </property>
+  </action>
+  <action name="actionSet_empty">
+   <property name="text">
+    <string>Set empty</string>
    </property>
   </action>
  </widget>

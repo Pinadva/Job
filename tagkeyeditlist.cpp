@@ -2,7 +2,7 @@
 
 TagKeyEditList::TagKeyEditList(QString tag_kind, QString file_name, QWidget *parent) : TagListBase(file_name, parent)
 {
-    this->tag_kind = tag_kind;
+    this->tag_type = tag_kind;
 }
 
 void TagKeyEditList::save()
@@ -18,14 +18,14 @@ void TagKeyEditList::save()
 
         extra_exif.append(QHash<QString, QString> {{data.first, data.second}});
     }
-    SettingsSingleton::getInstance().setExtraExif(extra_exif, this->tag_kind);
+    SettingsSingleton::getInstance().setExtraExif(extra_exif, this->tag_type);
 }
 
-void TagKeyEditList::loadTags()
+void TagKeyEditList::load()
 {
     qDebug() << "loadTags";
     this->clear();
-    QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif(this->tag_kind);
+    QList<QHash<QString, QString>> tags = SettingsSingleton::getInstance().getExtraExif(this->tag_type);
     for (auto item : tags)
     {
         TagKeyEdit *tag = new TagKeyEdit(this);

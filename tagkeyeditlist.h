@@ -12,14 +12,14 @@
 class TagKeyEditList : public TagListBase
 {
 public:
-    explicit TagKeyEditList(QString tag_kind, QString file_name = "", QWidget *parent = nullptr);
+    explicit TagKeyEditList(QString tag_type, QString file_name = "", QWidget *parent = nullptr);
 
 public:
     void save() override;
-    void loadTags() override;
+    void load() override;
 
 private:
-    QString tag_kind; // common_extra or unique_extra
+    QString tag_type; // common_extra or unique_extra
 };
 
 #endif // TAGLISTKEYEDIT_H

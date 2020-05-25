@@ -9,6 +9,7 @@ TagKeyEdit::TagKeyEdit(QWidget *parent) : TagBaseWidget(parent)
     layout->addWidget(exif_name);
     layout->addWidget(remove_btn);
     setLayout(layout);
+    setData();
 }
 
 void TagKeyEdit::setExifName()
@@ -29,7 +30,7 @@ void TagKeyEdit::setExifName(const QString &cur_text)
 
 void TagKeyEdit::setData()
 {
-    setShortName("");
+    setShortName();
     setExifName();
 }
 

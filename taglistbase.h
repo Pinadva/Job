@@ -14,7 +14,7 @@ class TagListBase : public QListWidget
 public:
     explicit TagListBase(QString file_name = "", QWidget *parent = nullptr);
     virtual void save()     = 0;
-    virtual void loadTags() = 0;
+    virtual void load() = 0;
 
 public slots:
     void addTag(TagBaseWidget *);

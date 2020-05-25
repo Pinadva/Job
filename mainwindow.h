@@ -1,7 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "addtagform.h"
+#include "changetagkeyform_.h"
+#include "changetagvalueform_.h"
 #include "fraction.h"
 #include "photopresenter.h"
 #include "photoview.h"
@@ -9,7 +10,6 @@
 #include "tagbase.h"
 #include "tagkeyedit.h"
 #include "tagkeyeditlist.h"
-#include "tagmediator.h"
 #include "textbase.h"
 
 #include <QByteArray>
@@ -55,18 +55,18 @@ protected:
 private slots:
     void on_actionSelect_photos_triggered();
     void on_actionAdd_tags_triggered();
-
+    void on_actionSet_empty_triggered();
     void on_pushButton_clicked();
-
     void on_testBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
 
-    PhotoView *view           = nullptr;
-    PhotoPresenter *presenter = nullptr;
-    PhotoModel *model         = nullptr;
-    AddTagForm *add_tag_form  = nullptr;
+    PhotoView *view                       = nullptr;
+    PhotoPresenter *presenter             = nullptr;
+    PhotoModel *model                     = nullptr;
+    ChangeTagValueForm *change_value_form = nullptr;
+    ChangeTagKeyForm *change_key_form     = nullptr;
 
     QPixmap result_pixmap;
     QMovie *movie;

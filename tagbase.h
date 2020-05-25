@@ -29,7 +29,7 @@ public slots:
     }
 
 public slots:
-    void setShortName(const QString &);
+    void setShortName(const QString &text = "");
     void setRemoveBtn();
     void sendRemoveTag();
 signals:
