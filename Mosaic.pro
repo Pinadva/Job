@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addcomment.cpp \
     changetagkeyform.cpp \
     changetagvalueform.cpp \
     exifextra.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
     textbase.cpp
 
 HEADERS += \
+    addcomment.h \
     changetagkeyform.h \
     changetagvalueform.h \
     exifextra.h \
@@ -60,6 +62,7 @@ HEADERS += \
     textbase.h
 
 FORMS += \
+    addcomment.ui \
     changetagkeyform.ui \
     changetagvalueform.ui \
     mainwindow.ui

@@ -51,6 +51,7 @@ void ChangeTagKeyForm::on_add_unique_pushButton_clicked()
 
 void ChangeTagKeyForm::on_clear_unique_pushButton_clicked()
 {
+    unique->clear();
 }
 
 void ChangeTagKeyForm::on_add_common_pushButton_clicked()
@@ -60,6 +61,7 @@ void ChangeTagKeyForm::on_add_common_pushButton_clicked()
 
 void ChangeTagKeyForm::on_clear_common_pushButton_clicked()
 {
+    common->clear();
 }
 
 void ChangeTagKeyForm::showEvent(QShowEvent *event)

@@ -12,7 +12,7 @@ class PhotoPresenter : public PhotoBase
 
 public:
     PhotoPresenter();
-    PhotoPresenter(PhotoModel *&);
+    PhotoPresenter(PhotoModel *);
 
     void process(QStringList &);
     bool isGoodCount(QStringList &);
@@ -21,6 +21,8 @@ public:
     bool isGoodSize(const QHash<int, PhotoSegment> &);
     bool isSameExifs(const QHash<int, PhotoSegment> &);
     QHash<int, PhotoSegment> &getPhotos();
+    void setComment(QString);
+    QString getComment();
 
     PhotoModel *model = nullptr;
 signals:

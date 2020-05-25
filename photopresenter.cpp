@@ -5,7 +5,7 @@ PhotoPresenter::PhotoPresenter()
     this->model = new PhotoModel();
 }
 
-PhotoPresenter::PhotoPresenter(PhotoModel *&model)
+PhotoPresenter::PhotoPresenter(PhotoModel *model)
 {
     this->model = model;
 }
@@ -120,4 +120,14 @@ bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
 QHash<int, PhotoSegment> &PhotoPresenter::getPhotos()
 {
     return this->model->getPhotos();
+}
+
+void PhotoPresenter::setComment(QString text)
+{
+    this->model->setComment(text);
+}
+
+QString PhotoPresenter::getComment()
+{
+    return this->model->getComment();
 }

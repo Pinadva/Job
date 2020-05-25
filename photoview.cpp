@@ -77,6 +77,7 @@ QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
     }
     text.painter.end();
     return pixmap;
+    text.drawText("-------------------------------");
 }
 
 const QPixmap &PhotoView::getResult()
@@ -106,6 +107,8 @@ QPixmap PhotoView::drawCommonExif()
         qDebug() << "extra item" << item.first << item.second;
         text.drawText(item.first, item.second);
     }
+    text.drawText("-------------------------------");
+    text.drawText(presenter->getComment());
 
     text.painter.end();
 

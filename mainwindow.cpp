@@ -13,10 +13,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->view              = new PhotoView(presenter);
     this->change_value_form = new ChangeTagValueForm();
     this->change_key_form   = new ChangeTagKeyForm();
+    this->add_comment_form  = new AddComment();
     this->movie             = new QMovie("://loader.gif");
 
     change_value_form->setPhotoPresenter(presenter);
     change_value_form->setPhotoPresenter(presenter);
+    add_comment_form->setPhotoPresenter(presenter);
 
     connect(model, &PhotoModel::statusChanged, this, &MainWindow::updateStatusBar);
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
@@ -24,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
     connect(change_value_form, &ChangeTagValueForm::valuesChanged, this, &MainWindow::updateResult);
 
+    add_comment_form->show();
     //    add_tag_form->show();
     //    change_key_form->show();
 }
@@ -107,6 +110,11 @@ void MainWindow::on_actionAdd_tags_triggered()
 void MainWindow::on_actionSet_empty_triggered()
 {
     change_value_form->show();
+}
+
+void MainWindow::on_actionAdd_comment_triggered()
+{
+    add_comment_form->show();
 }
 
 void MainWindow::on_pushButton_clicked()

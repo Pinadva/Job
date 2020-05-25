@@ -1,8 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "changetagkeyform_.h"
-#include "changetagvalueform_.h"
+#include "addcomment.h"
+#include "changetagkeyform.h"
+#include "changetagvalueform.h"
 #include "fraction.h"
 #include "photopresenter.h"
 #include "photoview.h"
@@ -56,6 +57,7 @@ private slots:
     void on_actionSelect_photos_triggered();
     void on_actionAdd_tags_triggered();
     void on_actionSet_empty_triggered();
+    void on_actionAdd_comment_triggered();
     void on_pushButton_clicked();
     void on_testBtn_clicked();
 
@@ -67,6 +69,7 @@ private:
     PhotoModel *model                     = nullptr;
     ChangeTagValueForm *change_value_form = nullptr;
     ChangeTagKeyForm *change_key_form     = nullptr;
+    AddComment *add_comment_form          = nullptr;
 
     QPixmap result_pixmap;
     QMovie *movie;

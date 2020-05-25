@@ -81,6 +81,7 @@
     </property>
     <addaction name="actionAdd_tags"/>
     <addaction name="actionSet_empty"/>
+    <addaction name="actionAdd_comment"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -104,6 +105,11 @@
   <action name="actionSet_empty">
    <property name="text">
     <string>Set empty</string>
+   </property>
+  </action>
+  <action name="actionAdd_comment">
+   <property name="text">
+    <string>Add comment</string>
    </property>
   </action>
  </widget>

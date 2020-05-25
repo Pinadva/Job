@@ -11,6 +11,8 @@ PhotoModel::PhotoModel()
                                {"6", "Action program"},
                                {"7", "Portrait mode"},
                                {"8", "Landscape mode"}};
+    comment                 = "void";
+    qDebug() << "PhotoModel()" << comment;
 }
 
 void PhotoModel::setExifKeys()
@@ -153,4 +155,14 @@ QString PhotoModel::createTagText(Exiv2::ExifKey &key, std::string value)
         tag = "";
 
     return tag;
+}
+
+void PhotoModel::setComment(QString text)
+{
+    this->comment = text;
+}
+
+QString PhotoModel::getComment()
+{
+    return comment;
 }
