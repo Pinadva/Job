@@ -3,6 +3,7 @@
 ExifKeys::ExifKeys()
 {
     setUnique();
+    setUniqueExtra();
     setCommon();
     setCommonExtra();
 }

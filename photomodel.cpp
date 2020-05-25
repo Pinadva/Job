@@ -80,17 +80,21 @@ void PhotoModel::setPhotos()
 
         this->photos.insert(photos.size(), photo_segment);
 
-        //        qDebug() << "unique";
-        //        qDebug() << photo_segment.unique;
-        //        qDebug() << "end unique";
+        qDebug() << "*** unique ***";
+        qDebug() << photo_segment.unique;
+        qDebug() << "end unique";
 
-        //        qDebug() << "common";
-        //        qDebug() << photo_segment.common;
-        //        qDebug() << "end common";
+        qDebug() << "*** unique extra ***";
+        qDebug() << photo_segment.unique_extra;
+        qDebug() << "end unique extra";
 
-        //        qDebug() << "extra";
-        //        qDebug() << photo_segment.common_extra;
-        //        qDebug() << "end extra";
+        qDebug() << "*** common ***";
+        qDebug() << photo_segment.common;
+        qDebug() << "end common";
+
+        qDebug() << "*** common extra ***";
+        qDebug() << photo_segment.common_extra;
+        qDebug() << "end common extra";
     }
 }
 

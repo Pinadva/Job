@@ -59,7 +59,7 @@ QPixmap PhotoView::drawPhotos()
 
 QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
 {
-    //    qDebug() << "draw unique exif";
+    qDebug() << "draw unique exif";
     QPixmap pixmap = segment.photo->copy(x, y, this->segment_size.width(), this->segment_size.height());
     auto extra     = segment.unique_extra;
     TextBase text(Qt::black, Qt::green);
@@ -72,7 +72,7 @@ QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
     text.drawText("-------------------------------");
     for (auto item : extra)
     {
-        qDebug() << "extra item" << item.first << item.second;
+        qDebug() << "unique extra item" << item.first << item.second;
         text.drawText(item.first, item.second);
     }
     text.painter.end();
