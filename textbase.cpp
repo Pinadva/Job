@@ -38,7 +38,7 @@ void TextBase::drawText(QString text)
 
 void TextBase::chooseColor(QString value)
 {
-    if (value == "-")
+    if (value == "")
         painter.setPen(Qt::red);
     else
         painter.setPen(text_color);

@@ -150,7 +150,7 @@ QString PhotoModel::createTagText(Exiv2::ExifKey &key, std::string value)
             tag = exposure_programm_human[tag];
     }
     else
-        tag = "-";
+        tag = "";
 
     return tag;
 }
