@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
     connect(change_value_form, &ChangeTagValueForm::valuesChanged, this, &MainWindow::updateResult);
 
-    add_comment_form->show();
+    //    add_comment_form->show();
     //    add_tag_form->show();
     //    change_key_form->show();
 }

@@ -3,7 +3,6 @@
 TagValueEdit::TagValueEdit(QWidget *parent) : TagBaseWidget(parent)
 {
     this->value_lineEdit = new QLineEdit();
-    connect(value_lineEdit, &QLineEdit::textChanged, this, &TagValueEdit::checkValid);
     layout->addWidget(short_name_lineEdit);
     layout->addWidget(value_lineEdit);
     //    layout->addWidget(remove_btn);

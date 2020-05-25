@@ -11,7 +11,7 @@ PhotoModel::PhotoModel()
                                {"6", "Action program"},
                                {"7", "Portrait mode"},
                                {"8", "Landscape mode"}};
-    comment                 = "void";
+    comment                 = "";
     qDebug() << "PhotoModel()" << comment;
 }
 
