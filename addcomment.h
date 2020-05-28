@@ -30,7 +30,7 @@ private:
     PhotoPresenter *photo_presenter = nullptr;
 
 signals:
-    void valueChanged();
+    void valuesChanged(QString, int);
 
     // QDialog interface
 public slots:

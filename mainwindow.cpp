@@ -21,10 +21,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     add_comment_form->setPhotoPresenter(presenter);
 
     connect(model, &PhotoModel::statusChanged, this, &MainWindow::updateStatusBar);
+    connect(model, &PhotoModel::processStarted, this, &MainWindow::showLoading);
     connect(presenter, &PhotoPresenter::statusChanged, this, &MainWindow::updateStatusBar);
+    connect(presenter, &PhotoPresenter::processStarted, this, &MainWindow::showLoading);
     connect(view, &PhotoView::statusChanged, this, &MainWindow::updateStatusBar);
     connect(view, &PhotoView::readyView, this, &MainWindow::viewResult);
-    connect(change_value_form, &ChangeTagValueForm::valuesChanged, this, &MainWindow::updateResult);
+    connect(view, &PhotoView::processStarted, this, &MainWindow::showLoading);
+    connect(change_value_form, &ChangeTagValueForm::valuesChanged, this, &MainWindow::updateStatusBar);
+    connect(add_comment_form, &AddComment::valuesChanged, this, &MainWindow::updateStatusBar);
 
     //    add_comment_form->show();
     //    add_tag_form->show();
@@ -73,12 +77,20 @@ void MainWindow::chooseKeyAction(QString key)
         on_actionSelect_photos_triggered();
     else if (key == "\u000E") // ctrl + n
         on_actionAdd_tags_triggered();
+    else if (key == "\u0012" or key == "r")
+        on_actionReload_triggered();
 }
 
 void MainWindow::updateResult()
 {
     ui->label->clear();
     this->view->paint();
+}
+
+void MainWindow::showLoading()
+{
+    ui->label->setMovie(movie);
+    movie->start();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -117,6 +129,11 @@ void MainWindow::on_actionAdd_comment_triggered()
     add_comment_form->show();
 }
 
+void MainWindow::on_actionReload_triggered()
+{
+    updateResult();
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     QHash<QString, QString> h1;
@@ -141,7 +158,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
     event->accept();
-    qDebug() << event->text();
+    qDebug() << event->key() << event->text();
     chooseKeyAction(event->text());
 }
 
@@ -170,5 +187,4 @@ void MainWindow::on_testBtn_clicked()
 {
     ui->label->clear();
     this->view->paint();
-    //    this->repaint();
 }

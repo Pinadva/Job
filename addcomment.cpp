@@ -29,17 +29,14 @@ void AddComment::save()
     comment.close();
 
     close();
-    emit valueChanged();
+    emit valuesChanged("Нажмите Ctrl+R или File->Reload чтобы применить изменения.", 0);
 }
 
 void AddComment::load()
 {
-    qDebug() << "bug1";
     qDebug() << photo_presenter;
     QString text = photo_presenter->getComment();
-    qDebug() << "bug2";
     this->ui->plainTextEdit->setPlainText(text);
-    qDebug() << "bug3";
 }
 
 void AddComment::accept()

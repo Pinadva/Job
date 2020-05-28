@@ -12,6 +12,7 @@ PhotoPresenter::PhotoPresenter(PhotoModel *model)
 
 void PhotoPresenter::process(QStringList &photo_paths)
 {
+    emit processStarted();
     if (this->isGoodCount(photo_paths))
     {
         SettingsSingleton::getInstance().setPath(photo_paths.last());

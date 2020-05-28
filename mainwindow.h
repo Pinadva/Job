@@ -49,6 +49,7 @@ public slots:
     void viewResult(QPixmap &);
     void chooseKeyAction(QString);
     void updateResult();
+    void showLoading();
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -58,6 +59,7 @@ private slots:
     void on_actionAdd_tags_triggered();
     void on_actionSet_empty_triggered();
     void on_actionAdd_comment_triggered();
+    void on_actionReload_triggered();
     void on_pushButton_clicked();
     void on_testBtn_clicked();
 

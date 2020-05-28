@@ -41,12 +41,12 @@ protected:
     void showEvent(QShowEvent *event) override;
 
 signals:
-    void valuesChanged();
+    void valuesChanged(QString text = "", int = 0);
 
 private:
     Ui::ChangeTagValueForm *ui;
     //    TagKeyEditList *tagList = nullptr;
-    TagValueEditList *tagList       = nullptr;
+    TagValueEditList *tag_list      = nullptr;
     PhotoPresenter *photo_presenter = nullptr;
 };
 

@@ -4,14 +4,11 @@
 ChangeTagValueForm::ChangeTagValueForm(QWidget *parent) : QDialog(parent), ui(new Ui::ChangeTagValueForm)
 {
     ui->setupUi(this);
-
     //    ui->testBtn->setVisible(false);
 
-    //    tagList = new TagKeyEditList("common_extra");
-    tagList = new TagValueEditList();
-    //    tagList->setEmptyTags();
+    tag_list = new TagValueEditList();
 
-    ui->verticalLayout->addWidget(tagList);
+    ui->verticalLayout->addWidget(tag_list);
     //    this->load();
 }
 
@@ -22,10 +19,8 @@ ChangeTagValueForm::~ChangeTagValueForm()
 
 void ChangeTagValueForm::chooseKeyAction(QString key)
 {
-    //    if (key == "\u000E") // ctrl + n
-    //        tagList->addTag(new TagKeyEdit());
-    //    else if (key == "\u007F") // delete
-    //        tagList->removeTag();
+    if (key == "\u0012" or key == "r")
+        this->load();
 }
 
 void ChangeTagValueForm::setPhotoPresenter(PhotoPresenter *presenter)
@@ -35,16 +30,21 @@ void ChangeTagValueForm::setPhotoPresenter(PhotoPresenter *presenter)
 
 void ChangeTagValueForm::save()
 {
-    tagList->save();
-
-    for (int i = 0; i < 4; ++i)
+    if (tag_list->count() > 0)
     {
-        auto item              = ui->tags_gridLayout->itemAtPosition(i / 4, i % 4)->widget();
-        TagValueEditList *tags = dynamic_cast<TagValueEditList *>(item);
-        tags->save();
+        tag_list->save();
+
+        for (int i = 0; i < 4; ++i)
+        {
+            auto item              = ui->tags_gridLayout->itemAtPosition(i / 4, i % 4)->widget();
+            TagValueEditList *tags = dynamic_cast<TagValueEditList *>(item);
+            tags->save();
+        }
+        close();
+        emit valuesChanged("Нажмите Ctrl+R или File->Reload чтобы применить изменения.", 0);
     }
-    close();
-    emit valuesChanged();
+    else
+        close();
 }
 
 void ChangeTagValueForm::load()
@@ -55,8 +55,8 @@ void ChangeTagValueForm::load()
         if (photos.size() > 0)
         {
             auto photo_segment = photos[0];
-            tagList->setEmptyTags(photo_segment.common_empty);
-            tagList->load();
+            tag_list->setEmptyTags(photo_segment.common_empty);
+            tag_list->load();
         }
         for (int i = 0; i < photos.size(); ++i)
         {
@@ -81,14 +81,12 @@ void ChangeTagValueForm::on_testBtn_clicked()
 void ChangeTagValueForm::keyReleaseEvent(QKeyEvent *event)
 {
     event->accept();
-    qDebug() << event->text();
-    chooseKeyAction(event->text());
 }
 
 void ChangeTagValueForm::showEvent(QShowEvent *event)
 {
     event->accept();
-    this->load();
+    load();
 }
 
 void ChangeTagValueForm::accept()

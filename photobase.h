@@ -10,6 +10,7 @@ public:
     PhotoBase();
 signals:
     void statusChanged(QString, int);
+    void processStarted();
 
 private:
 };

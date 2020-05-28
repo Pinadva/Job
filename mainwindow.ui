@@ -74,6 +74,7 @@
      <string>File</string>
     </property>
     <addaction name="actionSelect_photos"/>
+    <addaction name="actionReload"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -110,6 +111,11 @@
   <action name="actionAdd_comment">
    <property name="text">
     <string>Add comment</string>
+   </property>
+  </action>
+  <action name="actionReload">
+   <property name="text">
+    <string>Reload</string>
    </property>
   </action>
  </widget>

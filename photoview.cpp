@@ -15,18 +15,23 @@ PhotoView::PhotoView(PhotoPresenter *&presenter)
 void PhotoView::paint()
 {
     qDebug() << "start paint";
-    this->photo_size   = this->presenter->getPhotos()[0].photo->size();
-    this->segment_size = this->photo_size / 4;
+    if (this->presenter->getPhotos().size() > 0)
+    {
+        emit processStarted();
+        this->photo_size   = this->presenter->getPhotos()[0].photo->size();
+        this->segment_size = this->photo_size / 4;
 
-    QPixmap result(this->photo_size.width() + 1200, this->photo_size.height());
-    result.fill(Qt::white);
-    QPainter painter(&result);
-    painter.drawPixmap(0, 0, drawPhotos());
-    painter.drawPixmap(photo_size.width() + 20, 20, drawCommonExif());
-    painter.end();
-    this->saveResult(result);
-    result_pixmap = result.copy();
-    emit readyView(result_pixmap);
+        QPixmap result(this->photo_size.width() + 1200, this->photo_size.height());
+        result.fill(Qt::white);
+        QPainter painter(&result);
+        painter.drawPixmap(0, 0, drawPhotos());
+        painter.drawPixmap(photo_size.width() + 20, 20, drawCommonExif());
+        painter.end();
+        this->saveResult(result);
+        result_pixmap = result.copy();
+        emit readyView(result_pixmap);
+        emit statusChanged("Success", 1);
+    }
 }
 
 void PhotoView::saveResult(QPixmap &pixmap)
