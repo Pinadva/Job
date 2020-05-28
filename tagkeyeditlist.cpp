@@ -34,3 +34,17 @@ void TagKeyEditList::load()
         addTag(tag);
     }
 }
+
+void TagKeyEditList::chooseKeyAction(QString key)
+{
+    if (key == "\u007F")
+    {
+        removeTag();
+    }
+}
+
+void TagKeyEditList::keyPressEvent(QKeyEvent *event)
+{
+    event->accept();
+    chooseKeyAction(event->text());
+}

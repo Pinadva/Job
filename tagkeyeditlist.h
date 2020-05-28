@@ -17,9 +17,14 @@ public:
 public:
     void save() override;
     void load() override;
+    void chooseKeyAction(QString);
 
 private:
     QString tag_type; // common_extra or unique_extra
+
+    // QWidget interface
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // TAGLISTKEYEDIT_H

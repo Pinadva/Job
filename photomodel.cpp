@@ -132,6 +132,7 @@ void PhotoModel::clear()
 {
     this->photo_paths.clear();
     this->photos.clear();
+    this->comment.clear();
 }
 
 QString PhotoModel::createTagText(Exiv2::ExifKey &key, std::string value)
