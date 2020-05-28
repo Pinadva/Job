@@ -82,7 +82,6 @@ QPixmap PhotoView::drawUniqueExif(const PhotoSegment &segment, int &x, int &y)
     }
     text.painter.end();
     return pixmap;
-    text.drawText("-------------------------------");
 }
 
 const QPixmap &PhotoView::getResult()
@@ -113,8 +112,13 @@ QPixmap PhotoView::drawCommonExif()
         text.drawText(item.first, item.second);
     }
     text.drawText("-------------------------------");
-    text.drawText(presenter->getComment());
-
+    qDebug() << "comment = " << presenter->getComment();
+    QString raw_comment = presenter->getComment();
+    QStringList comment = raw_comment.split("\n");
+    for (QString line : comment)
+    {
+        text.drawText(line);
+    }
     text.painter.end();
 
     return pixmap;

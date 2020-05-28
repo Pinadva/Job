@@ -34,6 +34,7 @@ void TextBase::drawText(QString text)
 {
     chooseColor(text);
     painter.drawText(20, y, text);
+
     y += delta_y;
 }
 
