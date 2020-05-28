@@ -27,6 +27,7 @@ SOURCES += \
     photobase.cpp \
     photomodel.cpp \
     photopresenter.cpp \
+    photosegment.cpp \
     photoview.cpp \
     settingssingleton.cpp \
     tagbase.cpp \

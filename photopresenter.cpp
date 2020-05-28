@@ -92,28 +92,15 @@ bool PhotoPresenter::isGoodSize(const QHash<int, PhotoSegment> &photos)
 
 bool PhotoPresenter::isSameExifs(const QHash<int, PhotoSegment> &photos)
 {
-    //    QList<QHash<QString, QString>> exifList = photos[0].common;
-
-    //    for (auto hash : exifList)
-    //    {
-    //        for (auto key : hash.keys())
-    //        {
-    //            if (key != "DateTime")
-    //            {
-    //                for (auto photo_iter = photos.begin(); photo_iter != photos.end(); ++photo_iter)
-    //                {
-    //                    for (auto photo_hash : photo_iter->common)
-    //                    {
-    //                        if (hash[key] != photo_hash[key])
-    //                        {
-    //                            emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
-    //                            return false;
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+    PhotoSegment base = photos.begin().value();
+    for (PhotoSegment segment : photos)
+    {
+        if (base != segment)
+        {
+            emit statusChanged("Общие exif данные должны быть одинаковыми.", -1);
+            return false;
+        }
+    }
     return true;
 }
 

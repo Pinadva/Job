@@ -1,14 +1,20 @@
 #ifndef PHOTOSEGMENT_H
 #define PHOTOSEGMENT_H
 
+#include <QDebug>
 #include <QHash>
 #include <QLabel>
 #include <QPair>
 #include <QPixmap>
 #include <QString>
 
-struct PhotoSegment
+class PhotoSegment
 {
+public:
+    PhotoSegment();
+    //    bool operator==(const PhotoSegment &second) const;
+    friend bool operator==(const PhotoSegment &first, const PhotoSegment &second);
+    friend bool operator!=(const PhotoSegment &first, const PhotoSegment &second);
     QPixmap *photo = nullptr;
     QList<QPair<QString, QString>> unique;
     QList<QPair<QString, QString> *> unique_empty;
@@ -17,4 +23,5 @@ struct PhotoSegment
     QList<QPair<QString, QString> *> common_empty;
     QList<QPair<QString, QString>> common_extra;
 };
+
 #endif // PHOTOSEGMENT_H
