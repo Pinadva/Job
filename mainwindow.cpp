@@ -73,10 +73,16 @@ void MainWindow::viewResult(QPixmap &result)
 
 void MainWindow::chooseKeyAction(QString key)
 {
-    if (key == "\u000F" or key == "o") // ctrl + o
-        on_actionSelect_photos_triggered();
-    else if (key == "\u000E") // ctrl + n
+    if (key == "\u0001" or key == "a") // ctrl + a
         on_actionAdd_tags_triggered();
+    else if (key == "\u0003" or key == "c")
+        on_actionAdd_comment_triggered();
+    else if (key == "\u0005" or key == "e")
+        on_actionSet_empty_triggered();
+    else if (key == "\u000E" or key == "n")
+        on_actionAdd_tags_triggered();
+    else if (key == "\u000F" or key == "o")
+        on_actionSelect_photos_triggered();
     else if (key == "\u0012" or key == "r")
         on_actionReload_triggered();
 }
